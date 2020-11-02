@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>Clothing Sorter</name>
+  <packageId>Mlie.ClothingSorter</packageId>
+  <author>Mlie</author>
+  <url>https://github.com/emipa606/ClothingSorter</url>
+  <supportedVersions>
+    <li>1.2</li>
+  </supportedVersions>
+  <modDependencies />
+  <loadAfter />
+  <description>[img]https://i.imgur.com/WAEzk68.png[/img]
+
+- A simple mod that sorts apparel based on what layer they cover
+- Options for subcategories based on armor-value and psyfocus
+- Works with all apparel
+
+[table]
+	[tr]
+		[td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
+		[td][url=https://github.com/emipa606/ApparelOrganizer][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+	[/tr]
+[/table]</description>
+</ModMetaData>
