@@ -51,14 +51,24 @@ namespace ClothingSorter
         {
             var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
+            if (!Settings.SortByLayer && !Settings.SortByTech) Settings.SortByLayer = true;
+            listing_Standard.CheckboxLabeled("Layer categories", ref Settings.SortByLayer, "Should apparel be sorted on layers?");
+            listing_Standard.CheckboxLabeled("Tech-level categories", ref Settings.SortByTech, "Should apparel be sorted on tech-level?"); 
+            if (Settings.SortByTech && Settings.SortByLayer)
+            {
+                listing_Standard.AddLabeledRadioList(null, TechSortSettingOptions, ref Settings.TechSortSetting, 0);
+                listing_Standard.Gap();
+                listing_Standard.GapLine();
+            }
             listing_Standard.Gap();
             listing_Standard.CheckboxLabeled("Armored sub-categories", ref Settings.ArmoredSeparate, "Should apparel with armor-values be sorted in a sub-category?");
-            if(Settings.ArmoredSeparate)
+            if (Settings.ArmoredSeparate)
             {
                 listing_Standard.AddLabeledSlider($"Low value to count as armored: {Math.Round(Settings.ArmorRating * 100)}%", ref Settings.ArmorRating, 0f, 2f, "0% armor", "200% armor", 0.01f, false);
                 listing_Standard.Gap();
+                listing_Standard.GapLine();
             }
-            if(ModLister.RoyaltyInstalled)
+            if (ModLister.RoyaltyInstalled)
             {
                 listing_Standard.CheckboxLabeled("Psyfocus sub-categories", ref Settings.PsychicSeparate, "Should apparel with psyfocus-values be sorted in a sub-category?");
             }
@@ -76,6 +86,8 @@ namespace ClothingSorter
         /// The instance of the settings to be read by the mod
         /// </summary>
         public static ClothingSorterMod instance;
+
+        public static string[] TechSortSettingOptions = new string[] { "Tech-level first, then layer", "Layer first, then tech-level" };
 
         /// <summary>
         /// The private settings
