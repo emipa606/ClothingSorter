@@ -5,6 +5,7 @@
   <author>Mlie</author>
   <url>https://github.com/emipa606/ClothingSorter</url>
   <supportedVersions>
+    <li>1.1</li>
     <li>1.2</li>
   </supportedVersions>
   <modDependencies />
@@ -18,7 +19,7 @@
 [table]
 	[tr]
 		[td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
-		[td][url=https://github.com/emipa606/ApparelOrganizer][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
+		[td][url=https://github.com/emipa606/ClothingSorter][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
 	[/tr]
 [/table]</description>
 </ModMetaData>

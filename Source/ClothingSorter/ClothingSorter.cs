@@ -19,30 +19,39 @@ namespace ClothingSorter
             var apparelInGame = (from apparelDef in DefDatabase<ThingDef>.AllDefsListForReading
                                  where apparelDef.IsApparel && apparelDef.thingCategories != null && apparelDef.thingCategories.Count() > 0
                                  select apparelDef).ToList();
+            var layersInGame = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef).ToList();
+            Log.Message($"Clothing Sorter: Updating {apparelInGame.Count} apparel based on {layersInGame.Count} layers.");
 
-            Log.Message($"Clothing Sorter: Updating {apparelInGame.Count} items.");
-            var layersInGame = new List<ApparelLayerDef> {
-                ApparelLayerDefOf.Overhead,
-                ApparelLayerDefOf.OnSkin,
-                ApparelLayerDefOf.Middle,
-                ApparelLayerDefOf.Shell,
-                ApparelLayerDefOf.Belt
-            };
-
-            // Clean current tags
-            var existingCategories = new HashSet<ThingCategoryDef>();
-            foreach (var apparel in apparelInGame)
+            var customCategories = (from category in DefDatabase<ThingCategoryDef>.AllDefsListForReading
+                                    where category.defName.StartsWith("CS_")
+                                    select category).ToList();
+            var customCategoriesStrings = (from category in DefDatabase<ThingCategoryDef>.AllDefsListForReading
+                                           where category.defName.StartsWith("CS_")
+                                           select category.defName).ToList();
+            foreach (var layer in layersInGame)
             {
-                existingCategories.AddRange(apparel.thingCategories);
-                apparel.thingCategories.Clear();
+                foreach (var prefix in new List<string> { "CS", "CS_Psyfocus", "CS_Armored" })
+                {
+                    if (customCategoriesStrings.Contains($"{prefix}_{layer.defName}"))
+                    {
+                        continue;
+                    }
+                    var categoryLabel = prefix == "CS" ? layer.label : prefix.Replace("CS_", "");
+                    var layerCategory = new ThingCategoryDef { defName = $"{prefix}_{layer.defName}", label = categoryLabel };
+                    DefGenerator.AddImpliedDef(layerCategory);
+                    customCategories.Add(layerCategory);
+                }
             }
 
-            var categoriesToClear = (from category in DefDatabase<ThingCategoryDef>.AllDefsListForReading
-                                     where category.defName.StartsWith("CS_")
-                                     select category).ToList();
-            foreach (var category in categoriesToClear)
+            // Clean current tags and categories
+            foreach (var apparel in apparelInGame)
+            {
+                apparel.thingCategories.Clear();
+            }
+            foreach (var category in customCategories)
             {
                 category.childThingDefs.Clear();
+                category.childCategories.Clear();
             }
             ThingCategoryDefOf.Apparel.childThingDefs.Clear();
             ThingCategoryDefOf.Apparel.childCategories.Clear();
@@ -50,24 +59,9 @@ namespace ClothingSorter
             foreach (var layer in layersInGame)
             {
                 var thingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail($"CS_{layer.defName}");
-                if (thingCategory == null)
-                {
-                    Log.Warning($"Clothing Sorter: ThingCategoryDef named CS_{layer.defName} could not be found.");
-                    continue;
-                }
-                ThingCategoryDefOf.Apparel.childCategories.Add(thingCategory);
                 var armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail($"CS_Armored_{layer.defName}");
-                if (ClothingSorterMod.instance.Settings.ArmoredSeparate && armoredThingCategory == null)
-                {
-                    Log.Warning($"Clothing Sorter: ThingCategoryDef named CS_Armored_{layer.defName} could not be found.");
-                    continue;
-                }
                 var psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail($"CS_Psyfocus_{layer.defName}");
-                if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate && psyfocusThingCategory == null)
-                {
-                    Log.Warning($"Clothing Sorter: ThingCategoryDef named CS_Psyfocus_{layer.defName} could not be found.");
-                    continue;
-                }
+
                 foreach (var apparel in from apparelDef in apparelInGame where apparelDef.apparel?.layers?.Count() > 0 && apparelDef.apparel.layers.Contains(layer) select apparelDef)
                 {
                     if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate)
@@ -91,10 +85,25 @@ namespace ClothingSorter
                     apparel.thingCategories.Add(thingCategory);
                     thingCategory.childThingDefs.Add(apparel);
                 }
-                //armoredThingCategory.ResolveReferences();
-                //thingCategory.ResolveReferences();
+                if (ClothingSorterMod.instance.Settings.ArmoredSeparate && armoredThingCategory.childThingDefs.Count > 0)
+                {
+                    armoredThingCategory.parent = thingCategory;
+                    thingCategory.childCategories.Add(armoredThingCategory);
+                }
+                if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate && psyfocusThingCategory.childThingDefs.Count > 0)
+                {
+                    psyfocusThingCategory.parent = thingCategory;
+                    thingCategory.childCategories.Add(psyfocusThingCategory);
+                }
+                if (thingCategory.childThingDefs.Count == 0 && thingCategory.childCategories.Count == 0)
+                {
+                    continue;
+                }
+                thingCategory.parent = ThingCategoryDefOf.Apparel;
+                ThingCategoryDefOf.Apparel.childCategories.Add(thingCategory);
+                Log.Message($"Clothing Sorter: Generated {thingCategory.defName}, childItems {string.Join(",", thingCategory.childThingDefs)}, child categories {string.Join(",", thingCategory.childCategories)}");
             }
-            //ThingCategoryDefOf.Apparel.ResolveReferences();
+            Log.Message($"Clothing Sorter: Apparel has childItems {string.Join(",", ThingCategoryDefOf.Apparel.childThingDefs)}, child categories {string.Join(",", ThingCategoryDefOf.Apparel.childCategories)}");
             Log.Message($"Clothing Sorter: Update done.");
         }
     }
