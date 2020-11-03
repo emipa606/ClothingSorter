@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using SettingsHelper;
 using Verse;
+using System;
 
 namespace ClothingSorter
 {
@@ -28,10 +30,7 @@ namespace ClothingSorter
                 }
                 return settings;
             }
-            set
-            {
-                settings = value;
-            }
+            set => settings = value;
         }
 
         /// <summary>
@@ -50,10 +49,15 @@ namespace ClothingSorter
         /// <param name="rect"></param>
         public override void DoSettingsWindowContents(Rect rect)
         {
-            Listing_Standard listing_Standard = new Listing_Standard();
+            var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
             listing_Standard.Gap();
             listing_Standard.CheckboxLabeled("Armored sub-categories", ref Settings.ArmoredSeparate, "Should apparel with armor-values be sorted in a sub-category?");
+            if(Settings.ArmoredSeparate)
+            {
+                listing_Standard.AddLabeledSlider($"Low value to count as armored: {Math.Round(Settings.ArmorRating * 100)}%", ref Settings.ArmorRating, 0f, 2f, "0% armor", "200% armor", 0.01f, false);
+                listing_Standard.Gap();
+            }
             if(ModLister.RoyaltyInstalled)
             {
                 listing_Standard.CheckboxLabeled("Psyfocus sub-categories", ref Settings.PsychicSeparate, "Should apparel with psyfocus-values be sorted in a sub-category?");

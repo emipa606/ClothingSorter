@@ -8,6 +8,7 @@ namespace ClothingSorter
     internal class ClothingSorterSettings : ModSettings
     {
         public bool ArmoredSeparate = true;
+        public float ArmorRating = 0.1f;
         public bool PsychicSeparate = true;
 
         /// <summary>
@@ -17,6 +18,7 @@ namespace ClothingSorter
         {
             base.ExposeData();
             Scribe_Values.Look(ref ArmoredSeparate, "ArmoredSeparate", true, false);
+            Scribe_Values.Look(ref ArmorRating, "ArmorRating", 0.1f, false);
             Scribe_Values.Look(ref PsychicSeparate, "PsychicSeparate", true, false);
         }
     }

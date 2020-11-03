@@ -75,7 +75,8 @@ namespace ClothingSorter
                     }
                     if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
                     {
-                        if (apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) || apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp))
+                        if ((apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) > ClothingSorterMod.instance.Settings.ArmorRating) || 
+                            (apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) > ClothingSorterMod.instance.Settings.ArmorRating))
                         {
                             apparel.thingCategories.Add(armoredThingCategory);
                             armoredThingCategory.childThingDefs.Add(apparel);
@@ -101,9 +102,9 @@ namespace ClothingSorter
                 }
                 thingCategory.parent = ThingCategoryDefOf.Apparel;
                 ThingCategoryDefOf.Apparel.childCategories.Add(thingCategory);
-                Log.Message($"Clothing Sorter: Generated {thingCategory.defName}, childItems {string.Join(",", thingCategory.childThingDefs)}, child categories {string.Join(",", thingCategory.childCategories)}");
+                //Log.Message($"Clothing Sorter: Generated {thingCategory.defName}, childItems {string.Join(",", thingCategory.childThingDefs)}, child categories {string.Join(",", thingCategory.childCategories)}");
             }
-            Log.Message($"Clothing Sorter: Apparel has childItems {string.Join(",", ThingCategoryDefOf.Apparel.childThingDefs)}, child categories {string.Join(",", ThingCategoryDefOf.Apparel.childCategories)}");
+            //Log.Message($"Clothing Sorter: Apparel has childItems {string.Join(",", ThingCategoryDefOf.Apparel.childThingDefs)}, child categories {string.Join(",", ThingCategoryDefOf.Apparel.childCategories)}");
             Log.Message($"Clothing Sorter: Update done.");
         }
     }

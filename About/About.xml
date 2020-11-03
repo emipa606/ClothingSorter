@@ -14,7 +14,9 @@
 
 - A simple mod that sorts apparel based on what layer they cover
 - Options for subcategories based on armor-value and psyfocus
-- Works with all apparel
+- Works with all apparel, modded and vanilla
+- Generates categories for custom apparel-layers
+- Safe to add/remove from saves
 
 [table]
 	[tr]
