@@ -32,7 +32,7 @@ namespace ClothingSorter
 
             if (ClothingSorterMod.instance.Settings.SortByTech && ClothingSorterMod.instance.Settings.SortByLayer)
             {
-                if (ClothingSorterMod.instance.Settings.TechSortSetting == ClothingSorterMod.TechSortSettingOptions[0])
+                if (ClothingSorterMod.instance.Settings.SortSetting == 0)
                 {
                     SortByTech(apparelInGame, ThingCategoryDefOf.Apparel, true);
                 }

@@ -51,33 +51,47 @@ namespace ClothingSorter
         {
             var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
-            if (!Settings.SortByLayer && !Settings.SortByTech) Settings.SortByLayer = true;
-            listing_Standard.CheckboxLabeled("Layer categories", ref Settings.SortByLayer, "Should apparel be sorted on layers?");
-            listing_Standard.CheckboxLabeled("Tech-level categories", ref Settings.SortByTech, "Should apparel be sorted on tech-level?"); 
+            if (!Settings.SortByLayer && !Settings.SortByTech)
+            {
+                Settings.SortByLayer = true;
+            }
+
+            listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
+            listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription"); 
             if (Settings.SortByTech && Settings.SortByLayer)
             {
-                listing_Standard.AddLabeledRadioList(null, TechSortSettingOptions, ref Settings.TechSortSetting, 0);
                 listing_Standard.Gap();
+                if(listing_Standard.RadioButton_NewTemp("SettingTechThenLayer".Translate(), Settings.SortSetting == 0))
+                {
+                    Settings.SortSetting = 0;
+                }
+                if (listing_Standard.RadioButton_NewTemp("SettingLayerThenTech".Translate(), Settings.SortSetting == 1))
+                {
+                    Settings.SortSetting = 1;
+                }
+                //listing_Standard.AddLabeledRadioList(null, TechSortSettingOptions, ref TechSortSettingOptions[Settings.SortSetting], 0);
                 listing_Standard.GapLine();
             }
             listing_Standard.Gap();
-            listing_Standard.CheckboxLabeled("Armored sub-categories", ref Settings.ArmoredSeparate, "Should apparel with armor-values be sorted in a sub-category?");
+            listing_Standard.CheckboxLabeled("SettingArmoredCategories".Translate(), ref Settings.ArmoredSeparate, "SettingArmoredCategoriesDescription".Translate());
             if (Settings.ArmoredSeparate)
             {
-                listing_Standard.AddLabeledSlider($"Low value to count as armored: {Math.Round(Settings.ArmorRating * 100)}%", ref Settings.ArmorRating, 0f, 2f, "0% armor", "200% armor", 0.01f, false);
+                listing_Standard.AddLabeledSlider(TranslatorFormattedStringExtensions.Translate("SettingArmoredLowValue", Math.Round(Settings.ArmorRating * 100)), ref Settings.ArmorRating, 0f, 2f, "SettingArmoredMin".Translate(), "SettingArmoredMax".Translate(), 0.01f, false);
                 listing_Standard.Gap();
                 listing_Standard.GapLine();
             }
             if (ModLister.RoyaltyInstalled)
             {
-                listing_Standard.CheckboxLabeled("Psyfocus sub-categories", ref Settings.PsychicSeparate, "Should apparel with psyfocus-values be sorted in a sub-category?");
+                listing_Standard.CheckboxLabeled("SettingPsyfocusCategories".Translate(), ref Settings.PsychicSeparate, "SettingPsyfocusCategoriesDescription".Translate());
             }
             listing_Standard.End();
+
             Settings.Write();
         }
 
         public override void WriteSettings()
         {
+            
             base.WriteSettings();
             ClothingSorter.SortClothing();
         }
@@ -86,8 +100,6 @@ namespace ClothingSorter
         /// The instance of the settings to be read by the mod
         /// </summary>
         public static ClothingSorterMod instance;
-
-        public static string[] TechSortSettingOptions = new string[] { "Tech-level first, then layer", "Layer first, then tech-level" };
 
         /// <summary>
         /// The private settings
