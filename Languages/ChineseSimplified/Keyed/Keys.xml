@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettingLayerCategories>按层次分类</SettingLayerCategories>
+  <SettingLayerCategoriesDescription>是否按照衣服穿戴层次分类?</SettingLayerCategoriesDescription>
+  <SettingTechCategories>按科技分类</SettingTechCategories>
+  <SettingTechCategoriesDescription>是否按照衣物科技水平分类?</SettingTechCategoriesDescription>
+  <SettingArmoredCategories>子分类-装甲</SettingArmoredCategories>
+  <SettingArmoredCategoriesDescription>是否为达到设定护甲值(钝器或利器防护)的衣物创建新子类?</SettingArmoredCategoriesDescription>
+  <SettingArmoredLowValue>归类为装甲的最低护甲值: {0}%</SettingArmoredLowValue>
+  <SettingArmoredMin>0% 护甲</SettingArmoredMin>
+  <SettingArmoredMax>200% 护甲</SettingArmoredMax>
+  <SettingPsyfocusCategories>子分类-心灵装备</SettingPsyfocusCategories>
+  <SettingPsyfocusCategoriesDescription>是否为拥有心灵属性的衣物创建新子类?</SettingPsyfocusCategoriesDescription>
+  <SettingTechThenLayer>科技水平为主，衣物层次为次</SettingTechThenLayer>
+  <SettingLayerThenTech>衣物层次为主，科技水平为次</SettingLayerThenTech>
+
+</LanguageData>
