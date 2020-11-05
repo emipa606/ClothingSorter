@@ -10,6 +10,7 @@ namespace ClothingSorter
         public bool SortByLayer = true;
         public bool SortByTech = false;
         public int SortSetting = 0;
+        public bool CombineLayers = true;
         public bool ArmoredSeparate = true;
         public float ArmorRating = 0.1f;
         public bool PsychicSeparate = true;
@@ -23,6 +24,7 @@ namespace ClothingSorter
             Scribe_Values.Look(ref SortByLayer, "SortByLayer", true, false);
             Scribe_Values.Look(ref SortByTech, "SortByTech", false, false);
             Scribe_Values.Look(ref SortSetting, "SortSetting", 0, false);
+            Scribe_Values.Look(ref CombineLayers, "CombineLayers", true, false);
             Scribe_Values.Look(ref ArmoredSeparate, "ArmoredSeparate", true, false);
             Scribe_Values.Look(ref ArmorRating, "ArmorRating", 0.1f, false);
             Scribe_Values.Look(ref PsychicSeparate, "PsychicSeparate", true, false);

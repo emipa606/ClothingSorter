@@ -4,6 +4,8 @@
   <SettingLayerCategoriesDescription>Should apparel be sorted on layers?</SettingLayerCategoriesDescription>
   <SettingTechCategories>Tech-level categories</SettingTechCategories>
   <SettingTechCategoriesDescription>Should apparel be sorted on tech-level?</SettingTechCategoriesDescription>
+  <SettingCombineLayers>Combine layer-categories with the same name</SettingCombineLayers>
+  <SettingCombineLayersDescription>If two or more layers have the same label, should they be combined into one category?</SettingCombineLayersDescription>
   <SettingArmoredCategories>Armored sub-categories</SettingArmoredCategories>
   <SettingArmoredCategoriesDescription>Should apparel with armor-values be sorted in a sub-category?</SettingArmoredCategoriesDescription>
   <SettingArmoredLowValue>Low value to count as armored: {0}%</SettingArmoredLowValue>
