@@ -73,7 +73,7 @@ namespace ClothingSorter
                 }
                 else
                 {
-                    layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.ToString() };
+                    layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.label };
                     DefGenerator.AddImpliedDef(layerThingCategory);
                 }
                 if (KeepSorting)
