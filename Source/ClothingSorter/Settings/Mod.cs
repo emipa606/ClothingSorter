@@ -57,11 +57,11 @@ namespace ClothingSorter
             }
 
             listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
-            listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription"); 
+            listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
             if (Settings.SortByTech && Settings.SortByLayer)
             {
                 listing_Standard.Gap();
-                if(listing_Standard.RadioButton_NewTemp("SettingTechThenLayer".Translate(), Settings.SortSetting == 0))
+                if (listing_Standard.RadioButton_NewTemp("SettingTechThenLayer".Translate(), Settings.SortSetting == 0))
                 {
                     Settings.SortSetting = 0;
                 }
@@ -69,10 +69,13 @@ namespace ClothingSorter
                 {
                     Settings.SortSetting = 1;
                 }
-                //listing_Standard.AddLabeledRadioList(null, TechSortSettingOptions, ref TechSortSettingOptions[Settings.SortSetting], 0);
                 listing_Standard.GapLine();
             }
             listing_Standard.Gap();
+            if (Settings.SortByLayer)
+            {
+                listing_Standard.CheckboxLabeled("SettingCombineLayers".Translate(), ref Settings.CombineLayers, "SettingCombineLayersDescription".Translate());
+            }
             listing_Standard.CheckboxLabeled("SettingArmoredCategories".Translate(), ref Settings.ArmoredSeparate, "SettingArmoredCategoriesDescription".Translate());
             if (Settings.ArmoredSeparate)
             {
@@ -91,7 +94,7 @@ namespace ClothingSorter
 
         public override void WriteSettings()
         {
-            
+
             base.WriteSettings();
             ClothingSorter.SortClothing();
         }

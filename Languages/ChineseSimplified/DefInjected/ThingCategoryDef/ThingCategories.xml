@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-
   <CS_Overhead.label>头部</CS_Overhead.label>
   <CS_Armored_Overhead.label>装甲</CS_Armored_Overhead.label>
   <CS_Psyfocus_Overhead.label>心灵装备</CS_Psyfocus_Overhead.label>
@@ -16,6 +15,4 @@
   <CS_Belt.label>配件</CS_Belt.label>
   <CS_Armored_Belt.label>装甲</CS_Armored_Belt.label>
   <CS_Psyfocus_Belt.label>心灵装备</CS_Psyfocus_Belt.label>
-
-
 </LanguageData>

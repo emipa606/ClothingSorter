@@ -57,9 +57,19 @@ namespace ClothingSorter
 
         private static void SortByLayer(List<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, bool KeepSorting = false)
         {
-            foreach (var layerDef in from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef)
+            var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef).ToList();
+            var selectedLayers = new List<ApparelLayerDef>();
+            for (var layerInt = 0; layerInt < layerDefs.Count(); layerInt++)
             {
-                var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel?.layers?.Count() > 0 && apparelDef.apparel.layers.Contains(layerDef) select apparelDef).ToList();
+                if (ClothingSorterMod.instance.Settings.CombineLayers && layerDefs.Count() > layerInt + 1 && layerDefs[layerInt].label.ToLower() == layerDefs[layerInt + 1].label.ToLower())
+                {
+                    selectedLayers.Add(layerDefs[layerInt]);
+                    continue;
+                }
+                var layerDef = layerDefs[layerInt];
+                selectedLayers.Add(layerDef);
+                var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel?.layers?.Count() > 0 && apparelDef.apparel.layers.SharesElementWith(selectedLayers) select apparelDef).ToList();
+                selectedLayers.Clear();
                 var layerDefName = $"{thingCategoryDef.defName}_{layerDef}";
                 if (thingCategoryDef == ThingCategoryDefOf.Apparel)
                 {
@@ -73,7 +83,7 @@ namespace ClothingSorter
                 }
                 else
                 {
-                    layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.ToString() };
+                    layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.label };
                     DefGenerator.AddImpliedDef(layerThingCategory);
                 }
                 if (KeepSorting)
