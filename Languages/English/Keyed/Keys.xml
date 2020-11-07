@@ -15,5 +15,6 @@
   <SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</SettingPsyfocusCategoriesDescription>
   <SettingTechThenLayer>Tech-level first, then layer</SettingTechThenLayer>
   <SettingLayerThenTech>Layer first, then tech-level</SettingLayerThenTech>
+  <NoLayer>None</NoLayer>
 
 </LanguageData>

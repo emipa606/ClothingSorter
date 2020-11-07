@@ -16,9 +16,10 @@ namespace ClothingSorter
 
         public static void SortClothing()
         {
-            var apparelInGame = (from apparelDef in DefDatabase<ThingDef>.AllDefsListForReading
-                                 where apparelDef.IsApparel && apparelDef.thingCategories != null && apparelDef.thingCategories.Count() > 0
-                                 select apparelDef).ToList();
+            var apparelInGame = ThingCategoryDefOf.Apparel.DescendantThingDefs.ToList();
+            //var apparelInGame = (from apparelDef in DefDatabase<ThingDef>.AllDefsListForReading
+            //                     where apparelDef.IsApparel && apparelDef.thingCategories != null && apparelDef.thingCategories.Count() > 0
+            //                     select apparelDef).ToList();
 
             Log.Message($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
 
@@ -52,12 +53,14 @@ namespace ClothingSorter
                     SortByTech(apparelInGame, ThingCategoryDefOf.Apparel);
                 }
             }
+            ThingCategoryDefOf.Apparel.ResolveReferences();
             Log.Message($"Clothing Sorter: Update done.");
         }
 
         private static void SortByLayer(List<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, bool KeepSorting = false)
         {
             var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef).ToList();
+            layerDefs.Add(new ApparelLayerDef { defName = "Layer_None", label = "NoLayer".Translate() });
             var selectedLayers = new List<ApparelLayerDef>();
             for (var layerInt = 0; layerInt < layerDefs.Count(); layerInt++)
             {
@@ -69,6 +72,10 @@ namespace ClothingSorter
                 var layerDef = layerDefs[layerInt];
                 selectedLayers.Add(layerDef);
                 var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel?.layers?.Count() > 0 && apparelDef.apparel.layers.SharesElementWith(selectedLayers) select apparelDef).ToList();
+                if(layerDef.defName == "Layer_None")
+                {
+                    apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel == null ||  apparelDef.apparel.layers == null || apparelDef.apparel.layers.Count() == 0 select apparelDef).ToList();
+                }
                 selectedLayers.Clear();
                 var layerDefName = $"{thingCategoryDef.defName}_{layerDef}";
                 if (thingCategoryDef == ThingCategoryDefOf.Apparel)
@@ -92,6 +99,7 @@ namespace ClothingSorter
                     if (layerThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(layerThingCategory);
+                        layerThingCategory.parent = thingCategoryDef;
                     }
                 }
                 else
@@ -100,6 +108,7 @@ namespace ClothingSorter
                     if (layerThingCategory.childThingDefs.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(layerThingCategory);
+                        layerThingCategory.parent = thingCategoryDef;
                     }
                 }
             }
@@ -132,6 +141,7 @@ namespace ClothingSorter
                     if (techLevelThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(techLevelThingCategory);
+                        techLevelThingCategory.parent = thingCategoryDef;
                     }
                 }
                 else
@@ -140,6 +150,7 @@ namespace ClothingSorter
                     if (techLevelThingCategory.childThingDefs.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(techLevelThingCategory);
+                        techLevelThingCategory.parent = thingCategoryDef;
                     }
                 }
             }
