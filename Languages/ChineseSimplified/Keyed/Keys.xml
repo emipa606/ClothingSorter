@@ -4,6 +4,8 @@
   <SettingLayerCategoriesDescription>是否按照衣服穿戴层次分类?</SettingLayerCategoriesDescription>
   <SettingTechCategories>按科技分类</SettingTechCategories>
   <SettingTechCategoriesDescription>是否按照衣物科技水平分类?</SettingTechCategoriesDescription>
+  <SettingCombineLayers>将同名的衣物层次合为一类</SettingCombineLayers>
+  <SettingCombineLayersDescription>当两个或更多的衣物层次拥有相同(类似)的名字时，将其合为一类?</SettingCombineLayersDescription>
   <SettingArmoredCategories>子分类-装甲</SettingArmoredCategories>
   <SettingArmoredCategoriesDescription>是否为达到设定护甲值(钝器或利器防护)的衣物创建新子类?</SettingArmoredCategoriesDescription>
   <SettingArmoredLowValue>归类为装甲的最低护甲值: {0}%</SettingArmoredLowValue>
