@@ -23,13 +23,31 @@ namespace ClothingSorter
 
             Log.Message($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
 
+            foreach (var category in ThingCategoryDefOf.Apparel.ThisAndChildCategoryDefs)
+            {
+                category.childThingDefs.Clear();
+                category.childCategories.Clear();
+                if (category.parent != ThingCategoryDefOf.Root)
+                {
+                    category.parent = null;
+                }
+                category.ClearCachedData();
+            }
+            foreach( var category in from categories in DefDatabase<ThingCategoryDef>.AllDefsListForReading where categories.defName.StartsWith("CS_") select categories)
+            {
+                category.childThingDefs.Clear();
+                category.childCategories.Clear();
+                if (category.parent != ThingCategoryDefOf.Root)
+                {
+                    category.parent = null;
+                }
+                category.ClearCachedData();
+            }
             // Clean current tags and categories
             foreach (var apparel in apparelInGame)
             {
                 apparel.thingCategories.Clear();
             }
-            ThingCategoryDefOf.Apparel.childThingDefs.Clear();
-            ThingCategoryDefOf.Apparel.childCategories.Clear();
 
             if (ClothingSorterMod.instance.Settings.SortByTech && ClothingSorterMod.instance.Settings.SortByLayer)
             {
@@ -72,9 +90,9 @@ namespace ClothingSorter
                 var layerDef = layerDefs[layerInt];
                 selectedLayers.Add(layerDef);
                 var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel?.layers?.Count() > 0 && apparelDef.apparel.layers.SharesElementWith(selectedLayers) select apparelDef).ToList();
-                if(layerDef.defName == "Layer_None")
+                if (layerDef.defName == "Layer_None")
                 {
-                    apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel == null ||  apparelDef.apparel.layers == null || apparelDef.apparel.layers.Count() == 0 select apparelDef).ToList();
+                    apparelToCheck = (from apparelDef in apparelToSort where apparelDef.apparel == null || apparelDef.apparel.layers == null || apparelDef.apparel.layers.Count() == 0 select apparelDef).ToList();
                 }
                 selectedLayers.Clear();
                 var layerDefName = $"{thingCategoryDef.defName}_{layerDef}";
@@ -83,12 +101,7 @@ namespace ClothingSorter
                     layerDefName = $"CS_{layerDef}";
                 }
                 ThingCategoryDef layerThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(layerDefName);
-                if (layerThingCategory != null)
-                {
-                    layerThingCategory.childThingDefs.Clear();
-                    layerThingCategory.childCategories.Clear();
-                }
-                else
+                if (layerThingCategory == null)
                 {
                     layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.label };
                     DefGenerator.AddImpliedDef(layerThingCategory);
@@ -105,12 +118,13 @@ namespace ClothingSorter
                 else
                 {
                     AddApparelToCategory(apparelToCheck, layerThingCategory);
-                    if (layerThingCategory.childThingDefs.Count > 0)
+                    if (layerThingCategory.childThingDefs.Count > 0 || layerThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(layerThingCategory);
                         layerThingCategory.parent = thingCategoryDef;
                     }
                 }
+                layerThingCategory.ResolveReferences();
             }
         }
 
@@ -125,12 +139,7 @@ namespace ClothingSorter
                     techLevelDefName = $"CS_{techLevel}";
                 }
                 ThingCategoryDef techLevelThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(techLevelDefName);
-                if (techLevelThingCategory != null)
-                {
-                    techLevelThingCategory.childThingDefs.Clear();
-                    techLevelThingCategory.childCategories.Clear();
-                }
-                else
+                if (techLevelThingCategory == null)
                 {
                     techLevelThingCategory = new ThingCategoryDef { defName = techLevelDefName, label = techLevel.ToString() };
                     DefGenerator.AddImpliedDef(techLevelThingCategory);
@@ -147,12 +156,13 @@ namespace ClothingSorter
                 else
                 {
                     AddApparelToCategory(apparelToCheck, techLevelThingCategory);
-                    if (techLevelThingCategory.childThingDefs.Count > 0)
+                    if (techLevelThingCategory.childThingDefs.Count > 0 || techLevelThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(techLevelThingCategory);
                         techLevelThingCategory.parent = thingCategoryDef;
                     }
                 }
+                techLevelThingCategory.ResolveReferences();
             }
         }
 
@@ -166,22 +176,14 @@ namespace ClothingSorter
         {
             var psyfocusDefName = $"{thingCategoryDef.defName}_Psyfocus";
             ThingCategoryDef psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
-            if (psyfocusThingCategory != null)
-            {
-                psyfocusThingCategory.childThingDefs.Clear();
-            }
-            else
+            if (psyfocusThingCategory == null)
             {
                 psyfocusThingCategory = new ThingCategoryDef { defName = psyfocusDefName, label = "Psyfocus" };
                 DefGenerator.AddImpliedDef(psyfocusThingCategory);
             }
             var armoredDefName = $"{thingCategoryDef.defName}_Armored";
             ThingCategoryDef armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(armoredDefName);
-            if (armoredThingCategory != null)
-            {
-                armoredThingCategory.childThingDefs.Clear();
-            }
-            else
+            if (armoredThingCategory == null)
             {
                 armoredThingCategory = new ThingCategoryDef { defName = armoredDefName, label = "Armored" };
                 DefGenerator.AddImpliedDef(armoredThingCategory);
@@ -215,12 +217,15 @@ namespace ClothingSorter
             {
                 armoredThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(armoredThingCategory);
+                armoredThingCategory.ResolveReferences();
             }
             if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate && psyfocusThingCategory.childThingDefs.Count > 0)
             {
                 psyfocusThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(psyfocusThingCategory);
+                psyfocusThingCategory.ResolveReferences();
             }
+            thingCategoryDef.ResolveReferences();
         }
     }
 }
