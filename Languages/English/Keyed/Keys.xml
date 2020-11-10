@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
+
   <SettingLayerCategories>Layer categories</SettingLayerCategories>
   <SettingLayerCategoriesDescription>Should apparel be sorted on layers?</SettingLayerCategoriesDescription>
   <SettingTechCategories>Tech-level categories</SettingTechCategories>
@@ -16,5 +17,8 @@
   <SettingTechThenLayer>Tech-level first, then layer</SettingTechThenLayer>
   <SettingLayerThenTech>Layer first, then tech-level</SettingLayerThenTech>
   <NoLayer>None</NoLayer>
+  
+  <CS_Psyfocus>Psyfocus</CS_Psyfocus>
+  <CS_Armored>Armored</CS_Armored>
 
 </LanguageData>
