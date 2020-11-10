@@ -141,7 +141,7 @@ namespace ClothingSorter
                 ThingCategoryDef techLevelThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(techLevelDefName);
                 if (techLevelThingCategory == null)
                 {
-                    techLevelThingCategory = new ThingCategoryDef { defName = techLevelDefName, label = techLevel.ToString() };
+                    techLevelThingCategory = new ThingCategoryDef { defName = techLevelDefName, label = techLevel.ToStringHuman() }; //changed ToString() to ToStringHuman() to correctly translate tech-levels
                     DefGenerator.AddImpliedDef(techLevelThingCategory);
                 }
                 if (KeepSorting)
@@ -178,14 +178,14 @@ namespace ClothingSorter
             ThingCategoryDef psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
             if (psyfocusThingCategory == null)
             {
-                psyfocusThingCategory = new ThingCategoryDef { defName = psyfocusDefName, label = "Psyfocus" };
+                psyfocusThingCategory = new ThingCategoryDef { defName = psyfocusDefName, label = "CS_Psyfocus".Translate() };
                 DefGenerator.AddImpliedDef(psyfocusThingCategory);
             }
             var armoredDefName = $"{thingCategoryDef.defName}_Armored";
             ThingCategoryDef armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(armoredDefName);
             if (armoredThingCategory == null)
             {
-                armoredThingCategory = new ThingCategoryDef { defName = armoredDefName, label = "Armored" };
+                armoredThingCategory = new ThingCategoryDef { defName = armoredDefName, label = "CS_Armored".Translate() };
                 DefGenerator.AddImpliedDef(armoredThingCategory);
             }
 
