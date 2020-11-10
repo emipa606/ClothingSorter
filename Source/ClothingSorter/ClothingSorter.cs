@@ -174,15 +174,6 @@ namespace ClothingSorter
         /// <param name="thingCategoryDef"></param>
         private static void AddApparelToCategory(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef)
         {
-            var psyfocusDefName = $"{thingCategoryDef.defName}_Psyfocus";
-            ThingCategoryDef psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
-            if (psyfocusThingCategory == null)
-            {
-                psyfocusThingCategory = new ThingCategoryDef { defName = psyfocusDefName, label = "CS_Psyfocus".Translate() };
-                DefGenerator.AddImpliedDef(psyfocusThingCategory);
-            }
-            psyfocusThingCategory.childCategories.Clear();
-            psyfocusThingCategory.childThingDefs.Clear();
             var armoredDefName = $"{thingCategoryDef.defName}_Armored";
             ThingCategoryDef armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(armoredDefName);
             if (armoredThingCategory == null)
@@ -192,19 +183,28 @@ namespace ClothingSorter
             }
             armoredThingCategory.childCategories.Clear();
             armoredThingCategory.childThingDefs.Clear();
+            var psyfocusDefName = $"{thingCategoryDef.defName}_Psyfocus";
+            ThingCategoryDef psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
+            if (psyfocusThingCategory == null)
+            {
+                psyfocusThingCategory = new ThingCategoryDef { defName = psyfocusDefName, label = "CS_Psyfocus".Translate() };
+                DefGenerator.AddImpliedDef(psyfocusThingCategory);
+            }
+            psyfocusThingCategory.childCategories.Clear();
+            psyfocusThingCategory.childThingDefs.Clear();
+            var royaltyDefName = $"{thingCategoryDef.defName}_Royalty";
+            ThingCategoryDef royaltyThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(royaltyDefName);
+            if (royaltyThingCategory == null)
+            {
+                royaltyThingCategory = new ThingCategoryDef { defName = royaltyDefName, label = "CS_Royalty".Translate() };
+                DefGenerator.AddImpliedDef(royaltyThingCategory);
+            }
+            royaltyThingCategory.childCategories.Clear();
+            royaltyThingCategory.childThingDefs.Clear();
             thingCategoryDef.childCategories.Clear();
             thingCategoryDef.childThingDefs.Clear();
             foreach (var apparel in apparelToSort)
             {
-                if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate)
-                {
-                    if (apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PsychicEntropyRecoveryRate) > 0)
-                    {
-                        apparel.thingCategories.Add(psyfocusThingCategory);
-                        psyfocusThingCategory.childThingDefs.Add(apparel);
-                        continue;
-                    }
-                }
                 if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
                 {
                     if ((apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) > ClothingSorterMod.instance.Settings.ArmorRating) ||
@@ -212,6 +212,24 @@ namespace ClothingSorter
                     {
                         apparel.thingCategories.Add(armoredThingCategory);
                         armoredThingCategory.childThingDefs.Add(apparel);
+                        continue;
+                    }
+                }
+                if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate)
+                {
+                    if (apparel.apparel.tags != null && apparel.apparel.tags.Contains("Psychic"))
+                    {
+                        apparel.thingCategories.Add(psyfocusThingCategory);
+                        psyfocusThingCategory.childThingDefs.Add(apparel);
+                        continue;
+                    }
+                }
+                if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate)
+                {
+                    if (apparel.apparel.tags != null && apparel.apparel.tags.Contains("Royal"))
+                    {
+                        apparel.thingCategories.Add(royaltyThingCategory);
+                        royaltyThingCategory.childThingDefs.Add(apparel);
                         continue;
                     }
                 }
@@ -228,6 +246,12 @@ namespace ClothingSorter
             {
                 psyfocusThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(psyfocusThingCategory);
+                //psyfocusThingCategory.ResolveReferences();
+            }
+            if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate && royaltyThingCategory.childThingDefs.Count > 0)
+            {
+                royaltyThingCategory.parent = thingCategoryDef;
+                thingCategoryDef.childCategories.Add(royaltyThingCategory);
                 //psyfocusThingCategory.ResolveReferences();
             }
             //thingCategoryDef.ResolveReferences();

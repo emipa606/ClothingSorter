@@ -13,10 +13,13 @@
   <SettingArmoredMax>200% armor</SettingArmoredMax>
   <SettingPsyfocusCategories>Psyfocus sub-categories</SettingPsyfocusCategories>
   <SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</SettingPsyfocusCategoriesDescription>
+  <SettingRoyaltyCategories>Royalty sub-categories</SettingRoyaltyCategories>
+  <SettingRoyaltyCategoriesDescription>Should apparel fit for Royalty be sorted in a sub-category?</SettingRoyaltyCategoriesDescription>
   <SettingTechThenLayer>Tech-level first, then layer</SettingTechThenLayer>
   <SettingLayerThenTech>Layer first, then tech-level</SettingLayerThenTech>
   <NoLayer>None</NoLayer>
-  <CS_Psyfocus>Psyfocus</CS_Psyfocus>
   <CS_Armored>Armored</CS_Armored>
+  <CS_Psyfocus>Psyfocus</CS_Psyfocus>
+  <CS_Royalty>Royalty</CS_Royalty>
 
 </LanguageData>

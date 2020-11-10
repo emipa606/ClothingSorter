@@ -14,6 +14,7 @@ namespace ClothingSorter
         public bool ArmoredSeparate = true;
         public float ArmorRating = 0.1f;
         public bool PsychicSeparate = true;
+        public bool RoyaltySeparate = false;
 
         /// <summary>
         /// Saving and loading the values
@@ -28,6 +29,7 @@ namespace ClothingSorter
             Scribe_Values.Look(ref ArmoredSeparate, "ArmoredSeparate", true, false);
             Scribe_Values.Look(ref ArmorRating, "ArmorRating", 0.1f, false);
             Scribe_Values.Look(ref PsychicSeparate, "PsychicSeparate", true, false);
+            Scribe_Values.Look(ref RoyaltySeparate, "RoyaltySeparate", false, false);
         }
     }
 }

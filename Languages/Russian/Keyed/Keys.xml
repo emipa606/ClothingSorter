@@ -16,6 +16,6 @@
   <SettingTechThenLayer>Сначала технический уровень, затем слой</SettingTechThenLayer>
   <SettingLayerThenTech>Сначала слой, затем технический уровень</SettingLayerThenTech>
   <NoLayer>Без слоя</NoLayer>
-  <CS_Psyfocus>Эльтекс</CS_Psyfocus>
   <CS_Armored>Броня</CS_Armored>
+  <CS_Psyfocus>Эльтекс</CS_Psyfocus>
 </LanguageData>
