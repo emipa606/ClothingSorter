@@ -13,6 +13,12 @@
   <SettingArmoredMax>200% 护甲</SettingArmoredMax>
   <SettingPsyfocusCategories>子分类-心灵装备</SettingPsyfocusCategories>
   <SettingPsyfocusCategoriesDescription>是否为拥有心灵属性的衣物创建新子类?</SettingPsyfocusCategoriesDescription>
+  <SettingRoyaltyCategories>子分类-贵族衣物</SettingRoyaltyCategories>
+  <SettingRoyaltyCategoriesDescription>是否为贵族衣物创建新子类?</SettingRoyaltyCategoriesDescription>
   <SettingTechThenLayer>科技水平为主，衣物层次为次</SettingTechThenLayer>
   <SettingLayerThenTech>衣物层次为主，科技水平为次</SettingLayerThenTech>
+  <NoLayer>非衣物</NoLayer>
+  <CS_Armored>装甲</CS_Armored>
+  <CS_Psyfocus>心灵属性</CS_Psyfocus>
+  <CS_Royalty>贵族衣物</CS_Royalty>
 </LanguageData>
