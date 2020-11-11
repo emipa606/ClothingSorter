@@ -208,7 +208,8 @@ namespace ClothingSorter
                 if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
                 {
                     if ((apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) > ClothingSorterMod.instance.Settings.ArmorRating) ||
-                        (apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) > ClothingSorterMod.instance.Settings.ArmorRating))
+                        (apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) && apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) > ClothingSorterMod.instance.Settings.ArmorRating) ||
+                        (apparel.StatBaseDefined(StatDefOf.StuffEffectMultiplierArmor) && apparel.GetStatValueAbstract(StatDefOf.StuffEffectMultiplierArmor) > ClothingSorterMod.instance.Settings.ArmorRating * 2))
                     {
                         apparel.thingCategories.Add(armoredThingCategory);
                         armoredThingCategory.childThingDefs.Add(apparel);
@@ -217,7 +218,7 @@ namespace ClothingSorter
                 }
                 if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate)
                 {
-                    if (apparel.apparel.tags != null && apparel.apparel.tags.Contains("Psychic"))
+                    if (apparel.apparel?.tags?.Contains("Psychic") == true)
                     {
                         apparel.thingCategories.Add(psyfocusThingCategory);
                         psyfocusThingCategory.childThingDefs.Add(apparel);
@@ -226,7 +227,7 @@ namespace ClothingSorter
                 }
                 if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate)
                 {
-                    if (apparel.apparel.tags != null && apparel.apparel.tags.Contains("Royal"))
+                    if (apparel.apparel?.tags?.Contains("Royal") == true)
                     {
                         apparel.thingCategories.Add(royaltyThingCategory);
                         royaltyThingCategory.childThingDefs.Add(apparel);
