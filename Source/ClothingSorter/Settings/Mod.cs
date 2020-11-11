@@ -86,6 +86,7 @@ namespace ClothingSorter
             if (ModLister.RoyaltyInstalled)
             {
                 listing_Standard.CheckboxLabeled("SettingPsyfocusCategories".Translate(), ref Settings.PsychicSeparate, "SettingPsyfocusCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("SettingRoyaltyCategories".Translate(), ref Settings.RoyaltySeparate, "SettingRoyaltyCategoriesDescription".Translate());
             }
             listing_Standard.End();
 

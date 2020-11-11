@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <SettingLayerCategories>Категории слоёв одежды</SettingLayerCategories>
+  <SettingLayerCategoriesDescription>Следует ли группировать одежду по слоям?</SettingLayerCategoriesDescription>
+  <SettingTechCategories>Категории технического уровня</SettingTechCategories>
+  <SettingTechCategoriesDescription>Следует ли группировать одежду по техническому уровню?</SettingTechCategoriesDescription>
+  <SettingCombineLayers>Объединить категории слоёв с одинаковыми именами</SettingCombineLayers>
+  <SettingCombineLayersDescription>Если два или более слоя имеют одно и то же название, должны ли они быть объединены в одну категорию?</SettingCombineLayersDescription>
+  <SettingArmoredCategories>Подкатегория "Броня"</SettingArmoredCategories>
+  <SettingArmoredCategoriesDescription>Следует ли создать подкатегорию одежды со значениями брони?</SettingArmoredCategoriesDescription>
+  <SettingArmoredLowValue>Нижнее значение, чтобы считать бронированной: {0}%</SettingArmoredLowValue>
+  <SettingArmoredMin>0% брони</SettingArmoredMin>
+  <SettingArmoredMax>200% брони</SettingArmoredMax>
+  <SettingPsyfocusCategories>Подкатегория "Эльтекс"</SettingPsyfocusCategories>
+  <SettingPsyfocusCategoriesDescription>Следует ли создать подкатегорию поддерживающей пси-концентрацию одежды?</SettingPsyfocusCategoriesDescription>
+  <SettingTechThenLayer>Сначала технический уровень, затем слой</SettingTechThenLayer>
+  <SettingLayerThenTech>Сначала слой, затем технический уровень</SettingLayerThenTech>
+  <NoLayer>Без слоя</NoLayer>
+  <CS_Armored>Броня</CS_Armored>
+  <CS_Psyfocus>Эльтекс</CS_Psyfocus>
+</LanguageData>
