@@ -2,6 +2,7 @@
 using SettingsHelper;
 using Verse;
 using System;
+using System.Collections.Generic;
 
 namespace ClothingSorter
 {
@@ -51,27 +52,61 @@ namespace ClothingSorter
         {
             var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
-            if (!Settings.SortByLayer && !Settings.SortByTech)
+            listing_Standard.Label("SettingDeselectOptions".Translate());
+            if (!(Settings.SortByLayer || Settings.SortByTech || Settings.SortByMod))
             {
                 Settings.SortByLayer = true;
             }
-
-            listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
-            listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
-            if (Settings.SortByTech && Settings.SortByLayer)
+            if (AtLeastTwo(Settings.SortByLayer, Settings.SortByTech, Settings.SortByMod))
             {
+                var categories = new string[2];
+                if (Settings.SortByLayer)
+                {
+                    listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
+                    categories[0] = "SettingLayer".Translate();
+                } else
+                {
+                    listing_Standard.Label("SettingLayerCategories".Translate());
+                }
+                if (Settings.SortByTech)
+                {
+                    listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
+                    if(string.IsNullOrEmpty(categories[0]))
+                    {
+                        categories[0] = "SettingTech".Translate();
+                    } else
+                    {
+                        categories[1] = "SettingTech".Translate();
+                    }
+                } else
+                {
+                    listing_Standard.Label("SettingTechCategories".Translate());
+                }
+                if (Settings.SortByMod)
+                {
+                    listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
+                    categories[1] = "SettingMod".Translate();
+                } else
+                {
+                    listing_Standard.Label("SettingModCategories".Translate());
+                }               
                 listing_Standard.Gap();
-                if (listing_Standard.RadioButton_NewTemp("SettingTechThenLayer".Translate(), Settings.SortSetting == 0))
+                listing_Standard.Label("SettingSortOrder".Translate());
+                if (listing_Standard.RadioButton_NewTemp($"{categories[0]} / {categories[1]}", Settings.SortSetting == 0))
                 {
                     Settings.SortSetting = 0;
                 }
-                if (listing_Standard.RadioButton_NewTemp("SettingLayerThenTech".Translate(), Settings.SortSetting == 1))
+                if (listing_Standard.RadioButton_NewTemp($"{categories[1]} / {categories[0]}", Settings.SortSetting == 1))
                 {
                     Settings.SortSetting = 1;
                 }
-                listing_Standard.GapLine();
+            } else
+            {
+                    listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
+                    listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
+                    listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
             }
-            listing_Standard.Gap();
+            listing_Standard.GapLine();
             if (Settings.SortByLayer)
             {
                 listing_Standard.CheckboxLabeled("SettingCombineLayers".Translate(), ref Settings.CombineLayers, "SettingCombineLayersDescription".Translate());
@@ -98,6 +133,20 @@ namespace ClothingSorter
 
             base.WriteSettings();
             ClothingSorter.SortClothing();
+        }
+
+        public static bool AtLeastTwo(List<bool> listOfBool)
+        {
+            if(listOfBool.Count != 3)
+            {
+                return false;
+            }
+            return AtLeastTwo(listOfBool[0], listOfBool[1], listOfBool[2]);
+        }
+
+        private static bool AtLeastTwo(bool a, bool b, bool c)
+        {
+            return (a && (b || c)) || (b && c);
         }
 
         /// <summary>

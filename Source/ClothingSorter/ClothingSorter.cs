@@ -14,6 +14,14 @@ namespace ClothingSorter
             SortClothing();
         }
 
+        enum NextSortOption
+        {
+            Layer = 0,
+            Tech = 1,
+            Mod = 2,
+            None = 3
+        }
+
         public static void SortClothing()
         {
             var apparelInGame = ThingCategoryDefOf.Apparel.DescendantThingDefs.ToHashSet();
@@ -33,7 +41,7 @@ namespace ClothingSorter
                 }
                 category.ClearCachedData();
             }
-            foreach( var category in from categories in DefDatabase<ThingCategoryDef>.AllDefsListForReading where categories.defName.StartsWith("CS_") select categories)
+            foreach (var category in from categories in DefDatabase<ThingCategoryDef>.AllDefsListForReading where categories.defName.StartsWith("CS_") select categories)
             {
                 category.childThingDefs.Clear();
                 category.childCategories.Clear();
@@ -48,16 +56,36 @@ namespace ClothingSorter
             {
                 apparel.thingCategories.Clear();
             }
-
-            if (ClothingSorterMod.instance.Settings.SortByTech && ClothingSorterMod.instance.Settings.SortByLayer)
+            var allSortOptions = new List<bool> { ClothingSorterMod.instance.Settings.SortByLayer, ClothingSorterMod.instance.Settings.SortByTech, ClothingSorterMod.instance.Settings.SortByMod };
+            if (ClothingSorterMod.AtLeastTwo(allSortOptions))
             {
-                if (ClothingSorterMod.instance.Settings.SortSetting == 0)
+                var firstSortOption = -1;
+                var nextSortOption = NextSortOption.None;
+                for (var i = 0; i < allSortOptions.Count; i++)
                 {
-                    SortByTech(apparelInGame, ThingCategoryDefOf.Apparel, true);
+                    if (!allSortOptions[i])
+                    {
+                        continue;
+                    }
+                    if ((ClothingSorterMod.instance.Settings.SortSetting == 0 && firstSortOption == -1) ||
+                       (ClothingSorterMod.instance.Settings.SortSetting == 1 && nextSortOption != NextSortOption.None))
+                    {
+                        firstSortOption = i;
+                        continue;
+                    }
+                    nextSortOption = (NextSortOption)i;
                 }
-                else
+                switch (firstSortOption)
                 {
-                    SortByLayer(apparelInGame, ThingCategoryDefOf.Apparel, true);
+                    case 0:
+                        SortByLayer(apparelInGame, ThingCategoryDefOf.Apparel, nextSortOption);
+                        break;
+                    case 1:
+                        SortByTech(apparelInGame, ThingCategoryDefOf.Apparel, nextSortOption);
+                        break;
+                    case 2:
+                        SortByMod(apparelInGame, ThingCategoryDefOf.Apparel, nextSortOption);
+                        break;
                 }
             }
             else
@@ -66,17 +94,22 @@ namespace ClothingSorter
                 {
                     SortByLayer(apparelInGame, ThingCategoryDefOf.Apparel);
                 }
-                else
+                if (ClothingSorterMod.instance.Settings.SortByTech)
                 {
                     SortByTech(apparelInGame, ThingCategoryDefOf.Apparel);
+                }
+                if (ClothingSorterMod.instance.Settings.SortByMod)
+                {
+                    SortByMod(apparelInGame, ThingCategoryDefOf.Apparel);
                 }
             }
             //ThingCategoryDefOf.Apparel.ResolveReferences();
             Log.Message($"Clothing Sorter: Update done.");
         }
 
-        private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, bool KeepSorting = false)
+        private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, NextSortOption nextSortOption = NextSortOption.None)
         {
+            Log.Message($"Sorting by layer, then by {nextSortOption}");
             var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef).ToList();
             layerDefs.Add(new ApparelLayerDef { defName = "Layer_None", label = "NoLayer".Translate() });
             var selectedLayers = new List<ApparelLayerDef>();
@@ -106,10 +139,10 @@ namespace ClothingSorter
                     layerThingCategory = new ThingCategoryDef { defName = layerDefName, label = layerDef.label };
                     DefGenerator.AddImpliedDef(layerThingCategory);
                 }
-                if (KeepSorting)
+                if (nextSortOption == NextSortOption.None)
                 {
-                    SortByTech(apparelToCheck, layerThingCategory);
-                    if (layerThingCategory.childCategories.Count > 0)
+                    AddApparelToCategory(apparelToCheck, layerThingCategory);
+                    if (layerThingCategory.childThingDefs.Count > 0 || layerThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(layerThingCategory);
                         layerThingCategory.parent = thingCategoryDef;
@@ -117,8 +150,16 @@ namespace ClothingSorter
                 }
                 else
                 {
-                    AddApparelToCategory(apparelToCheck, layerThingCategory);
-                    if (layerThingCategory.childThingDefs.Count > 0 || layerThingCategory.childCategories.Count > 0)
+                    switch (nextSortOption)
+                    {
+                        case NextSortOption.Tech:
+                            SortByTech(apparelToCheck, layerThingCategory);
+                            break;
+                        case NextSortOption.Mod:
+                            SortByMod(apparelToCheck, layerThingCategory);
+                            break;
+                    }
+                    if (layerThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(layerThingCategory);
                         layerThingCategory.parent = thingCategoryDef;
@@ -128,8 +169,9 @@ namespace ClothingSorter
             }
         }
 
-        private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, bool KeepSorting = false)
+        private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, NextSortOption nextSortOption = NextSortOption.None)
         {
+            Log.Message($"Sorting by tech, then by {nextSortOption}");
             foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
             {
                 var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.techLevel == techLevel select apparelDef).ToHashSet();
@@ -144,10 +186,10 @@ namespace ClothingSorter
                     techLevelThingCategory = new ThingCategoryDef { defName = techLevelDefName, label = techLevel.ToStringHuman() };
                     DefGenerator.AddImpliedDef(techLevelThingCategory);
                 }
-                if (KeepSorting)
+                if (nextSortOption == NextSortOption.None)
                 {
-                    SortByLayer(apparelToCheck, techLevelThingCategory);
-                    if (techLevelThingCategory.childCategories.Count > 0)
+                    AddApparelToCategory(apparelToCheck, techLevelThingCategory);
+                    if (techLevelThingCategory.childThingDefs.Count > 0 || techLevelThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(techLevelThingCategory);
                         techLevelThingCategory.parent = thingCategoryDef;
@@ -155,11 +197,66 @@ namespace ClothingSorter
                 }
                 else
                 {
-                    AddApparelToCategory(apparelToCheck, techLevelThingCategory);
-                    if (techLevelThingCategory.childThingDefs.Count > 0 || techLevelThingCategory.childCategories.Count > 0)
+                    switch (nextSortOption)
+                    {
+                        case NextSortOption.Layer:
+                            SortByLayer(apparelToCheck, techLevelThingCategory);
+                            break;
+                        case NextSortOption.Mod:
+                            SortByMod(apparelToCheck, techLevelThingCategory);
+                            break;
+                    }
+                    if (techLevelThingCategory.childCategories.Count > 0)
                     {
                         thingCategoryDef.childCategories.Add(techLevelThingCategory);
                         techLevelThingCategory.parent = thingCategoryDef;
+                    }
+                }
+                //techLevelThingCategory.ResolveReferences();
+            }
+        }
+
+        private static void SortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef, NextSortOption nextSortOption = NextSortOption.None)
+        {
+            Log.Message($"Sorting by mod, then by {nextSortOption}");
+            foreach (ModMetaData modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
+            {
+                var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.modContentPack.PackageId == modData.PackageId select apparelDef).ToHashSet();
+                var modDefName = $"{thingCategoryDef.defName}_{modData.PackageId}";
+                if (thingCategoryDef == ThingCategoryDefOf.Apparel)
+                {
+                    modDefName = $"CS_{modData.PackageId}";
+                }
+                ThingCategoryDef modThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(modDefName);
+                if (modThingCategory == null)
+                {
+                    modThingCategory = new ThingCategoryDef { defName = modDefName, label = modData.Name };
+                    DefGenerator.AddImpliedDef(modThingCategory);
+                }
+                if (nextSortOption == NextSortOption.None)
+                {
+                    AddApparelToCategory(apparelToCheck, modThingCategory);
+                    if (modThingCategory.childThingDefs.Count > 0 || modThingCategory.childCategories.Count > 0)
+                    {
+                        thingCategoryDef.childCategories.Add(modThingCategory);
+                        modThingCategory.parent = thingCategoryDef;
+                    }
+                }
+                else
+                {
+                    switch (nextSortOption)
+                    {
+                        case NextSortOption.Layer:
+                            SortByLayer(apparelToCheck, modThingCategory);
+                            break;
+                        case NextSortOption.Tech:
+                            SortByTech(apparelToCheck, modThingCategory);
+                            break;
+                    }
+                    if (modThingCategory.childCategories.Count > 0)
+                    {
+                        thingCategoryDef.childCategories.Add(modThingCategory);
+                        modThingCategory.parent = thingCategoryDef;
                     }
                 }
                 //techLevelThingCategory.ResolveReferences();

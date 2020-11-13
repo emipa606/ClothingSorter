@@ -1,9 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <SettingLayerCategories>Layer categories</SettingLayerCategories>
-  <SettingLayerCategoriesDescription>Should apparel be sorted on layers?</SettingLayerCategoriesDescription>
+  <SettingLayerCategoriesDescription>Should apparel be sorted on what layer they cover?</SettingLayerCategoriesDescription>
   <SettingTechCategories>Tech-level categories</SettingTechCategories>
-  <SettingTechCategoriesDescription>Should apparel be sorted on tech-level?</SettingTechCategoriesDescription>
+  <SettingTechCategoriesDescription>Should apparel be sorted on their tech-level?</SettingTechCategoriesDescription>
+  <SettingModCategories>Mod categories</SettingModCategories>
+  <SettingModCategoriesDescription>Should apparel be sorted on what mod they are added from?</SettingModCategoriesDescription>
+  <SettingDeselectOptions>Max two categories can be selected at the same time</SettingDeselectOptions>
   <SettingCombineLayers>Combine layer-categories with the same name</SettingCombineLayers>
   <SettingCombineLayersDescription>If two or more layers have the same label, should they be combined into one category?</SettingCombineLayersDescription>
   <SettingArmoredCategories>Armored sub-categories</SettingArmoredCategories>
@@ -15,11 +18,12 @@
   <SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</SettingPsyfocusCategoriesDescription>
   <SettingRoyaltyCategories>Royalty sub-categories</SettingRoyaltyCategories>
   <SettingRoyaltyCategoriesDescription>Should apparel fit for Royalty be sorted in a sub-category?</SettingRoyaltyCategoriesDescription>
-  <SettingTechThenLayer>Tech-level first, then layer</SettingTechThenLayer>
-  <SettingLayerThenTech>Layer first, then tech-level</SettingLayerThenTech>
+  <SettingSortOrder>Category sort-order</SettingSortOrder>
+  <SettingTech>Tech</SettingTech>
+  <SettingLayer>Layer</SettingLayer>
+  <SettingMod>Mod</SettingMod>
   <NoLayer>None</NoLayer>
   <CS_Armored>Armored</CS_Armored>
   <CS_Psyfocus>Psyfocus</CS_Psyfocus>
   <CS_Royalty>Royalty</CS_Royalty>
-
 </LanguageData>

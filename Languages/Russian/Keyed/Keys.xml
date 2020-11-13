@@ -4,6 +4,9 @@
   <SettingLayerCategoriesDescription>Следует ли группировать одежду по слоям?</SettingLayerCategoriesDescription>
   <SettingTechCategories>Категории технического уровня</SettingTechCategories>
   <SettingTechCategoriesDescription>Следует ли группировать одежду по техническому уровню?</SettingTechCategoriesDescription>
+  <SettingModCategories>Категории модификаций</SettingModCategories>
+  <SettingModCategoriesDescription>Следует ли группировать одежду по принадлежности к добавляющей её модификации?</SettingModCategoriesDescription>
+  <SettingDeselectOptions>Одновременно можно выбрать только две категории!</SettingDeselectOptions>
   <SettingCombineLayers>Объединить категории слоёв с одинаковыми именами</SettingCombineLayers>
   <SettingCombineLayersDescription>Если два или более слоя имеют одно и то же название, должны ли они быть объединены в одну категорию?</SettingCombineLayersDescription>
   <SettingArmoredCategories>Подкатегория "Броня"</SettingArmoredCategories>
@@ -13,9 +16,14 @@
   <SettingArmoredMax>200% брони</SettingArmoredMax>
   <SettingPsyfocusCategories>Подкатегория "Эльтекс"</SettingPsyfocusCategories>
   <SettingPsyfocusCategoriesDescription>Следует ли создать подкатегорию поддерживающей пси-концентрацию одежды?</SettingPsyfocusCategoriesDescription>
-  <SettingTechThenLayer>Сначала технический уровень, затем слой</SettingTechThenLayer>
-  <SettingLayerThenTech>Сначала слой, затем технический уровень</SettingLayerThenTech>
+  <SettingRoyaltyCategories>Подкатегория "Знать"</SettingRoyaltyCategories>
+  <SettingRoyaltyCategoriesDescription>Следует ли создать подкатегорию одежды, удовлетворяющей требованиям знатного титула?</SettingRoyaltyCategoriesDescription>
+  <SettingSortOrder>Порядок сортировки категорий:</SettingSortOrder>
+  <SettingTech>Технический уровень</SettingTech>
+  <SettingLayer>Слой</SettingLayer>
+  <SettingMod>Модификация</SettingMod>
   <NoLayer>Без слоя</NoLayer>
   <CS_Armored>Броня</CS_Armored>
   <CS_Psyfocus>Эльтекс</CS_Psyfocus>
+  <CS_Royalty>Знать</CS_Royalty>
 </LanguageData>
