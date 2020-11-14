@@ -52,7 +52,9 @@ namespace ClothingSorter
         {
             var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
+            GUI.contentColor = Color.yellow;
             listing_Standard.Label("SettingDeselectOptions".Translate());
+            GUI.contentColor = Color.white;
             if (!(Settings.SortByLayer || Settings.SortByTech || Settings.SortByMod))
             {
                 Settings.SortByLayer = true;
@@ -66,7 +68,9 @@ namespace ClothingSorter
                     categories[0] = "SettingLayer".Translate();
                 } else
                 {
-                    listing_Standard.Label("SettingLayerCategories".Translate());
+                    GUI.contentColor = Color.grey;
+                    listing_Standard.Label("SettingLayerCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    GUI.contentColor = Color.white;
                 }
                 if (Settings.SortByTech)
                 {
@@ -80,7 +84,9 @@ namespace ClothingSorter
                     }
                 } else
                 {
-                    listing_Standard.Label("SettingTechCategories".Translate());
+                    GUI.contentColor = Color.grey;
+                    listing_Standard.Label("SettingTechCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    GUI.contentColor = Color.white;
                 }
                 if (Settings.SortByMod)
                 {
@@ -88,8 +94,10 @@ namespace ClothingSorter
                     categories[1] = "SettingMod".Translate();
                 } else
                 {
-                    listing_Standard.Label("SettingModCategories".Translate());
-                }               
+                    GUI.contentColor = Color.grey;
+                    listing_Standard.Label("SettingModCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    GUI.contentColor = Color.white;
+                }
                 listing_Standard.Gap();
                 listing_Standard.Label("SettingSortOrder".Translate());
                 if (listing_Standard.RadioButton_NewTemp($"{categories[0]} / {categories[1]}", Settings.SortSetting == 0))
@@ -102,14 +110,26 @@ namespace ClothingSorter
                 }
             } else
             {
-                    listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
-                    listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
-                    listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
+
+                GUI.contentColor = Color.grey;
+                listing_Standard.Gap();
+                listing_Standard.Label("SettingSortOrder".Translate());
+                listing_Standard.Label("/");
+                listing_Standard.Label("/");
+                GUI.contentColor = Color.white;
             }
             listing_Standard.GapLine();
             if (Settings.SortByLayer)
             {
                 listing_Standard.CheckboxLabeled("SettingCombineLayers".Translate(), ref Settings.CombineLayers, "SettingCombineLayersDescription".Translate());
+            } else
+            {
+                GUI.contentColor = Color.grey;
+                listing_Standard.Label("SettingCombineLayers".Translate(), -1, "SettingCombineLayersDescription".Translate());
+                GUI.contentColor = Color.white;
             }
             listing_Standard.CheckboxLabeled("SettingArmoredCategories".Translate(), ref Settings.ArmoredSeparate, "SettingArmoredCategoriesDescription".Translate());
             if (Settings.ArmoredSeparate)
