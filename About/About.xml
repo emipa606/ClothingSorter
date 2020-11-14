@@ -12,15 +12,27 @@
   <loadAfter />
   <description>[img]https://i.imgur.com/WAEzk68.png[/img]
 
-- A mod that sorts apparel based on various properties
-- Option to sort by tech-level as well as layer
-- Options for subcategories based on armor-value and psyfocus
-- Option to set what armor-value apparel should be put in the armored category
+[h2]A mod that sorts apparel based on various properties[/h2]
 
-- Works with all apparel, modded and vanilla
-- Generates categories for custom apparel-layers
-- Safe to add/remove from saves
-- Verified to work with CE
+[list]
+[*]Option to sort by layer
+[*]Option to sort by tech-level
+[*]Option to sort by mod-name
+[/list]
+[list]
+[*]Option to combine layer-categories with the same name
+[*]Options for subcategories based on armor-value and Psycic/Royalty-tagged apparel
+[*]Option to set what armor-value apparel should be put in the armored category
+[/list]
+[list]
+[*]Works with all apparel, modded and vanilla
+[*]Generates categories for custom apparel-layers
+[*]Safe to add/remove from saves
+[*]Verified to work with CE
+[/list]
+
+Russian translation by Reiquard
+Chinese translation by HawnHan
 
 [table]
 	[tr]

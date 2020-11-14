@@ -66,7 +66,8 @@ namespace ClothingSorter
                 {
                     listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
                     categories[0] = "SettingLayer".Translate();
-                } else
+                }
+                else
                 {
                     GUI.contentColor = Color.grey;
                     listing_Standard.Label("SettingLayerCategories".Translate(), -1, "SettingDeselectOptions".Translate());
@@ -75,14 +76,16 @@ namespace ClothingSorter
                 if (Settings.SortByTech)
                 {
                     listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
-                    if(string.IsNullOrEmpty(categories[0]))
+                    if (string.IsNullOrEmpty(categories[0]))
                     {
                         categories[0] = "SettingTech".Translate();
-                    } else
+                    }
+                    else
                     {
                         categories[1] = "SettingTech".Translate();
                     }
-                } else
+                }
+                else
                 {
                     GUI.contentColor = Color.grey;
                     listing_Standard.Label("SettingTechCategories".Translate(), -1, "SettingDeselectOptions".Translate());
@@ -92,7 +95,8 @@ namespace ClothingSorter
                 {
                     listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
                     categories[1] = "SettingMod".Translate();
-                } else
+                }
+                else
                 {
                     GUI.contentColor = Color.grey;
                     listing_Standard.Label("SettingModCategories".Translate(), -1, "SettingDeselectOptions".Translate());
@@ -108,7 +112,8 @@ namespace ClothingSorter
                 {
                     Settings.SortSetting = 1;
                 }
-            } else
+            }
+            else
             {
                 listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
                 listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
@@ -125,7 +130,8 @@ namespace ClothingSorter
             if (Settings.SortByLayer)
             {
                 listing_Standard.CheckboxLabeled("SettingCombineLayers".Translate(), ref Settings.CombineLayers, "SettingCombineLayersDescription".Translate());
-            } else
+            }
+            else
             {
                 GUI.contentColor = Color.grey;
                 listing_Standard.Label("SettingCombineLayers".Translate(), -1, "SettingCombineLayersDescription".Translate());
@@ -157,7 +163,7 @@ namespace ClothingSorter
 
         public static bool AtLeastTwo(List<bool> listOfBool)
         {
-            if(listOfBool.Count != 3)
+            if (listOfBool.Count != 3)
             {
                 return false;
             }

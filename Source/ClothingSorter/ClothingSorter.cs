@@ -221,7 +221,7 @@ namespace ClothingSorter
             Log.Message($"Sorting by mod, then by {nextSortOption}");
             foreach (ModMetaData modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
             {
-                var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.modContentPack.PackageId == modData.PackageId select apparelDef).ToHashSet();
+                var apparelToCheck = (from apparelDef in apparelToSort where apparelDef.modContentPack != null && apparelDef.modContentPack.PackageId != null && apparelDef.modContentPack.PackageId == modData.PackageId select apparelDef).ToHashSet();
                 var modDefName = $"{thingCategoryDef.defName}_{modData.PackageId}";
                 if (thingCategoryDef == ThingCategoryDefOf.Apparel)
                 {
@@ -260,6 +260,48 @@ namespace ClothingSorter
                     }
                 }
                 //techLevelThingCategory.ResolveReferences();
+            }
+            var missingApparelToCheck = (from apparelDef in apparelToSort where apparelDef.modContentPack == null || apparelDef.modContentPack.PackageId == null select apparelDef).ToHashSet();
+            if(missingApparelToCheck.Count == 0)
+            {
+                return;
+            }
+            var missingModDefName = $"{thingCategoryDef.defName}_Mod_None";
+            if (thingCategoryDef == ThingCategoryDefOf.Apparel)
+            {
+                missingModDefName = $"CS_Mod_None";
+            }
+            ThingCategoryDef missingModThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(missingModDefName);
+            if (missingModThingCategory == null)
+            {
+                missingModThingCategory = new ThingCategoryDef { defName = missingModDefName, label = "NoLayer".Translate() };
+                DefGenerator.AddImpliedDef(missingModThingCategory);
+            }
+            if (nextSortOption == NextSortOption.None)
+            {
+                AddApparelToCategory(missingApparelToCheck, missingModThingCategory);
+                if (missingModThingCategory.childThingDefs.Count > 0 || missingModThingCategory.childCategories.Count > 0)
+                {
+                    thingCategoryDef.childCategories.Add(missingModThingCategory);
+                    missingModThingCategory.parent = thingCategoryDef;
+                }
+            }
+            else
+            {
+                switch (nextSortOption)
+                {
+                    case NextSortOption.Layer:
+                        SortByLayer(missingApparelToCheck, missingModThingCategory);
+                        break;
+                    case NextSortOption.Tech:
+                        SortByTech(missingApparelToCheck, missingModThingCategory);
+                        break;
+                }
+                if (missingModThingCategory.childCategories.Count > 0)
+                {
+                    thingCategoryDef.childCategories.Add(missingModThingCategory);
+                    missingModThingCategory.parent = thingCategoryDef;
+                }
             }
         }
 
