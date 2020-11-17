@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  <SettingLayerCategories>Layer categories</SettingLayerCategories>
-  <SettingLayerCategoriesDescription>Should apparel be sorted on what layer they cover?</SettingLayerCategoriesDescription>
-  <SettingTechCategories>Tech-level categories</SettingTechCategories>
-  <SettingTechCategoriesDescription>Should apparel be sorted on their tech-level?</SettingTechCategoriesDescription>
-  <SettingModCategories>Mod categories</SettingModCategories>
-  <SettingModCategoriesDescription>Should apparel be sorted on what mod they are added from?</SettingModCategoriesDescription>
-  <SettingDeselectOptions>Max two categories can be selected at the same time</SettingDeselectOptions>
-  <SettingCombineLayers>Combine layer-categories with the same name</SettingCombineLayers>
-  <SettingCombineLayersDescription>If two or more layers have the same label, should they be combined into one category?</SettingCombineLayersDescription>
-  <SettingArmoredCategories>Armored sub-categories</SettingArmoredCategories>
-  <SettingArmoredCategoriesDescription>Should apparel with armor-values be sorted in a sub-category?</SettingArmoredCategoriesDescription>
-  <SettingArmoredLowValue>Low value to count as armored: {0}%</SettingArmoredLowValue>
-  <SettingArmoredMin>0% armor</SettingArmoredMin>
-  <SettingArmoredMax>200% armor</SettingArmoredMax>
-  <SettingPsyfocusCategories>Psyfocus sub-categories</SettingPsyfocusCategories>
-  <SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</SettingPsyfocusCategoriesDescription>
-  <SettingRoyaltyCategories>Royalty sub-categories</SettingRoyaltyCategories>
-  <SettingRoyaltyCategoriesDescription>Should apparel fit for Royalty be sorted in a sub-category?</SettingRoyaltyCategoriesDescription>
-  <SettingSortOrder>Category sort-order</SettingSortOrder>
-  <SettingTech>Tech</SettingTech>
-  <SettingLayer>Layer</SettingLayer>
-  <SettingMod>Mod</SettingMod>
-  <NoLayer>None</NoLayer>
+  <CS_SettingLayerCategories>Layer categories</CS_SettingLayerCategories>
+  <CS_SettingLayerCategoriesDescription>Should apparel be sorted on what layer they cover?</CS_SettingLayerCategoriesDescription>
+  <CS_SettingTechCategories>Tech-level categories</CS_SettingTechCategories>
+  <CS_SettingTechCategoriesDescription>Should apparel be sorted on their tech-level?</CS_SettingTechCategoriesDescription>
+  <CS_SettingModCategories>Mod categories</CS_SettingModCategories>
+  <CS_SettingModCategoriesDescription>Should apparel be sorted on what mod they are added from?</CS_SettingModCategoriesDescription>
+  <CS_SettingDeselectOptions>Max two categories can be selected at the same time</CS_SettingDeselectOptions>
+  <CS_SettingCombineLayers>Combine layer-categories with the same name</CS_SettingCombineLayers>
+  <CS_SettingCombineLayersDescription>If two or more layers have the same label, should they be combined into one category?</CS_SettingCombineLayersDescription>
+  <CS_SettingArmoredCategories>Armored sub-categories</CS_SettingArmoredCategories>
+  <CS_SettingArmoredCategoriesDescription>Should apparel with armor-values be sorted in a sub-category?</CS_SettingArmoredCategoriesDescription>
+  <CS_SettingArmoredLowValue>Low value to count as armored: {0}%</CS_SettingArmoredLowValue>
+  <CS_SettingArmoredMin>0% armor</CS_SettingArmoredMin>
+  <CS_SettingArmoredMax>200% armor</CS_SettingArmoredMax>
+  <CS_SettingPsyfocusCategories>Psyfocus sub-categories</CS_SettingPsyfocusCategories>
+  <CS_SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</CS_SettingPsyfocusCategoriesDescription>
+  <CS_SettingRoyaltyCategories>Royalty sub-categories</CS_SettingRoyaltyCategories>
+  <CS_SettingRoyaltyCategoriesDescription>Should apparel fit for Royalty be sorted in a sub-category?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSortOrder>Category sort-order</CS_SettingSortOrder>
+  <CS_SettingTech>Tech</CS_SettingTech>
+  <CS_SettingLayer>Layer</CS_SettingLayer>
+  <CS_SettingMod>Mod</CS_SettingMod>
+  <CS_NoLayer>None</CS_NoLayer>
   <CS_Armored>Armored</CS_Armored>
   <CS_Psyfocus>Psyfocus</CS_Psyfocus>
   <CS_Royalty>Royalty</CS_Royalty>

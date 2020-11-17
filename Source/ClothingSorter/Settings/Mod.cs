@@ -53,7 +53,7 @@ namespace ClothingSorter
             var listing_Standard = new Listing_Standard();
             listing_Standard.Begin(rect);
             GUI.contentColor = Color.yellow;
-            listing_Standard.Label("SettingDeselectOptions".Translate());
+            listing_Standard.Label("CS_SettingDeselectOptions".Translate());
             GUI.contentColor = Color.white;
             if (!(Settings.SortByLayer || Settings.SortByTech || Settings.SortByMod))
             {
@@ -64,46 +64,46 @@ namespace ClothingSorter
                 var categories = new string[2];
                 if (Settings.SortByLayer)
                 {
-                    listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
-                    categories[0] = "SettingLayer".Translate();
+                    listing_Standard.CheckboxLabeled("CS_SettingLayerCategories".Translate(), ref Settings.SortByLayer, "CS_SettingLayerCategoriesDescription".Translate());
+                    categories[0] = "CS_SettingLayer".Translate();
                 }
                 else
                 {
                     GUI.contentColor = Color.grey;
-                    listing_Standard.Label("SettingLayerCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    listing_Standard.Label("CS_SettingLayerCategories".Translate(), -1, "CS_SettingDeselectOptions".Translate());
                     GUI.contentColor = Color.white;
                 }
                 if (Settings.SortByTech)
                 {
-                    listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
+                    listing_Standard.CheckboxLabeled("CS_SettingTechCategories".Translate(), ref Settings.SortByTech, "CS_SettingTechCategoriesDescription".Translate());
                     if (string.IsNullOrEmpty(categories[0]))
                     {
-                        categories[0] = "SettingTech".Translate();
+                        categories[0] = "CS_SettingTech".Translate();
                     }
                     else
                     {
-                        categories[1] = "SettingTech".Translate();
+                        categories[1] = "CS_SettingTech".Translate();
                     }
                 }
                 else
                 {
                     GUI.contentColor = Color.grey;
-                    listing_Standard.Label("SettingTechCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    listing_Standard.Label("CS_SettingTechCategories".Translate(), -1, "CS_SettingDeselectOptions".Translate());
                     GUI.contentColor = Color.white;
                 }
                 if (Settings.SortByMod)
                 {
-                    listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
-                    categories[1] = "SettingMod".Translate();
+                    listing_Standard.CheckboxLabeled("CS_SettingModCategories".Translate(), ref Settings.SortByMod, "CS_SettingModCategoriesDescription".Translate());
+                    categories[1] = "CS_SettingMod".Translate();
                 }
                 else
                 {
                     GUI.contentColor = Color.grey;
-                    listing_Standard.Label("SettingModCategories".Translate(), -1, "SettingDeselectOptions".Translate());
+                    listing_Standard.Label("CS_SettingModCategories".Translate(), -1, "CS_SettingDeselectOptions".Translate());
                     GUI.contentColor = Color.white;
                 }
                 listing_Standard.Gap();
-                listing_Standard.Label("SettingSortOrder".Translate());
+                listing_Standard.Label("CS_SettingSortOrder".Translate());
                 if (listing_Standard.RadioButton_NewTemp($"{categories[0]} / {categories[1]}", Settings.SortSetting == 0))
                 {
                     Settings.SortSetting = 0;
@@ -115,13 +115,13 @@ namespace ClothingSorter
             }
             else
             {
-                listing_Standard.CheckboxLabeled("SettingLayerCategories".Translate(), ref Settings.SortByLayer, "SettingLayerCategoriesDescription".Translate());
-                listing_Standard.CheckboxLabeled("SettingTechCategories".Translate(), ref Settings.SortByTech, "SettingTechCategoriesDescription".Translate());
-                listing_Standard.CheckboxLabeled("SettingModCategories".Translate(), ref Settings.SortByMod, "SettingModCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingLayerCategories".Translate(), ref Settings.SortByLayer, "CS_SettingLayerCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingTechCategories".Translate(), ref Settings.SortByTech, "CS_SettingTechCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingModCategories".Translate(), ref Settings.SortByMod, "CS_SettingModCategoriesDescription".Translate());
 
                 GUI.contentColor = Color.grey;
                 listing_Standard.Gap();
-                listing_Standard.Label("SettingSortOrder".Translate());
+                listing_Standard.Label("CS_SettingSortOrder".Translate());
                 listing_Standard.Label("/");
                 listing_Standard.Label("/");
                 GUI.contentColor = Color.white;
@@ -129,25 +129,25 @@ namespace ClothingSorter
             listing_Standard.GapLine();
             if (Settings.SortByLayer)
             {
-                listing_Standard.CheckboxLabeled("SettingCombineLayers".Translate(), ref Settings.CombineLayers, "SettingCombineLayersDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingCombineLayers".Translate(), ref Settings.CombineLayers, "CS_SettingCombineLayersDescription".Translate());
             }
             else
             {
                 GUI.contentColor = Color.grey;
-                listing_Standard.Label("SettingCombineLayers".Translate(), -1, "SettingCombineLayersDescription".Translate());
+                listing_Standard.Label("CS_SettingCombineLayers".Translate(), -1, "CS_SettingCombineLayersDescription".Translate());
                 GUI.contentColor = Color.white;
             }
-            listing_Standard.CheckboxLabeled("SettingArmoredCategories".Translate(), ref Settings.ArmoredSeparate, "SettingArmoredCategoriesDescription".Translate());
+            listing_Standard.CheckboxLabeled("CS_SettingArmoredCategories".Translate(), ref Settings.ArmoredSeparate, "CS_SettingArmoredCategoriesDescription".Translate());
             if (Settings.ArmoredSeparate)
             {
-                listing_Standard.AddLabeledSlider(TranslatorFormattedStringExtensions.Translate("SettingArmoredLowValue", Math.Round(Settings.ArmorRating * 100)), ref Settings.ArmorRating, 0f, 2f, "SettingArmoredMin".Translate(), "SettingArmoredMax".Translate(), 0.01f, false);
+                listing_Standard.AddLabeledSlider(TranslatorFormattedStringExtensions.Translate("CS_SettingArmoredLowValue", Math.Round(Settings.ArmorRating * 100)), ref Settings.ArmorRating, 0f, 2f, "CS_SettingArmoredMin".Translate(), "CS_SettingArmoredMax".Translate(), 0.01f, false);
                 listing_Standard.Gap();
                 listing_Standard.GapLine();
             }
             if (ModLister.RoyaltyInstalled)
             {
-                listing_Standard.CheckboxLabeled("SettingPsyfocusCategories".Translate(), ref Settings.PsychicSeparate, "SettingPsyfocusCategoriesDescription".Translate());
-                listing_Standard.CheckboxLabeled("SettingRoyaltyCategories".Translate(), ref Settings.RoyaltySeparate, "SettingRoyaltyCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingPsyfocusCategories".Translate(), ref Settings.PsychicSeparate, "CS_SettingPsyfocusCategoriesDescription".Translate());
+                listing_Standard.CheckboxLabeled("CS_SettingRoyaltyCategories".Translate(), ref Settings.RoyaltySeparate, "CS_SettingRoyaltyCategoriesDescription".Translate());
             }
             listing_Standard.End();
 

@@ -111,7 +111,7 @@ namespace ClothingSorter
         {
             Log.Message($"Sorting by layer, then by {nextSortOption}");
             var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading orderby layerDef.label select layerDef).ToList();
-            layerDefs.Add(new ApparelLayerDef { defName = "Layer_None", label = "NoLayer".Translate() });
+            layerDefs.Add(new ApparelLayerDef { defName = "Layer_None", label = "CS_NoLayer".Translate() });
             var selectedLayers = new List<ApparelLayerDef>();
             for (var layerInt = 0; layerInt < layerDefs.Count(); layerInt++)
             {
@@ -274,7 +274,7 @@ namespace ClothingSorter
             ThingCategoryDef missingModThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(missingModDefName);
             if (missingModThingCategory == null)
             {
-                missingModThingCategory = new ThingCategoryDef { defName = missingModDefName, label = "NoLayer".Translate() };
+                missingModThingCategory = new ThingCategoryDef { defName = missingModDefName, label = "CS_NoLayer".Translate() };
                 DefGenerator.AddImpliedDef(missingModThingCategory);
             }
             if (nextSortOption == NextSortOption.None)
