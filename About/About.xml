@@ -9,7 +9,9 @@
     <li>1.2</li>
   </supportedVersions>
   <modDependencies />
-  <loadAfter />
+  <loadAfter>
+    <li>CETeam.CombatExtended</li>
+  </loadAfter>
   <description>[img]https://i.imgur.com/WAEzk68.png[/img]
 
 [h2]A mod that sorts apparel based on various properties[/h2]
@@ -34,10 +36,26 @@
 Russian translation by Reiquard
 Chinese translation by HawnHan
 
+Keywords: Sort, filter, apparel, categories, layers
+
 [table]
 	[tr]
 		[td][url=https://invite.gg/Mlie][img]https://i.imgur.com/zdzzBrc.png[/img][/url][/td]
 		[td][url=https://github.com/emipa606/ClothingSorter][img]https://i.imgur.com/kTkpTOE.png[/img][/url][/td]
 	[/tr]
-[/table]</description>
+[/table]
+
+If you have any suggestion on more properties to sort on, leave a comment here or on the Discord-server!
+
+[img]https://i.imgur.com/Rs6T6cr.png[/img]
+[list]
+[*] See if the the error persists if you just have this mod and its requirements active.
+[*] If not, try adding your other mods until it happens again.
+[*] Post your error-log using [url=https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib[/url] and command Ctrl+F12
+[*] For best support, please use the Discord-channel for error-reporting.
+[*] Do not report errors by making a discussion-thread, I get no notification of that.
+[*] If you have the solution for a problem, please post it to the GitHub repository.
+[/list]
+</description>
 </ModMetaData>
+
