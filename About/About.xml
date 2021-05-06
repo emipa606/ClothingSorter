@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
   <name>Clothing Sorter</name>
   <packageId>Mlie.ClothingSorter</packageId>
@@ -25,6 +25,7 @@
 [*]Option to combine layer-categories with the same name
 [*]Options for subcategories based on armor-value and Psycic/Royalty-tagged apparel
 [*]Option to set what armor-value apparel should be put in the armored category
+[*]A CE-multiplier option to fine tune the CE-armor calculation
 [/list]
 [list]
 [*]Works with all apparel, modded and vanilla
@@ -56,6 +57,6 @@ If you have any suggestion on more properties to sort on, leave a comment here o
 [*] Do not report errors by making a discussion-thread, I get no notification of that.
 [*] If you have the solution for a problem, please post it to the GitHub repository.
 [/list]
+
 </description>
 </ModMetaData>
-
