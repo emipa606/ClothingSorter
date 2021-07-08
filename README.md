@@ -3,7 +3,8 @@
 ![Image](https://i.imgur.com/WAEzk68.png)
 
 
-[h2]A mod that sorts apparel based on various properties[/h2]
+## A mod that sorts apparel based on various properties
+
 
 
 
@@ -31,6 +32,7 @@
 
 Russian translation by Reiquard
 Chinese translation by HawnHan
+French translation by qux
 
 Keywords: Sort, filter, apparel, categories, layers
 

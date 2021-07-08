@@ -125,13 +125,13 @@ namespace ClothingSorter
 
                 listing_Standard.Gap();
                 listing_Standard.Label("CS_SettingSortOrder".Translate());
-                if (listing_Standard.RadioButton_NewTemp($"{categories[0]} / {categories[1]}",
+                if (listing_Standard.RadioButton($"{categories[0]} / {categories[1]}",
                     Settings.SortSetting == 0))
                 {
                     Settings.SortSetting = 0;
                 }
 
-                if (listing_Standard.RadioButton_NewTemp($"{categories[1]} / {categories[0]}",
+                if (listing_Standard.RadioButton($"{categories[1]} / {categories[0]}",
                     Settings.SortSetting == 1))
                 {
                     Settings.SortSetting = 1;

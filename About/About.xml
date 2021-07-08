@@ -7,6 +7,7 @@
   <supportedVersions>
     <li>1.1</li>
     <li>1.2</li>
+    <li>1.3</li>
   </supportedVersions>
   <modDependencies />
   <loadAfter>
@@ -36,6 +37,7 @@
 
 Russian translation by Reiquard
 Chinese translation by HawnHan
+French translation by qux
 
 Keywords: Sort, filter, apparel, categories, layers
 
