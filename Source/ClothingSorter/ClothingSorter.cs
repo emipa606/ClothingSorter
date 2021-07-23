@@ -119,7 +119,7 @@ namespace ClothingSorter
                 }
             }
 
-            //ThingCategoryDefOf.Apparel.ResolveReferences();
+            ThingCategoryDefOf.Apparel.ResolveReferences();
             Log.Message("Clothing Sorter: Update done.");
         }
 
@@ -472,7 +472,7 @@ namespace ClothingSorter
             {
                 armoredThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(armoredThingCategory);
-                //armoredThingCategory.ResolveReferences();
+                armoredThingCategory.ResolveReferences();
             }
 
             if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate &&
@@ -480,20 +480,21 @@ namespace ClothingSorter
             {
                 psyfocusThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(psyfocusThingCategory);
-                //psyfocusThingCategory.ResolveReferences();
+                psyfocusThingCategory.ResolveReferences();
             }
 
             if (!ModLister.RoyaltyInstalled || !ClothingSorterMod.instance.Settings.RoyaltySeparate ||
                 royaltyThingCategory.childThingDefs.Count <= 0)
             {
+                thingCategoryDef.ResolveReferences();
                 return;
             }
 
             royaltyThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(royaltyThingCategory);
-            //psyfocusThingCategory.ResolveReferences();
+            royaltyThingCategory.ResolveReferences();
 
-            //thingCategoryDef.ResolveReferences();
+            thingCategoryDef.ResolveReferences();
         }
 
         private enum NextSortOption
