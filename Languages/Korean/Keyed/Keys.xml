@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CS_SettingLayerCategories>착용 부위 분류</CS_SettingLayerCategories>
+  <CS_SettingLayerCategoriesDescription>의상을 착용 부위에 따라 분류할까요?</CS_SettingLayerCategoriesDescription>
+  <CS_SettingTechCategories>기술 수준 분류</CS_SettingTechCategories>
+  <CS_SettingTechCategoriesDescription>의상을 기술 수준에 따라 분류할까요?</CS_SettingTechCategoriesDescription>
+  <CS_SettingModCategories>모드 분류</CS_SettingModCategories>
+  <CS_SettingModCategoriesDescription>추가하는 모드에 따라 의상을 분류할까요?</CS_SettingModCategoriesDescription>
+  <CS_SettingDeselectOptions>한 번에 최대 두 분류만 선택할 수 있습니다</CS_SettingDeselectOptions>
+  <CS_SettingCombineLayers>이름이 같은 착용 부위 분류 통합</CS_SettingCombineLayers>
+  <CS_SettingCombineLayersDescription>이름이 같은 착용 부위가 여럿 있다면, 하나의 분류로 통합할까요?</CS_SettingCombineLayersDescription>
+  <CS_SettingArmoredCategories>갑옷 소분류</CS_SettingArmoredCategories>
+  <CS_SettingArmoredCategoriesDescription>방어도가 있는 의상을 별도의 소분류로 정렬할까요?</CS_SettingArmoredCategoriesDescription>
+  <CS_SettingArmoredLowValue>갑옷으로 분류할 수치: {0}%</CS_SettingArmoredLowValue>
+  <CS_SettingArmoredMin>0% 방어도</CS_SettingArmoredMin>
+  <CS_SettingArmoredMax>200% 방어도</CS_SettingArmoredMax>
+  <CS_SettingPsyfocusCategories>초집중 소분류</CS_SettingPsyfocusCategories>
+  <CS_SettingPsyfocusCategoriesDescription>초집중 값이 있는 의상을 별도의 소분류로 정렬할까요?</CS_SettingPsyfocusCategoriesDescription>
+  <CS_SettingRoyaltyCategories>귀족 소분류</CS_SettingRoyaltyCategories>
+  <CS_SettingRoyaltyCategoriesDescription>귀족 의상을 별도의 소분류로 정렬할까요?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSortOrder>분류 정렬 순서</CS_SettingSortOrder>
+  <CS_SettingTech>기술</CS_SettingTech>
+  <CS_SettingLayer>부위</CS_SettingLayer>
+  <CS_SettingMod>모드</CS_SettingMod>
+  <CS_NoLayer>없음</CS_NoLayer>
+  <CS_Armored>갑옷</CS_Armored>
+  <CS_Psyfocus>초집중</CS_Psyfocus>
+  <CS_Royalty>귀족</CS_Royalty>
+  <CS_SettingCEArmorModifier>CE 방어도 배수 {0}</CS_SettingCEArmorModifier>
+  <CS_SettingCEDescription>Combat Extended가 바꾸는 방어 시스템에서는 일반적으로 방어도가 증가하기 때문에 CE를 불러왔다면 이 배수를 사용합니다. CE 패치가 방어도를 같은 방식으로 증가시키지 않을 수 있으므로 알고리즘이 완벽하지는 않지만, 최소한 바닐라 의상에 대해서는 5가 합리적인 설정값임을 알아냈습니다.</CS_SettingCEDescription>
+</LanguageData>
