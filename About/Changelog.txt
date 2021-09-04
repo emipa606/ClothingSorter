@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.0.23.0 - Pushing again
+
+
 1.0.22.0 - New version of 1SettingsHelper
 
 
