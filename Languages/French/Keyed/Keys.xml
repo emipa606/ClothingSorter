@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CS_SettingLayerCategories>Catégories de couches</CS_SettingLayerCategories>
+  <CS_SettingLayerCategoriesDescription>Les vêtements doivent-ils être triés selon la couche qu'ils recouvrent?</CS_SettingLayerCategoriesDescription>
+  <CS_SettingTechCategories>Catégories technologiques</CS_SettingTechCategories>
+  <CS_SettingTechCategoriesDescription>Les vêtements doivent-ils être triés en fonction de leur niveau technologique?</CS_SettingTechCategoriesDescription>
+  <CS_SettingModCategories>Catégories de mod</CS_SettingModCategories>
+  <CS_SettingModCategoriesDescription>Les vêtements doivent-ils être triés en fonction du mod à partir duquel ils sont ajoutés?</CS_SettingModCategoriesDescription>
+  <CS_SettingDeselectOptions>Deux catégories au maximum peuvent être sélectionnées en même temps</CS_SettingDeselectOptions>
+  <CS_SettingCombineLayers>Combinez des catégories de couches avec le même nom</CS_SettingCombineLayers>
+  <CS_SettingCombineLayersDescription>Si deux couches ou plus ont la même étiquette, doivent-elles être combinées en une seule catégorie?</CS_SettingCombineLayersDescription>
+  <CS_SettingArmoredCategories>Sous-catégories armure</CS_SettingArmoredCategories>
+  <CS_SettingArmoredCategoriesDescription>Les vêtements avec des valeurs d'armure devraient-ils être classés dans une sous-catégorie?</CS_SettingArmoredCategoriesDescription>
+  <CS_SettingArmoredLowValue>Valeur à partir de laquelle un vêtement est considéré comme une armure : {0}%</CS_SettingArmoredLowValue>
+  <CS_SettingArmoredMin>0% armure</CS_SettingArmoredMin>
+  <CS_SettingArmoredMax>200% armure</CS_SettingArmoredMax>
+  <CS_SettingPsyfocusCategories>Sous-catégories Psyfocus</CS_SettingPsyfocusCategories>
+  <CS_SettingPsyfocusCategoriesDescription>Les vêtements avec des valeurs psyfocus doivent-ils être triés dans une sous-catégorie?</CS_SettingPsyfocusCategoriesDescription>
+  <CS_SettingRoyaltyCategories>Sous-catégories de Royalty</CS_SettingRoyaltyCategories>
+  <CS_SettingRoyaltyCategoriesDescription>Les vêtements Royalty devraient-ils être classés dans une sous-catégorie?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSortOrder>Ordre de tri des catégories</CS_SettingSortOrder>
+  <CS_SettingTech>Technologie</CS_SettingTech>
+  <CS_SettingLayer>Couche</CS_SettingLayer>
+  <CS_SettingMod>Mod</CS_SettingMod>
+  <CS_NoLayer>Non</CS_NoLayer>
+  <CS_Armored>Armure</CS_Armored>
+  <CS_Psyfocus>Psyfocus</CS_Psyfocus>
+  <CS_Royalty>Royalty</CS_Royalty>
+  <CS_SettingCEArmorModifier>Multiplicateur de valeur d'armure CE {0}</CS_SettingCEArmorModifier>
+  <CS_SettingCEDescription>Puisque Combat Extended modifie un système de blindage pour obtenir des valeurs généralement augmentées, ce multiplicateur est utilisé lorsque CE est chargé. La logique n'est pas parfaite car les correctifs CE peuvent ne pas augmenter les valeurs d'armure de la même manière, mais j'ai trouvé que 5 est un paramètre raisonnable pour les vêtements vanilla au moins.</CS_SettingCEDescription>
+</LanguageData>

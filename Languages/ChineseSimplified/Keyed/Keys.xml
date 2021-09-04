@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CS_SettingLayerCategories>按层次分类</CS_SettingLayerCategories>
+  <CS_SettingLayerCategoriesDescription>是否按照衣服覆盖部位分类?</CS_SettingLayerCategoriesDescription>
+  <CS_SettingTechCategories>按科技分类</CS_SettingTechCategories>
+  <CS_SettingTechCategoriesDescription>是否按照衣物科技水平分类?</CS_SettingTechCategoriesDescription>
+  <CS_SettingModCategories>按Mod分类</CS_SettingModCategories>
+  <CS_SettingModCategoriesDescription>是否按照衣物来源的Mod分类?</CS_SettingModCategoriesDescription>
+  <CS_SettingDeselectOptions>最多勾选两个分类条件</CS_SettingDeselectOptions>
+  <CS_SettingCombineLayers>将同名的衣物层次合为一类</CS_SettingCombineLayers>
+  <CS_SettingCombineLayersDescription>当两个或更多的衣物层次拥有相同(类似)的名字时，将其合为一类?</CS_SettingCombineLayersDescription>
+  <CS_SettingArmoredCategories>子分类-装甲</CS_SettingArmoredCategories>
+  <CS_SettingArmoredCategoriesDescription>是否为达到设定护甲值(钝器或利器防护)的衣物创建新子类?</CS_SettingArmoredCategoriesDescription>
+  <CS_SettingArmoredLowValue>归类为装甲的最低护甲值: {0}%</CS_SettingArmoredLowValue>
+  <CS_SettingArmoredMin>0% 护甲</CS_SettingArmoredMin>
+  <CS_SettingArmoredMax>200% 护甲</CS_SettingArmoredMax>
+  <CS_SettingPsyfocusCategories>子分类-心灵装备</CS_SettingPsyfocusCategories>
+  <CS_SettingPsyfocusCategoriesDescription>是否为拥有心灵属性的衣物创建新子类?</CS_SettingPsyfocusCategoriesDescription>
+  <CS_SettingRoyaltyCategories>子分类-贵族衣物</CS_SettingRoyaltyCategories>
+  <CS_SettingRoyaltyCategoriesDescription>是否为贵族衣物创建新子类?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSortOrder>主/次类别</CS_SettingSortOrder>
+  <CS_SettingTech>科技</CS_SettingTech>
+  <CS_SettingLayer>层次</CS_SettingLayer>
+  <CS_SettingMod>Mod</CS_SettingMod>
+  <CS_NoLayer>非衣物</CS_NoLayer>
+  <CS_Armored>装甲</CS_Armored>
+  <CS_Psyfocus>心灵属性</CS_Psyfocus>
+  <CS_Royalty>贵族衣物</CS_Royalty>
+</LanguageData>

@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CS_SettingLayerCategories>Категории слоёв одежды</CS_SettingLayerCategories>
+  <CS_SettingLayerCategoriesDescription>Следует ли группировать одежду по слоям?</CS_SettingLayerCategoriesDescription>
+  <CS_SettingTechCategories>Категории технического уровня</CS_SettingTechCategories>
+  <CS_SettingTechCategoriesDescription>Следует ли группировать одежду по техническому уровню?</CS_SettingTechCategoriesDescription>
+  <CS_SettingModCategories>Категории модификаций</CS_SettingModCategories>
+  <CS_SettingModCategoriesDescription>Следует ли группировать одежду по принадлежности к добавляющей её модификации?</CS_SettingModCategoriesDescription>
+  <CS_SettingDeselectOptions>Одновременно можно выбрать только две категории!</CS_SettingDeselectOptions>
+  <CS_SettingCombineLayers>Объединить категории слоёв с одинаковыми именами</CS_SettingCombineLayers>
+  <CS_SettingCombineLayersDescription>Если два или более слоя имеют одно и то же название, должны ли они быть объединены в одну категорию?</CS_SettingCombineLayersDescription>
+  <CS_SettingArmoredCategories>Подкатегория "Броня"</CS_SettingArmoredCategories>
+  <CS_SettingArmoredCategoriesDescription>Следует ли создать подкатегорию для одежды со значениями брони?</CS_SettingArmoredCategoriesDescription>
+  <CS_SettingArmoredLowValue>Нижнее значение, чтобы считать бронированной: {0}%</CS_SettingArmoredLowValue>
+  <CS_SettingArmoredMin>0% брони</CS_SettingArmoredMin>
+  <CS_SettingArmoredMax>200% брони</CS_SettingArmoredMax>
+  <CS_SettingPsyfocusCategories>Подкатегория "Эльтекс"</CS_SettingPsyfocusCategories>
+  <CS_SettingPsyfocusCategoriesDescription>Следует ли создать подкатегорию для поддерживающей пси-концентрацию одежды?</CS_SettingPsyfocusCategoriesDescription>
+  <CS_SettingRoyaltyCategories>Подкатегория "Одежда знати"</CS_SettingRoyaltyCategories>
+  <CS_SettingRoyaltyCategoriesDescription>Следует ли создать подкатегорию для одежды, удовлетворяющей требованиям знатного титула?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSortOrder>Порядок сортировки категорий:</CS_SettingSortOrder>
+  <CS_SettingTech>Технический уровень</CS_SettingTech>
+  <CS_SettingLayer>Слой</CS_SettingLayer>
+  <CS_SettingMod>Модификация</CS_SettingMod>
+  <CS_NoLayer>Без слоя</CS_NoLayer>
+  <CS_Armored>Броня</CS_Armored>
+  <CS_Psyfocus>Эльтекс</CS_Psyfocus>
+  <CS_Royalty>Одежда знати</CS_Royalty>
+</LanguageData>

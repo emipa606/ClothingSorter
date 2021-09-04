@@ -1,0 +1,70 @@
+# Changelog for ClothingSorter
+
+1.0.22.0 - New version of 1SettingsHelper
+
+
+1.0.21.0 - Added Korean translation, thanks isty2e!
+
+
+1.0.20.0 - Added resolving of references for the categories since vanilla does not nullcheck
+
+
+1.0.19.0 - Mod updated for 1.3 and passed autotests
+
+
+1.0.18.0 - Added french translation, thanks qux!
+
+
+1.0.17.0 - Added CE multiplier setting
+
+
+1.0.16.0 - Uniquier translation-keys, updated russian translation.
+
+
+1.0.15.0 - Some error-checking for modsort-option, better mod config gui and updated chinese translation.
+
+
+1.0.14.0 - Added sorting by Mod-name
+
+
+1.0.13.0 - Should now not throw errors when sorting non-apparel. Added check for StuffEffectMultiplierArmor
+
+
+1.0.12.0 - Added Royalty sub-category
+
+
+1.0.11.0 - Okay, no more duplicates. Also added russian translation, via Reiquard
+
+
+1.0.10.0 - Now clears all generated categories on setting-change, no more duplicate or missing items
+
+
+1.0.9.0 - Now sorts all items under apparel, not just apparel
+
+
+1.0.8.0 - Should work with extra special properties, like "clean apparel" added by some mods.
+
+
+1.0.7.0 - Removed the premade categories as they are no longer needed
+
+
+1.0.6.0 - Added an option to combine layer-categories with the same label
+
+
+1.0.5.0 - The layer-labels should now show the label instead of the Defname
+
+
+1.0.4.0 - Added translatable keys for the C#-code
+
+
+1.0.3.0 - Added tech-sorting
+
+
+1.0.2.0 - Verified CE-compatibility, added changable armor-rating limit
+
+
+1.0.1.0 - Also generate custom layer-categories from mods
+
+
+1.0.0.0 - First publish
+

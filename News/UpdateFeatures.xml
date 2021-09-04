@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+  <HugsLib.UpdateFeatureDef Abstract="true" Name="UpdateFeatureBase">
+    <modNameReadable>ClothingSorter</modNameReadable>
+    <linkUrl>https://steamcommunity.com/sharedfiles/filedetails/?id=2275655161</linkUrl>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="UpdateFeatureBase">
+    <defName>ClothingSorter_1_0_3_0</defName>
+    <assemblyVersion>1.0.3.0</assemblyVersion>
+    <content>Some new features added:
+Sort by tech - Allows sorting based on techlevel of apparel
+Armor-value option - Allows setting the armor value of apparel to be sorted under the Armored category
+The sort-options can also be combined so it is possible for example to sort by layer first, then tech
+Please leave a comment on the mod-page if you have an idea of more sorting-options!
+</content>
+  </HugsLib.UpdateFeatureDef>
+  <HugsLib.UpdateFeatureDef ParentName="UpdateFeatureBase">
+    <defName>ClothingSorter_1_0_14_0</defName>
+    <assemblyVersion>1.0.14.0</assemblyVersion>
+    <content>Added a new sort-option, sort by Mod-name. It will categorize the apparel depending on what mod they were added from.
+Sorting is limited to two category-options at the same time.
+</content>
+  </HugsLib.UpdateFeatureDef>
+</Defs>
