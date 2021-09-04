@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.0.24.0 - Fixed history
+
+
 1.0.23.0 - Pushing again
 
 
