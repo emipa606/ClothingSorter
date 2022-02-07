@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.3.1 - Fixed sorting by two categories, added version info in mod-settings
+
+
 1.0.24.0 - Fixed history
 
 

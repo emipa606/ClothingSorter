@@ -28,4 +28,5 @@
   <CS_Royalty>Royalty</CS_Royalty>
   <CS_SettingCEArmorModifier>CE armorvalue multiplier {0}</CS_SettingCEArmorModifier>
   <CS_SettingCEDescription>Since Combat Extended modifies a the armor system to be generally increased values this multiplier is used when CE is loaded. The logic is not perfect since CE patches may not increase the armorvalues the same way, but I found that 5 is a reasonable setting for vanilla apparel at least.</CS_SettingCEDescription>
+  <CS_CurrentModVersion>Installed mod-version: {0}</CS_CurrentModVersion>
 </LanguageData>
