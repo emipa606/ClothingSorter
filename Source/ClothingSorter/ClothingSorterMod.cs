@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Mlie;
 using SettingsHelper;
 using UnityEngine;
@@ -71,61 +72,52 @@ internal class ClothingSorterMod : Mod
         GUI.contentColor = Color.yellow;
         listing_Standard.Label("CS_SettingDeselectOptions".Translate());
         GUI.contentColor = Color.white;
-        if (!(Settings.SortByLayer || Settings.SortByTech || Settings.SortByMod))
+        if (!(Settings.SortByLayer || Settings.SortByTech || Settings.SortByMod || Settings.SortByTag))
         {
             Settings.SortByLayer = true;
         }
 
-        if (AtLeastTwo(Settings.SortByLayer, Settings.SortByTech, Settings.SortByMod))
+        var enabledSettings = new List<bool>
+            { Settings.SortByLayer, Settings.SortByTech, Settings.SortByMod, Settings.SortByTag };
+
+        if (enabledSettings.Count(b => b.Equals(true)) == 2)
         {
             var categories = new string[2];
-            if (Settings.SortByLayer)
+            var i = 0;
+            for (var j = 0; j < enabledSettings.Count; j++)
             {
-                listing_Standard.CheckboxLabeled("CS_SettingLayerCategories".Translate(), ref Settings.SortByLayer,
-                    "CS_SettingLayerCategoriesDescription".Translate());
-                categories[0] = "CS_SettingLayer".Translate();
-            }
-            else
-            {
-                GUI.contentColor = Color.grey;
-                listing_Standard.Label("CS_SettingLayerCategories".Translate(), -1,
-                    "CS_SettingDeselectOptions".Translate());
-                GUI.contentColor = Color.white;
-            }
-
-            if (Settings.SortByTech)
-            {
-                listing_Standard.CheckboxLabeled("CS_SettingTechCategories".Translate(), ref Settings.SortByTech,
-                    "CS_SettingTechCategoriesDescription".Translate());
-                if (string.IsNullOrEmpty(categories[0]))
+                if (!enabledSettings[j])
                 {
-                    categories[0] = "CS_SettingTech".Translate();
+                    continue;
                 }
-                else
-                {
-                    categories[1] = "CS_SettingTech".Translate();
-                }
-            }
-            else
-            {
-                GUI.contentColor = Color.grey;
-                listing_Standard.Label("CS_SettingTechCategories".Translate(), -1,
-                    "CS_SettingDeselectOptions".Translate());
-                GUI.contentColor = Color.white;
-            }
 
-            if (Settings.SortByMod)
-            {
-                listing_Standard.CheckboxLabeled("CS_SettingModCategories".Translate(), ref Settings.SortByMod,
-                    "CS_SettingModCategoriesDescription".Translate());
-                categories[1] = "CS_SettingMod".Translate();
-            }
-            else
-            {
-                GUI.contentColor = Color.grey;
-                listing_Standard.Label("CS_SettingModCategories".Translate(), -1,
-                    "CS_SettingDeselectOptions".Translate());
-                GUI.contentColor = Color.white;
+                switch (j)
+                {
+                    case 0:
+                        listing_Standard.CheckboxLabeled("CS_SettingLayerCategories".Translate(),
+                            ref Settings.SortByLayer,
+                            "CS_SettingLayerCategoriesDescription".Translate());
+                        categories[i] = "CS_SettingLayer".Translate();
+                        break;
+                    case 1:
+                        listing_Standard.CheckboxLabeled("CS_SettingTechCategories".Translate(),
+                            ref Settings.SortByTech,
+                            "CS_SettingTechCategoriesDescription".Translate());
+                        categories[i] = "CS_SettingTech".Translate();
+                        break;
+                    case 2:
+                        listing_Standard.CheckboxLabeled("CS_SettingModCategories".Translate(), ref Settings.SortByMod,
+                            "CS_SettingModCategoriesDescription".Translate());
+                        categories[i] = "CS_SettingMod".Translate();
+                        break;
+                    case 3:
+                        listing_Standard.CheckboxLabeled("CS_SettingTagCategories".Translate(), ref Settings.SortByTag,
+                            "CS_SettingTagCategoriesDescription".Translate());
+                        categories[i] = "CS_SettingTag".Translate();
+                        break;
+                }
+
+                i++;
             }
 
             listing_Standard.Gap();
@@ -150,6 +142,8 @@ internal class ClothingSorterMod : Mod
                 "CS_SettingTechCategoriesDescription".Translate());
             listing_Standard.CheckboxLabeled("CS_SettingModCategories".Translate(), ref Settings.SortByMod,
                 "CS_SettingModCategoriesDescription".Translate());
+            listing_Standard.CheckboxLabeled("CS_SettingTagCategories".Translate(), ref Settings.SortByTag,
+                "CS_SettingTagCategoriesDescription".Translate());
 
             GUI.contentColor = Color.grey;
             listing_Standard.Gap();
@@ -210,28 +204,11 @@ internal class ClothingSorterMod : Mod
         }
 
         listing_Standard.End();
-
-        Settings.Write();
     }
 
     public override void WriteSettings()
     {
         base.WriteSettings();
         ClothingSorter.SortClothing();
-    }
-
-    public static bool AtLeastTwo(List<bool> listOfBool)
-    {
-        if (listOfBool.Count != 3)
-        {
-            return false;
-        }
-
-        return AtLeastTwo(listOfBool[0], listOfBool[1], listOfBool[2]);
-    }
-
-    private static bool AtLeastTwo(bool a, bool b, bool c)
-    {
-        return a && (b || c) || b && c;
     }
 }

@@ -1,5 +1,9 @@
 # Changelog for ClothingSorter
 
+1.3.3 - Added sorting by apparel-tag.
+Used DeepL to update translations for ChineseSimplified, French, Russian
+
+
 1.3.2 - More unique defname for the HugLib-news base-definition, to avoid conflicts with other mods
 
 
