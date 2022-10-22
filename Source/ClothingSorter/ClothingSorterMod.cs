@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Mlie;
-using SettingsHelper;
 using UnityEngine;
 using Verse;
 
@@ -171,16 +169,16 @@ internal class ClothingSorterMod : Mod
             "CS_SettingArmoredCategoriesDescription".Translate());
         if (Settings.ArmoredSeparate)
         {
-            listing_Standard.AddLabeledSlider(
+            Settings.ArmorRating = listing_Standard.SliderLabeled(
                 "CS_SettingArmoredLowValue".Translate(Math.Round(Settings.ArmorRating * 100)),
-                ref Settings.ArmorRating, 0f, 2f, "CS_SettingArmoredMin".Translate(),
-                "CS_SettingArmoredMax".Translate(), 0.01f);
+                Settings.ArmorRating, 0f, 2f);
             listing_Standard.Gap();
             if (ModLister.GetActiveModWithIdentifier("CETeam.CombatExtended") != null)
             {
                 listing_Standard.Label("CS_SettingCEDescription".Translate());
-                listing_Standard.AddLabeledSlider("CS_SettingCEArmorModifier".Translate(Settings.CEArmorModifier),
-                    ref Settings.CEArmorModifier, 0f, 10f, null, null, 0.1f);
+                Settings.CEArmorModifier = listing_Standard.SliderLabeled(
+                    "CS_SettingCEArmorModifier".Translate(Settings.CEArmorModifier),
+                    Settings.CEArmorModifier, 0f, 10f);
                 listing_Standard.Gap();
             }
 

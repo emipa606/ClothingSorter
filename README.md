@@ -11,6 +11,7 @@
 - Option to sort by layer
 - Option to sort by tech-level
 - Option to sort by mod-name
+- Option to sort by apparel tag
 
 
 
