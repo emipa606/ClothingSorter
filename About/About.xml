@@ -11,9 +11,7 @@
     <li>1.4</li>
   </supportedVersions>
   <modDependencies />
-  <loadAfter>
-    <li>CETeam.CombatExtended</li>
-  </loadAfter>
+  <loadAfter />
   <description>[img]https://i.imgur.com/buuPQel.png[/img]
 
 [h2]A mod that sorts apparel based on various properties[/h2]
