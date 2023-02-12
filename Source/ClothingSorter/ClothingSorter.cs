@@ -598,9 +598,9 @@ public class ClothingSorter
             };
             DefGenerator.AddImpliedDef(armoredThingCategory);
         }
-
         armoredThingCategory.childCategories.Clear();
         armoredThingCategory.childThingDefs.Clear();
+
         var psyfocusDefName = $"{thingCategoryDef.defName}_Psyfocus";
         var psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
         if (psyfocusThingCategory == null)
@@ -612,9 +612,9 @@ public class ClothingSorter
             };
             DefGenerator.AddImpliedDef(psyfocusThingCategory);
         }
-
         psyfocusThingCategory.childCategories.Clear();
         psyfocusThingCategory.childThingDefs.Clear();
+
         var royaltyDefName = $"{thingCategoryDef.defName}_Royalty";
         var royaltyThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(royaltyDefName);
         if (royaltyThingCategory == null)
@@ -626,11 +626,15 @@ public class ClothingSorter
             };
             DefGenerator.AddImpliedDef(royaltyThingCategory);
         }
-
         royaltyThingCategory.childCategories.Clear();
         royaltyThingCategory.childThingDefs.Clear();
+
         thingCategoryDef.childCategories.Clear();
         thingCategoryDef.childThingDefs.Clear();
+
+        bool doPsychicSeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate;
+        bool doRoyaltySeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate;
+
         foreach (var apparel in apparelToSort)
         {
             if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
@@ -651,7 +655,7 @@ public class ClothingSorter
                 }
             }
 
-            if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate)
+            if (doPsychicSeparate)
             {
                 if (apparel.apparel?.tags?.Contains("Psychic") == true)
                 {
@@ -661,7 +665,7 @@ public class ClothingSorter
                 }
             }
 
-            if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate)
+            if (doRoyaltySeparate)
             {
                 if (apparel.apparel?.tags?.Contains("Royal") == true)
                 {
@@ -682,21 +686,18 @@ public class ClothingSorter
             armoredThingCategory.ResolveReferences();
         }
 
-        if (ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate &&
-            psyfocusThingCategory.childThingDefs.Count > 0)
+        if (doPsychicSeparate && psyfocusThingCategory.childThingDefs.Count > 0)
         {
             psyfocusThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(psyfocusThingCategory);
             psyfocusThingCategory.ResolveReferences();
         }
-
-        if (!ModLister.RoyaltyInstalled || !ClothingSorterMod.instance.Settings.RoyaltySeparate ||
-            royaltyThingCategory.childThingDefs.Count <= 0)
+        
+        if (!doRoyaltySeparate || royaltyThingCategory.childThingDefs.Count <= 0)
         {
             thingCategoryDef.ResolveReferences();
             return;
         }
-
         royaltyThingCategory.parent = thingCategoryDef;
         thingCategoryDef.childCategories.Add(royaltyThingCategory);
         royaltyThingCategory.ResolveReferences();
