@@ -33,4 +33,10 @@
   <CS_SettingCEArmorModifier>Множитель бронестойкости CE {0}</CS_SettingCEArmorModifier>
   <CS_SettingCEDescription>Так как Combat Extended модифицирует систему брони для общего увеличения значений, этот множитель используется при загрузке CE. Логика не идеальна, поскольку патчи CE могут по-разному увеличивать значения брони, но я обнаружил, что 5 - это разумное значение, по крайней мере, для ванильной одежды.</CS_SettingCEDescription>
   <CS_CurrentModVersion>Установленная версия мода: {0}</CS_CurrentModVersion>
+  <CS_SettingSpecialCategories>Специальные подкатегории</CS_SettingSpecialCategories>
+  <CS_SettingSpecialCategoriesDescription>Должна ли специальная одежда (с уникальными свойствами) сортироваться в подкатегории?</CS_SettingSpecialCategoriesDescription>
+  <CS_SettingMechanitorCategories>Подкатегории механизаторов</CS_SettingMechanitorCategories>
+  <CS_SettingMechanitorCategoriesDescription>Следует ли сортировать одежду со свойствами Mechanitor в подкатегории?</CS_SettingMechanitorCategoriesDescription>
+  <CS_Special>Специальный</CS_Special>
+  <CS_Mechanitor>Механизатор</CS_Mechanitor>
 </LanguageData>

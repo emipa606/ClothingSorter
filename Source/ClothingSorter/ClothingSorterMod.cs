@@ -4,7 +4,7 @@ using Mlie;
 using UnityEngine;
 using Verse;
 
-namespace ClothingSorter {
+namespace ClothingSorter;
 
 [StaticConstructorOnStartup]
 internal class ClothingSorterMod : Mod
@@ -29,7 +29,7 @@ internal class ClothingSorterMod : Mod
     {
         instance = this;
         currentVersion =
-            VersionFromManifest.GetVersionFromModMetaData(ModLister.GetActiveModWithIdentifier("Mlie.ClothingSorter"));
+            VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
 
     /// <summary>
@@ -218,5 +218,4 @@ internal class ClothingSorterMod : Mod
         base.WriteSettings();
         ClothingSorter.SortClothing();
     }
-}
 }

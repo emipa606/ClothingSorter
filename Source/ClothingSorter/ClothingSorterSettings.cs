@@ -1,6 +1,6 @@
 ﻿using Verse;
 
-namespace ClothingSorter {
+namespace ClothingSorter;
 
 /// <summary>
 ///     Definition of the settings for the mod
@@ -11,15 +11,15 @@ internal class ClothingSorterSettings : ModSettings
     public float ArmorRating = 0.2f;
     public float CEArmorModifier = 5f;
     public bool CombineLayers = true;
+    public bool MechanitorSeparate;
     public bool PsychicSeparate = true;
     public bool RoyaltySeparate;
-    public bool SpecialSeparate;
-    public bool MechanitorSeparate;
     public bool SortByLayer = true;
     public bool SortByMod;
     public bool SortByTag;
     public bool SortByTech;
     public int SortSetting;
+    public bool SpecialSeparate;
 
     /// <summary>
     ///     Saving and loading the values
@@ -41,5 +41,4 @@ internal class ClothingSorterSettings : ModSettings
         Scribe_Values.Look(ref MechanitorSeparate, "MechanitorSeparate");
         Scribe_Values.Look(ref CEArmorModifier, "CEArmorModifier", 5f);
     }
-}
 }

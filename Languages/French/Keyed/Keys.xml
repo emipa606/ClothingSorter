@@ -33,4 +33,10 @@
   <CS_SettingTagCategoriesDescription>Les vêtements doivent-ils être triés en fonction des étiquettes qu'ils portent ?</CS_SettingTagCategoriesDescription>
   <CS_SettingTag>Étiquette</CS_SettingTag>
   <CS_CurrentModVersion>Version installée du module : {0}</CS_CurrentModVersion>
+  <CS_SettingSpecialCategories>Sous-catégories spéciales</CS_SettingSpecialCategories>
+  <CS_SettingSpecialCategoriesDescription>Les vêtements spéciaux (aux propriétés uniques) doivent-ils être classés dans une sous-catégorie ?</CS_SettingSpecialCategoriesDescription>
+  <CS_SettingMechanitorCategories>Sous-catégories du mécanicien</CS_SettingMechanitorCategories>
+  <CS_SettingMechanitorCategoriesDescription>Les vêtements ayant des propriétés de mécanicien doivent-ils être triés dans une sous-catégorie ?</CS_SettingMechanitorCategoriesDescription>
+  <CS_Special>Spécial</CS_Special>
+  <CS_Mechanitor>Mécanicien</CS_Mechanitor>
 </LanguageData>
