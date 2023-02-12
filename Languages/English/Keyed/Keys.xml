@@ -20,6 +20,10 @@
   <CS_SettingPsyfocusCategoriesDescription>Should apparel with psyfocus-values be sorted in a sub-category?</CS_SettingPsyfocusCategoriesDescription>
   <CS_SettingRoyaltyCategories>Royalty sub-categories</CS_SettingRoyaltyCategories>
   <CS_SettingRoyaltyCategoriesDescription>Should apparel fit for Royalty be sorted in a sub-category?</CS_SettingRoyaltyCategoriesDescription>
+  <CS_SettingSpecialCategories>Special sub-categories</CS_SettingSpecialCategories>
+  <CS_SettingSpecialCategoriesDescription>Should special apparel (with unique properties) be sorted in a sub-category?</CS_SettingSpecialCategoriesDescription>
+  <CS_SettingMechanitorCategories>Mechanitor sub-categories</CS_SettingMechanitorCategories>
+  <CS_SettingMechanitorCategoriesDescription>Should apparel with Mechanitor properties be sorted in a sub-category?</CS_SettingMechanitorCategoriesDescription>
   <CS_SettingSortOrder>Category sort-order</CS_SettingSortOrder>
   <CS_SettingTech>Tech</CS_SettingTech>
   <CS_SettingLayer>Layer</CS_SettingLayer>
@@ -29,6 +33,8 @@
   <CS_Armored>Armored</CS_Armored>
   <CS_Psyfocus>Psyfocus</CS_Psyfocus>
   <CS_Royalty>Royalty</CS_Royalty>
+  <CS_Special>Special</CS_Special>
+  <CS_Mechanitor>Mechanitor</CS_Mechanitor>
   <CS_SettingCEArmorModifier>CE armorvalue multiplier {0}</CS_SettingCEArmorModifier>
   <CS_SettingCEDescription>Since Combat Extended modifies a the armor system to be generally increased values this multiplier is used when CE is loaded. The logic is not perfect since CE patches may not increase the armorvalues the same way, but I found that 5 is a reasonable setting for vanilla apparel at least.</CS_SettingCEDescription>
   <CS_CurrentModVersion>Installed mod-version: {0}</CS_CurrentModVersion>

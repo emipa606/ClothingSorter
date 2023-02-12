@@ -4,7 +4,7 @@ using System.Linq;
 using RimWorld;
 using Verse;
 
-namespace ClothingSorter;
+namespace ClothingSorter {
 
 [StaticConstructorOnStartup]
 public class ClothingSorter
@@ -629,11 +629,41 @@ public class ClothingSorter
         royaltyThingCategory.childCategories.Clear();
         royaltyThingCategory.childThingDefs.Clear();
 
+        var specialDefName = $"{thingCategoryDef.defName}_Special";
+        var specialThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(specialDefName);
+        if (specialThingCategory == null)
+        {
+            specialThingCategory = new ThingCategoryDef
+            {
+                defName = specialDefName, label = "CS_Special".Translate(),
+                childSpecialFilters = new List<SpecialThingFilterDef>()
+            };
+            DefGenerator.AddImpliedDef(specialThingCategory);
+        }
+        specialThingCategory.childCategories.Clear();
+        specialThingCategory.childThingDefs.Clear();
+
+        var mechanitorDefName = $"{thingCategoryDef.defName}_Mechanitor";
+        var mechanitorThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(mechanitorDefName);
+        if (mechanitorThingCategory == null)
+        {
+            mechanitorThingCategory = new ThingCategoryDef
+            {
+                defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
+                childSpecialFilters = new List<SpecialThingFilterDef>()
+            };
+            DefGenerator.AddImpliedDef(mechanitorThingCategory);
+        }
+        mechanitorThingCategory.childCategories.Clear();
+        mechanitorThingCategory.childThingDefs.Clear();
+
         thingCategoryDef.childCategories.Clear();
         thingCategoryDef.childThingDefs.Clear();
 
         bool doPsychicSeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate;
         bool doRoyaltySeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate;
+        bool doSpecialSeparate = ClothingSorterMod.instance.Settings.SpecialSeparate;
+        bool doMechanitorSeparate = ModLister.BiotechInstalled && ClothingSorterMod.instance.Settings.MechanitorSeparate;
 
         foreach (var apparel in apparelToSort)
         {
@@ -675,6 +705,44 @@ public class ClothingSorter
                 }
             }
 
+            if (doSpecialSeparate)
+            {
+                if (
+                        apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PainShockThreshold) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ShootingAccuracyPawn) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.RangedCooldownFactor) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PsychicSensitivity) != 0
+                        || apparel.defName == "Apparel_TortureCrown"
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SlaveSuppressionFallRate) != 0
+                        // for some reason SlaveSuppressionFallRate doesn't work above
+                        // so we list them manually below TODO / HELP WANTED
+                        || apparel.defName == "Apparel_Collar"
+                        || apparel.defName == "Apparel_BodyStrap"
+                        
+
+                   )
+                {
+                    apparel.thingCategories.Add(specialThingCategory);
+                    specialThingCategory.childThingDefs.Add(apparel);
+                    continue;
+                }
+            }
+
+            if (doMechanitorSeparate)
+            {
+                if (
+                        apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.MechBandwidth) != 0
+                        || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.MechControlGroups) != 0
+                   )
+                {
+                    apparel.thingCategories.Add(mechanitorThingCategory);
+                    mechanitorThingCategory.childThingDefs.Add(apparel);
+                    continue;
+                }
+            }
+
             apparel.thingCategories.Add(thingCategoryDef);
             thingCategoryDef.childThingDefs.Add(apparel);
         }
@@ -691,6 +759,20 @@ public class ClothingSorter
             psyfocusThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(psyfocusThingCategory);
             psyfocusThingCategory.ResolveReferences();
+        }
+
+        if (doSpecialSeparate && specialThingCategory.childThingDefs.Count > 0)
+        {
+            specialThingCategory.parent = thingCategoryDef;
+            thingCategoryDef.childCategories.Add(specialThingCategory);
+            specialThingCategory.ResolveReferences();
+        }
+
+        if (doMechanitorSeparate && mechanitorThingCategory.childThingDefs.Count > 0)
+        {
+            mechanitorThingCategory.parent = thingCategoryDef;
+            thingCategoryDef.childCategories.Add(mechanitorThingCategory);
+            mechanitorThingCategory.ResolveReferences();
         }
         
         if (!doRoyaltySeparate || royaltyThingCategory.childThingDefs.Count <= 0)
@@ -713,4 +795,5 @@ public class ClothingSorter
         Tag = 3,
         None = 4
     }
+}
 }
