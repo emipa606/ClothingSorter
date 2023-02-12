@@ -4,7 +4,7 @@ using Mlie;
 using UnityEngine;
 using Verse;
 
-namespace ClothingSorter;
+namespace ClothingSorter {
 
 [StaticConstructorOnStartup]
 internal class ClothingSorterMod : Mod
@@ -193,6 +193,15 @@ internal class ClothingSorterMod : Mod
                 ref Settings.RoyaltySeparate, "CS_SettingRoyaltyCategoriesDescription".Translate());
         }
 
+        listing_Standard.CheckboxLabeled("CS_SettingSpecialCategories".Translate(),
+            ref Settings.SpecialSeparate, "CS_SettingSpecialCategoriesDescription".Translate());
+
+        if (ModLister.BiotechInstalled)
+        {
+            listing_Standard.CheckboxLabeled("CS_SettingMechanitorCategories".Translate(),
+                ref Settings.MechanitorSeparate, "CS_SettingMechanitorCategoriesDescription".Translate());
+        }
+
         if (currentVersion != null)
         {
             listing_Standard.Gap();
@@ -209,4 +218,5 @@ internal class ClothingSorterMod : Mod
         base.WriteSettings();
         ClothingSorter.SortClothing();
     }
+}
 }
