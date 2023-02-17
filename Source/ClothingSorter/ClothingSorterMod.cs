@@ -17,17 +17,13 @@ internal class ClothingSorterMod : Mod
     private static string currentVersion;
 
     /// <summary>
-    ///     The private settings
-    /// </summary>
-    private ClothingSorterSettings settings;
-
-    /// <summary>
     ///     Cunstructor
     /// </summary>
     /// <param name="content"></param>
     public ClothingSorterMod(ModContentPack content) : base(content)
     {
         instance = this;
+        Settings = GetSettings<ClothingSorterSettings>();
         currentVersion =
             VersionFromManifest.GetVersionFromModMetaData(content.ModMetaData);
     }
@@ -35,19 +31,7 @@ internal class ClothingSorterMod : Mod
     /// <summary>
     ///     The instance-settings for the mod
     /// </summary>
-    internal ClothingSorterSettings Settings
-    {
-        get
-        {
-            if (settings == null)
-            {
-                settings = GetSettings<ClothingSorterSettings>();
-            }
-
-            return settings;
-        }
-        set => settings = value;
-    }
+    internal ClothingSorterSettings Settings { get; }
 
     /// <summary>
     ///     The title for the mod-settings

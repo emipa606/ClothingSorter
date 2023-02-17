@@ -18,6 +18,7 @@
 
 - Option to combine layer-categories with the same name
 - Options for subcategories based on armor-value and Psycic/Royalty-tagged apparel
+- Option for subcategories for Machanitors and other gear with special effects, thanks maarxx!
 - Option to set what armor-value apparel should be put in the armored category
 - A CE-multiplier option to fine tune the CE-armor calculation
 
@@ -59,6 +60,4 @@ https://ko-fi.com/G2G55DDYD]![Image](https://i.imgur.com/Utx6OIH.png)
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-
-
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2275655161]Last updated 2023-02-12
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2275655161]Last updated 2023-02-17

@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.4.4 - Better save-compatibility, thanks Taranchuk
+
+
 1.4.3 - Added option for Mechanaitor specific gear and also a Special-category for gear with any extra effects, thank you maarxx for this addition!.
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 
