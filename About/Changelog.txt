@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.4.5 - Updated russian translation by Reiquard
+
+
 1.4.4 - Better save-compatibility, thanks Taranchuk
 
 
