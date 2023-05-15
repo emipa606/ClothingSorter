@@ -39,4 +39,8 @@
   <CS_SettingMechanitorCategoriesDescription>Les vêtements ayant des propriétés de mécanicien doivent-ils être triés dans une sous-catégorie ?</CS_SettingMechanitorCategoriesDescription>
   <CS_Special>Spécial</CS_Special>
   <CS_Mechanitor>Mécanicien</CS_Mechanitor>
+  <CS_SettingGenderCategories>Sous-catégories de genre</CS_SettingGenderCategories>
+  <CS_SettingGenderCategoriesDescription>Les vêtements dont le port est limité par le sexe doivent-ils être classés dans une sous-catégorie ?</CS_SettingGenderCategoriesDescription>
+  <CS_Female>Femme</CS_Female>
+  <CS_Male>Homme</CS_Male>
 </LanguageData>

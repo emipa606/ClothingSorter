@@ -11,6 +11,7 @@ internal class ClothingSorterSettings : ModSettings
     public float ArmorRating = 0.2f;
     public float CEArmorModifier = 5f;
     public bool CombineLayers = true;
+    public bool GenderSeparate;
     public bool MechanitorSeparate;
     public bool PsychicSeparate = true;
     public bool RoyaltySeparate;
@@ -38,6 +39,7 @@ internal class ClothingSorterSettings : ModSettings
         Scribe_Values.Look(ref PsychicSeparate, "PsychicSeparate", true);
         Scribe_Values.Look(ref RoyaltySeparate, "RoyaltySeparate");
         Scribe_Values.Look(ref SpecialSeparate, "SpecialSeparate");
+        Scribe_Values.Look(ref GenderSeparate, "GenderSeparate");
         Scribe_Values.Look(ref MechanitorSeparate, "MechanitorSeparate");
         Scribe_Values.Look(ref CEArmorModifier, "CEArmorModifier", 5f);
     }

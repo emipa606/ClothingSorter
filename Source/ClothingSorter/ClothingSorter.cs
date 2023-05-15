@@ -647,6 +647,36 @@ public class ClothingSorter
         specialThingCategory.childCategories.Clear();
         specialThingCategory.childThingDefs.Clear();
 
+        var femaleDefName = $"{thingCategoryDef.defName}_Female";
+        var femaleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(femaleDefName);
+        if (femaleThingCategory == null)
+        {
+            femaleThingCategory = new ThingCategoryDef
+            {
+                defName = femaleDefName, label = "CS_Female".Translate(),
+                childSpecialFilters = new List<SpecialThingFilterDef>()
+            };
+            DefGenerator.AddImpliedDef(femaleThingCategory);
+        }
+
+        femaleThingCategory.childCategories.Clear();
+        femaleThingCategory.childThingDefs.Clear();
+
+        var maleDefName = $"{thingCategoryDef.defName}_Male";
+        var maleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(maleDefName);
+        if (maleThingCategory == null)
+        {
+            maleThingCategory = new ThingCategoryDef
+            {
+                defName = maleDefName, label = "CS_Male".Translate(),
+                childSpecialFilters = new List<SpecialThingFilterDef>()
+            };
+            DefGenerator.AddImpliedDef(maleThingCategory);
+        }
+
+        maleThingCategory.childCategories.Clear();
+        maleThingCategory.childThingDefs.Clear();
+
         var mechanitorDefName = $"{thingCategoryDef.defName}_Mechanitor";
         var mechanitorThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(mechanitorDefName);
         if (mechanitorThingCategory == null)
@@ -668,10 +698,13 @@ public class ClothingSorter
         var doPsychicSeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate;
         var doRoyaltySeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate;
         var doSpecialSeparate = ClothingSorterMod.instance.Settings.SpecialSeparate;
+        var doGenderSeparate = ClothingSorterMod.instance.Settings.GenderSeparate;
         var doMechanitorSeparate = ModLister.BiotechInstalled && ClothingSorterMod.instance.Settings.MechanitorSeparate;
 
         foreach (var apparel in apparelToSort)
         {
+            var alreadyAdded = false;
+
             if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
             {
                 if (apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) &&
@@ -686,7 +719,7 @@ public class ClothingSorter
                 {
                     apparel.thingCategories.Add(armoredThingCategory);
                     armoredThingCategory.childThingDefs.Add(apparel);
-                    continue;
+                    alreadyAdded = true;
                 }
             }
 
@@ -696,7 +729,7 @@ public class ClothingSorter
                 {
                     apparel.thingCategories.Add(psyfocusThingCategory);
                     psyfocusThingCategory.childThingDefs.Add(apparel);
-                    continue;
+                    alreadyAdded = true;
                 }
             }
 
@@ -706,7 +739,24 @@ public class ClothingSorter
                 {
                     apparel.thingCategories.Add(royaltyThingCategory);
                     royaltyThingCategory.childThingDefs.Add(apparel);
-                    continue;
+                    alreadyAdded = true;
+                }
+            }
+
+            if (doGenderSeparate)
+            {
+                switch (apparel.apparel?.gender)
+                {
+                    case Gender.Female:
+                        apparel.thingCategories.Add(femaleThingCategory);
+                        femaleThingCategory.childThingDefs.Add(apparel);
+                        alreadyAdded = true;
+                        break;
+                    case Gender.Male:
+                        apparel.thingCategories.Add(maleThingCategory);
+                        maleThingCategory.childThingDefs.Add(apparel);
+                        alreadyAdded = true;
+                        break;
                 }
             }
 
@@ -729,7 +779,7 @@ public class ClothingSorter
                 {
                     apparel.thingCategories.Add(specialThingCategory);
                     specialThingCategory.childThingDefs.Add(apparel);
-                    continue;
+                    alreadyAdded = true;
                 }
             }
 
@@ -742,8 +792,13 @@ public class ClothingSorter
                 {
                     apparel.thingCategories.Add(mechanitorThingCategory);
                     mechanitorThingCategory.childThingDefs.Add(apparel);
-                    continue;
+                    alreadyAdded = true;
                 }
+            }
+
+            if (alreadyAdded)
+            {
+                continue;
             }
 
             apparel.thingCategories.Add(thingCategoryDef);
@@ -769,6 +824,23 @@ public class ClothingSorter
             specialThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(specialThingCategory);
             specialThingCategory.ResolveReferences();
+        }
+
+        if (doGenderSeparate)
+        {
+            if (femaleThingCategory.childThingDefs.Count > 0)
+            {
+                femaleThingCategory.parent = thingCategoryDef;
+                thingCategoryDef.childCategories.Add(femaleThingCategory);
+                femaleThingCategory.ResolveReferences();
+            }
+
+            if (maleThingCategory.childThingDefs.Count > 0)
+            {
+                maleThingCategory.parent = thingCategoryDef;
+                thingCategoryDef.childCategories.Add(maleThingCategory);
+                maleThingCategory.ResolveReferences();
+            }
         }
 
         if (doMechanitorSeparate && mechanitorThingCategory.childThingDefs.Count > 0)

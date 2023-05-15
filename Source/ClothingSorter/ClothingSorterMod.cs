@@ -179,6 +179,8 @@ internal class ClothingSorterMod : Mod
 
         listing_Standard.CheckboxLabeled("CS_SettingSpecialCategories".Translate(),
             ref Settings.SpecialSeparate, "CS_SettingSpecialCategoriesDescription".Translate());
+        listing_Standard.CheckboxLabeled("CS_SettingGenderCategories".Translate(),
+            ref Settings.GenderSeparate, "CS_SettingGenderCategoriesDescription".Translate());
 
         if (ModLister.BiotechInstalled)
         {

@@ -39,4 +39,8 @@
   <CS_SettingMechanitorCategoriesDescription>具有Mechanitor属性的服装是否应在一个子类别中进行排序？</CS_SettingMechanitorCategoriesDescription>
   <CS_Special>特别</CS_Special>
   <CS_Mechanitor>机械师</CS_Mechanitor>
+  <CS_SettingGenderCategories>性别子类别</CS_SettingGenderCategories>
+  <CS_SettingGenderCategoriesDescription>对什么性别的人可以穿的服装有限制，是否应该在一个子类别中进行分类？</CS_SettingGenderCategoriesDescription>
+  <CS_Female>女性</CS_Female>
+  <CS_Male>男性</CS_Male>
 </LanguageData>

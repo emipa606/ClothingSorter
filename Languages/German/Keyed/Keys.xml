@@ -39,4 +39,8 @@
   <CS_SettingMechanitorCategoriesDescription>Sollten Kleidungsstücke mit Mechanitor-Eigenschaften in einer Unterkategorie sortiert werden?</CS_SettingMechanitorCategoriesDescription>
   <CS_Special>Besonderes</CS_Special>
   <CS_Mechanitor>Mechanitor</CS_Mechanitor>
+  <CS_SettingGenderCategories>Geschlechtsspezifische Unterkategorien</CS_SettingGenderCategories>
+  <CS_SettingGenderCategoriesDescription>Sollten Kleidungsstücke, die nur von bestimmten Geschlechtern getragen werden können, in eine Unterkategorie eingeordnet werden?</CS_SettingGenderCategoriesDescription>
+  <CS_Female>Weiblich</CS_Female>
+  <CS_Male>Männlich</CS_Male>
 </LanguageData>
