@@ -596,7 +596,6 @@ public class ClothingSorter
                 defName = armoredDefName, label = "CS_Armored".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(armoredThingCategory);
         }
 
         armoredThingCategory.childCategories.Clear();
@@ -611,7 +610,6 @@ public class ClothingSorter
                 defName = psyfocusDefName, label = "CS_Psyfocus".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(psyfocusThingCategory);
         }
 
         psyfocusThingCategory.childCategories.Clear();
@@ -626,7 +624,6 @@ public class ClothingSorter
                 defName = royaltyDefName, label = "CS_Royalty".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(royaltyThingCategory);
         }
 
         royaltyThingCategory.childCategories.Clear();
@@ -641,7 +638,6 @@ public class ClothingSorter
                 defName = specialDefName, label = "CS_Special".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(specialThingCategory);
         }
 
         specialThingCategory.childCategories.Clear();
@@ -656,7 +652,6 @@ public class ClothingSorter
                 defName = femaleDefName, label = "CS_Female".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(femaleThingCategory);
         }
 
         femaleThingCategory.childCategories.Clear();
@@ -671,7 +666,6 @@ public class ClothingSorter
                 defName = maleDefName, label = "CS_Male".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(maleThingCategory);
         }
 
         maleThingCategory.childCategories.Clear();
@@ -686,7 +680,6 @@ public class ClothingSorter
                 defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(mechanitorThingCategory);
         }
 
         mechanitorThingCategory.childCategories.Clear();
@@ -860,9 +853,32 @@ public class ClothingSorter
         thingCategoryDef.childCategories.Add(royaltyThingCategory);
         royaltyThingCategory.ResolveReferences();
 
+        LateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
+        LateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
+        LateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
+        LateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
+        LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
+        LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
+        LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
+        
         thingCategoryDef.ResolveReferences();
     }
 
+    /// <summary>
+    ///     Blocks empty category so that ThingCategoryDefs won't exceed short hash limit 
+    /// </summary>
+    /// <param name="CategoryDefName"></param>
+    /// <param name="thingCategoryDef"></param>
+    private static void LateAddCategoryToDefDataBase(String CategoryDefName, ThingCategoryDef thingCategoryDef)
+    {
+        var notEmpty = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) == null && thingCategoryDef.childThingDefs.Count > 0;
+        if (notEmpty)
+        {
+            DefGenerator.AddImpliedDef(thingCategoryDef);
+            //Log.Message($"added {CategoryDefName} to db ");
+        }
+    }
+    
     private enum NextSortOption
     {
         Layer = 0,
