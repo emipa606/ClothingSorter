@@ -166,7 +166,7 @@ public class ClothingSorter
     private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by layer, then by {nextSortOption}");
+        // Log.Message($"Sorting by layer, then by {nextSortOption}");
         var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading
             orderby layerDef.label
             select layerDef).ToList();
@@ -256,7 +256,7 @@ public class ClothingSorter
     private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by tech, then by {nextSortOption}");
+        // Log.Message($"Sorting by tech, then by {nextSortOption}");
         foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
         {
             var apparelToCheck =
@@ -322,7 +322,7 @@ public class ClothingSorter
     private static void SortByTag(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by tag, then by {nextSortOption}");
+        // Log.Message($"Sorting by tag, then by {nextSortOption}");
         foreach (var tag in ApparelTagDictionary.Keys.OrderBy(s => s))
         {
             if (!apparelToSort.SharesElementWith(ApparelTagDictionary[tag]))
@@ -453,7 +453,7 @@ public class ClothingSorter
     private static void SortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by mod, then by {nextSortOption}");
+        // Log.Message($"Sorting by mod, then by {nextSortOption}");
         foreach (var modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
         {
             var apparelToCheck = (from apparelDef in apparelToSort
@@ -596,7 +596,6 @@ public class ClothingSorter
                 defName = armoredDefName, label = "CS_Armored".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(armoredThingCategory);
         }
 
         armoredThingCategory.childCategories.Clear();
@@ -611,7 +610,6 @@ public class ClothingSorter
                 defName = psyfocusDefName, label = "CS_Psyfocus".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(psyfocusThingCategory);
         }
 
         psyfocusThingCategory.childCategories.Clear();
@@ -626,7 +624,6 @@ public class ClothingSorter
                 defName = royaltyDefName, label = "CS_Royalty".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(royaltyThingCategory);
         }
 
         royaltyThingCategory.childCategories.Clear();
@@ -641,7 +638,6 @@ public class ClothingSorter
                 defName = specialDefName, label = "CS_Special".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(specialThingCategory);
         }
 
         specialThingCategory.childCategories.Clear();
@@ -656,7 +652,6 @@ public class ClothingSorter
                 defName = femaleDefName, label = "CS_Female".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(femaleThingCategory);
         }
 
         femaleThingCategory.childCategories.Clear();
@@ -671,7 +666,6 @@ public class ClothingSorter
                 defName = maleDefName, label = "CS_Male".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(maleThingCategory);
         }
 
         maleThingCategory.childCategories.Clear();
@@ -686,7 +680,6 @@ public class ClothingSorter
                 defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
                 childSpecialFilters = new List<SpecialThingFilterDef>()
             };
-            DefGenerator.AddImpliedDef(mechanitorThingCategory);
         }
 
         mechanitorThingCategory.childCategories.Clear();
@@ -770,11 +763,11 @@ public class ClothingSorter
                     || apparel.defName == "Apparel_TortureCrown"
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SlaveSuppressionFallRate) != 0
-                    // for some reason SlaveSuppressionFallRate doesn't work above
-                    // so we list them manually below TODO / HELP WANTED
-                    || apparel.defName == "Apparel_Collar"
-                    || apparel.defName == "Apparel_BodyStrap"
+                    || apparel.equippedStatOffsets.GetStatOffsetFromList(DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) > 0
+    
+                    // It should work now, at least for defs below
+                    //|| apparel.defName == "Apparel_Collar"
+                    //|| apparel.defName == "Apparel_BodyStrap"
                 )
                 {
                     apparel.thingCategories.Add(specialThingCategory);
@@ -860,9 +853,32 @@ public class ClothingSorter
         thingCategoryDef.childCategories.Add(royaltyThingCategory);
         royaltyThingCategory.ResolveReferences();
 
+        LateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
+        LateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
+        LateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
+        LateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
+        LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
+        LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
+        LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
+        
         thingCategoryDef.ResolveReferences();
     }
 
+    /// <summary>
+    ///     Blocks empty category so that ThingCategoryDefs won't exceed short hash limit 
+    /// </summary>
+    /// <param name="CategoryDefName"></param>
+    /// <param name="thingCategoryDef"></param>
+    private static void LateAddCategoryToDefDataBase(String CategoryDefName, ThingCategoryDef thingCategoryDef)
+    {
+        var notEmpty = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) == null && thingCategoryDef.childThingDefs.Count > 0;
+        if (notEmpty)
+        {
+            DefGenerator.AddImpliedDef(thingCategoryDef);
+            //Log.Message($"added {CategoryDefName} to db ");
+        }
+    }
+    
     private enum NextSortOption
     {
         Layer = 0,
