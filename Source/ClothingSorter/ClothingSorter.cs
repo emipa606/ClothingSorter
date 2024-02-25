@@ -166,7 +166,7 @@ public class ClothingSorter
     private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by layer, then by {nextSortOption}");
+        // Log.Message($"Sorting by layer, then by {nextSortOption}");
         var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading
             orderby layerDef.label
             select layerDef).ToList();
@@ -256,7 +256,7 @@ public class ClothingSorter
     private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by tech, then by {nextSortOption}");
+        // Log.Message($"Sorting by tech, then by {nextSortOption}");
         foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
         {
             var apparelToCheck =
@@ -322,7 +322,7 @@ public class ClothingSorter
     private static void SortByTag(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by tag, then by {nextSortOption}");
+        // Log.Message($"Sorting by tag, then by {nextSortOption}");
         foreach (var tag in ApparelTagDictionary.Keys.OrderBy(s => s))
         {
             if (!apparelToSort.SharesElementWith(ApparelTagDictionary[tag]))
@@ -453,7 +453,7 @@ public class ClothingSorter
     private static void SortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        Log.Message($"Sorting by mod, then by {nextSortOption}");
+        // Log.Message($"Sorting by mod, then by {nextSortOption}");
         foreach (var modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
         {
             var apparelToCheck = (from apparelDef in apparelToSort
