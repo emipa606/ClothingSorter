@@ -763,11 +763,11 @@ public class ClothingSorter
                     || apparel.defName == "Apparel_TortureCrown"
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SlaveSuppressionFallRate) != 0
-                    // for some reason SlaveSuppressionFallRate doesn't work above
-                    // so we list them manually below TODO / HELP WANTED
-                    || apparel.defName == "Apparel_Collar"
-                    || apparel.defName == "Apparel_BodyStrap"
+                    || apparel.equippedStatOffsets.GetStatOffsetFromList(DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) > 0
+    
+                    // It should work now, at least for defs below
+                    //|| apparel.defName == "Apparel_Collar"
+                    //|| apparel.defName == "Apparel_BodyStrap"
                 )
                 {
                     apparel.thingCategories.Add(specialThingCategory);
