@@ -19,6 +19,7 @@
 - Option to combine layer-categories with the same name
 - Options for subcategories based on armor-value and Psycic/Royalty-tagged apparel
 - Option for subcategories for Machanitors and other gear with special effects, thanks maarxx!
+- Option for subcategories for gender, based on the gender-tag in the apparel definition.
 - Option to set what armor-value apparel should be put in the armored category
 - A CE-multiplier option to fine tune the CE-armor calculation
 
@@ -39,6 +40,21 @@ Korean translation by isty2e
 
 Keywords: Sort, filter, apparel, categories, layers
 
+[table]
+	[tr]
+		[td]https://dsc.gg/mlie]![Image](https://i.imgur.com/zdzzBrc.png)
+[/td]
+		[td]https://github.com/emipa606/ClothingSorter]![Image](https://i.imgur.com/kTkpTOE.png)
+[/td]
+    [/tr]
+    [tr]
+        [td]![Image](https://i.imgur.com/WjDSfUn.png)
+[/td]
+        [td]![Image](https://i.imgur.com/h5VwTNL.png)
+[/td]
+    [/tr]
+[/table]
+
 If you have any suggestion on more properties to sort on, leave a comment here or on the Discord-server!
 
 ![Image](https://i.imgur.com/Ds0rBAD.png)
@@ -54,10 +70,12 @@ https://ko-fi.com/G2G55DDYD]![Image](https://i.imgur.com/VWG0yff.png)
 
 -  See if the the error persists if you just have this mod and its requirements active.
 -  If not, try adding your other mods until it happens again.
--  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib and command Ctrl+F12
+-  Post your error-log using https://steamcommunity.com/workshop/filedetails/?id=818773962]HugsLib or the standalone https://steamcommunity.com/sharedfiles/filedetails/?id=2873415404]Uploader and command Ctrl+F12
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
 
 
-https://steamcommunity.com/sharedfiles/filedetails/changelog/2275655161]Last updated 2023-05-15
+
+https://steamcommunity.com/sharedfiles/filedetails/changelog/2275655161]![Image](https://img.shields.io/github/v/release/emipa606/ClothingSorter?label=latest%20version&style=plastic&labelColor=0070cd&color=white)
+

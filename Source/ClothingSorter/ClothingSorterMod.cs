@@ -188,6 +188,10 @@ internal class ClothingSorterMod : Mod
                 ref Settings.MechanitorSeparate, "CS_SettingMechanitorCategoriesDescription".Translate());
         }
 
+        listing_Standard.Gap();
+        listing_Standard.CheckboxLabeled("CS_VerboseLogging".Translate(),
+            ref Settings.VerboseLogging, "CS_VerboseLoggingDescription".Translate());
+
         if (currentVersion != null)
         {
             listing_Standard.Gap();

@@ -21,6 +21,7 @@ internal class ClothingSorterSettings : ModSettings
     public bool SortByTech;
     public int SortSetting;
     public bool SpecialSeparate;
+    public bool VerboseLogging;
 
     /// <summary>
     ///     Saving and loading the values
@@ -29,6 +30,7 @@ internal class ClothingSorterSettings : ModSettings
     {
         base.ExposeData();
         Scribe_Values.Look(ref SortByLayer, "SortByLayer", true);
+        Scribe_Values.Look(ref VerboseLogging, "VerboseLogging");
         Scribe_Values.Look(ref SortByTech, "SortByTech");
         Scribe_Values.Look(ref SortByMod, "SortByMod");
         Scribe_Values.Look(ref SortByTag, "SortByTag");

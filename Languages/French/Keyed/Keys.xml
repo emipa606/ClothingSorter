@@ -43,4 +43,6 @@
   <CS_SettingGenderCategoriesDescription>Les vêtements dont le port est limité par le sexe doivent-ils être classés dans une sous-catégorie ?</CS_SettingGenderCategoriesDescription>
   <CS_Female>Femme</CS_Female>
   <CS_Male>Homme</CS_Male>
+  <CS_VerboseLogging>Journalisation verbeuse</CS_VerboseLogging>
+  <CS_VerboseLoggingDescription>Affiche des messages supplémentaires pour le débogage</CS_VerboseLoggingDescription>
 </LanguageData>

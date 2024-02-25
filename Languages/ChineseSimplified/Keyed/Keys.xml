@@ -43,4 +43,6 @@
   <CS_SettingGenderCategoriesDescription>对什么性别的人可以穿的服装有限制，是否应该在一个子类别中进行分类？</CS_SettingGenderCategoriesDescription>
   <CS_Female>女性</CS_Female>
   <CS_Male>男性</CS_Male>
+  <CS_VerboseLogging>冗长日志记录</CS_VerboseLogging>
+  <CS_VerboseLoggingDescription>显示用于调试的额外日志信息</CS_VerboseLoggingDescription>
 </LanguageData>

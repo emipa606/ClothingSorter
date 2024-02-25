@@ -43,4 +43,6 @@
   <CS_SettingGenderCategoriesDescription>Следует ли сортировать в подкатегории одежду, имеющую ограничения на то, какой пол может ее носить?</CS_SettingGenderCategoriesDescription>
   <CS_Female>Женский</CS_Female>
   <CS_Male>Мужчина</CS_Male>
+  <CS_VerboseLogging>Ведение подробного журнала</CS_VerboseLogging>
+  <CS_VerboseLoggingDescription>Показывает дополнительные сообщения журнала для отладки</CS_VerboseLoggingDescription>
 </LanguageData>

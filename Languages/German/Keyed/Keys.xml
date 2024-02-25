@@ -43,4 +43,6 @@
   <CS_SettingGenderCategoriesDescription>Sollten Kleidungsstücke, die nur von bestimmten Geschlechtern getragen werden können, in eine Unterkategorie eingeordnet werden?</CS_SettingGenderCategoriesDescription>
   <CS_Female>Weiblich</CS_Female>
   <CS_Male>Männlich</CS_Male>
+  <CS_VerboseLogging>Ausführliche Protokollierung</CS_VerboseLogging>
+  <CS_VerboseLoggingDescription>Zeigt zusätzliche Log-Meldungen zur Fehlersuche</CS_VerboseLoggingDescription>
 </LanguageData>

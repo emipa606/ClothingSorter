@@ -32,7 +32,7 @@ public class ClothingSorter
             {
                 if (!ApparelTagDictionary.ContainsKey(tag))
                 {
-                    ApparelTagDictionary[tag] = new List<ThingDef> { apparel };
+                    ApparelTagDictionary[tag] = [apparel];
                     continue;
                 }
 
@@ -45,7 +45,7 @@ public class ClothingSorter
     {
         var apparelInGame = ThingCategoryDefOf.Apparel.DescendantThingDefs.ToHashSet();
 
-        Log.Message($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
+        LogMessage($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
 
         if (ModLister.GetActiveModWithIdentifier("CETeam.CombatExtended") != null)
         {
@@ -160,13 +160,13 @@ public class ClothingSorter
         }
 
         ThingCategoryDefOf.Apparel.ResolveReferences();
-        Log.Message("Clothing Sorter: Update done.");
+        LogMessage("Clothing Sorter: Update done.");
     }
 
     private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        // Log.Message($"Sorting by layer, then by {nextSortOption}");
+        LogMessage($"Sorting {thingCategoryDef} by layer, then by {nextSortOption}");
         var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading
             orderby layerDef.label
             select layerDef).ToList();
@@ -209,7 +209,7 @@ public class ClothingSorter
                 layerThingCategory = new ThingCategoryDef
                 {
                     defName = layerDefName, label = layerDef.label,
-                    childSpecialFilters = new List<SpecialThingFilterDef>()
+                    childSpecialFilters = []
                 };
                 DefGenerator.AddImpliedDef(layerThingCategory);
             }
@@ -256,7 +256,7 @@ public class ClothingSorter
     private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        // Log.Message($"Sorting by tech, then by {nextSortOption}");
+        LogMessage($"Sorting {thingCategoryDef} by tech, then by {nextSortOption}");
         foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
         {
             var apparelToCheck =
@@ -274,7 +274,7 @@ public class ClothingSorter
                 techLevelThingCategory = new ThingCategoryDef
                 {
                     defName = techLevelDefName, label = techLevel.ToStringHuman(),
-                    childSpecialFilters = new List<SpecialThingFilterDef>()
+                    childSpecialFilters = []
                 };
                 DefGenerator.AddImpliedDef(techLevelThingCategory);
             }
@@ -322,7 +322,7 @@ public class ClothingSorter
     private static void SortByTag(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        // Log.Message($"Sorting by tag, then by {nextSortOption}");
+        LogMessage($"Sorting by {thingCategoryDef} tag, then by {nextSortOption}");
         foreach (var tag in ApparelTagDictionary.Keys.OrderBy(s => s))
         {
             if (!apparelToSort.SharesElementWith(ApparelTagDictionary[tag]))
@@ -406,7 +406,7 @@ public class ClothingSorter
             {
                 defName = missingTagDefName,
                 label = "CS_NoLayer".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
             DefGenerator.AddImpliedDef(missingTagThingCategory);
         }
@@ -453,7 +453,7 @@ public class ClothingSorter
     private static void SortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        // Log.Message($"Sorting by mod, then by {nextSortOption}");
+        LogMessage($"Sorting {thingCategoryDef} by mod, then by {nextSortOption}");
         foreach (var modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
         {
             var apparelToCheck = (from apparelDef in apparelToSort
@@ -471,7 +471,7 @@ public class ClothingSorter
             {
                 modThingCategory = new ThingCategoryDef
                 {
-                    defName = modDefName, label = modData.Name, childSpecialFilters = new List<SpecialThingFilterDef>()
+                    defName = modDefName, label = modData.Name, childSpecialFilters = []
                 };
                 DefGenerator.AddImpliedDef(modThingCategory);
             }
@@ -535,7 +535,7 @@ public class ClothingSorter
             missingModThingCategory = new ThingCategoryDef
             {
                 defName = missingModDefName, label = "CS_NoLayer".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
             DefGenerator.AddImpliedDef(missingModThingCategory);
         }
@@ -594,7 +594,7 @@ public class ClothingSorter
             armoredThingCategory = new ThingCategoryDef
             {
                 defName = armoredDefName, label = "CS_Armored".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -608,7 +608,7 @@ public class ClothingSorter
             psyfocusThingCategory = new ThingCategoryDef
             {
                 defName = psyfocusDefName, label = "CS_Psyfocus".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -622,7 +622,7 @@ public class ClothingSorter
             royaltyThingCategory = new ThingCategoryDef
             {
                 defName = royaltyDefName, label = "CS_Royalty".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -636,7 +636,7 @@ public class ClothingSorter
             specialThingCategory = new ThingCategoryDef
             {
                 defName = specialDefName, label = "CS_Special".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -650,7 +650,7 @@ public class ClothingSorter
             femaleThingCategory = new ThingCategoryDef
             {
                 defName = femaleDefName, label = "CS_Female".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -664,7 +664,7 @@ public class ClothingSorter
             maleThingCategory = new ThingCategoryDef
             {
                 defName = maleDefName, label = "CS_Male".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -678,7 +678,7 @@ public class ClothingSorter
             mechanitorThingCategory = new ThingCategoryDef
             {
                 defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
-                childSpecialFilters = new List<SpecialThingFilterDef>()
+                childSpecialFilters = []
             };
         }
 
@@ -763,8 +763,9 @@ public class ClothingSorter
                     || apparel.defName == "Apparel_TortureCrown"
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
                     || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) > 0
-    
+                    || apparel.equippedStatOffsets.GetStatOffsetFromList(
+                        DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) > 0
+
                     // It should work now, at least for defs below
                     //|| apparel.defName == "Apparel_Collar"
                     //|| apparel.defName == "Apparel_BodyStrap"
@@ -860,25 +861,37 @@ public class ClothingSorter
         LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
         LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
         LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
-        
+
         thingCategoryDef.ResolveReferences();
     }
 
     /// <summary>
-    ///     Blocks empty category so that ThingCategoryDefs won't exceed short hash limit 
+    ///     Blocks empty category so that ThingCategoryDefs won't exceed short hash limit
     /// </summary>
     /// <param name="CategoryDefName"></param>
     /// <param name="thingCategoryDef"></param>
-    private static void LateAddCategoryToDefDataBase(String CategoryDefName, ThingCategoryDef thingCategoryDef)
+    private static void LateAddCategoryToDefDataBase(string CategoryDefName, ThingCategoryDef thingCategoryDef)
     {
-        var notEmpty = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) == null && thingCategoryDef.childThingDefs.Count > 0;
-        if (notEmpty)
+        if (!(DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) == null &&
+              thingCategoryDef.childThingDefs.Count > 0))
         {
-            DefGenerator.AddImpliedDef(thingCategoryDef);
-            //Log.Message($"added {CategoryDefName} to db ");
+            return;
         }
+
+        DefGenerator.AddImpliedDef(thingCategoryDef);
+        LogMessage($"Added {CategoryDefName} to def-database");
     }
-    
+
+    private static void LogMessage(string message)
+    {
+        if (!ClothingSorterMod.instance.Settings.VerboseLogging)
+        {
+            return;
+        }
+
+        Log.Message($"[ClothingSorter]: {message}");
+    }
+
     private enum NextSortOption
     {
         Layer = 0,
