@@ -801,6 +801,7 @@ public class ClothingSorter
 
         if (ClothingSorterMod.instance.Settings.ArmoredSeparate && armoredThingCategory.childThingDefs.Count > 0)
         {
+            LateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
             armoredThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(armoredThingCategory);
             armoredThingCategory.ResolveReferences();
@@ -808,6 +809,7 @@ public class ClothingSorter
 
         if (doPsychicSeparate && psyfocusThingCategory.childThingDefs.Count > 0)
         {
+            LateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
             psyfocusThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(psyfocusThingCategory);
             psyfocusThingCategory.ResolveReferences();
@@ -815,6 +817,7 @@ public class ClothingSorter
 
         if (doSpecialSeparate && specialThingCategory.childThingDefs.Count > 0)
         {
+            LateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
             specialThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(specialThingCategory);
             specialThingCategory.ResolveReferences();
@@ -824,6 +827,7 @@ public class ClothingSorter
         {
             if (femaleThingCategory.childThingDefs.Count > 0)
             {
+                LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
                 femaleThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(femaleThingCategory);
                 femaleThingCategory.ResolveReferences();
@@ -831,6 +835,7 @@ public class ClothingSorter
 
             if (maleThingCategory.childThingDefs.Count > 0)
             {
+                LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
                 maleThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(maleThingCategory);
                 maleThingCategory.ResolveReferences();
@@ -839,28 +844,19 @@ public class ClothingSorter
 
         if (doMechanitorSeparate && mechanitorThingCategory.childThingDefs.Count > 0)
         {
+            LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
             mechanitorThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(mechanitorThingCategory);
             mechanitorThingCategory.ResolveReferences();
         }
 
-        if (!doRoyaltySeparate || royaltyThingCategory.childThingDefs.Count <= 0)
+        if (doRoyaltySeparate && royaltyThingCategory.childThingDefs.Count > 0)
         {
-            thingCategoryDef.ResolveReferences();
-            return;
+            LateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
+            royaltyThingCategory.parent = thingCategoryDef;
+            thingCategoryDef.childCategories.Add(royaltyThingCategory);
+            royaltyThingCategory.ResolveReferences();
         }
-
-        royaltyThingCategory.parent = thingCategoryDef;
-        thingCategoryDef.childCategories.Add(royaltyThingCategory);
-        royaltyThingCategory.ResolveReferences();
-
-        LateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
-        LateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
-        LateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
-        LateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
-        LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
-        LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
-        LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
 
         thingCategoryDef.ResolveReferences();
     }
@@ -872,8 +868,7 @@ public class ClothingSorter
     /// <param name="thingCategoryDef"></param>
     private static void LateAddCategoryToDefDataBase(string CategoryDefName, ThingCategoryDef thingCategoryDef)
     {
-        if (!(DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) == null &&
-              thingCategoryDef.childThingDefs.Count > 0))
+        if (DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) != null)
         {
             return;
         }

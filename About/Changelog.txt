@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.4.8 - Fixed the bug where the defs were only added if royalty were not loaded
+
+
 1.4.7 - Fixes for hash-limits and slave-suppression by hhyzbd and I moved logging to a mod-option instead
 Used DeepL to update translations for ChineseSimplified, French, German, Russian
 
