@@ -40,21 +40,6 @@ Korean translation by isty2e
 
 Keywords: Sort, filter, apparel, categories, layers
 
-[table]
-	[tr]
-		[td]https://dsc.gg/mlie]![Image](https://i.imgur.com/zdzzBrc.png)
-[/td]
-		[td]https://github.com/emipa606/ClothingSorter]![Image](https://i.imgur.com/kTkpTOE.png)
-[/td]
-    [/tr]
-    [tr]
-        [td]![Image](https://i.imgur.com/WjDSfUn.png)
-[/td]
-        [td]![Image](https://i.imgur.com/h5VwTNL.png)
-[/td]
-    [/tr]
-[/table]
-
 If you have any suggestion on more properties to sort on, leave a comment here or on the Discord-server!
 
 ![Image](https://i.imgur.com/Ds0rBAD.png)
@@ -74,6 +59,7 @@ https://ko-fi.com/G2G55DDYD]![Image](https://i.imgur.com/VWG0yff.png)
 -  For best support, please use the Discord-channel for error-reporting.
 -  Do not report errors by making a discussion-thread, I get no notification of that.
 -  If you have the solution for a problem, please post it to the GitHub repository.
+-  Use https://github.com/RimSort/RimSort/releases/latest]RimSort to sort your mods
 
 
 

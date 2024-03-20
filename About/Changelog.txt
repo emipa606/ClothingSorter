@@ -1,5 +1,8 @@
 # Changelog for ClothingSorter
 
+1.5.0 - Mod updated for 1.5 and passed autotests
+
+
 1.4.8 - Fixed the bug where the defs were only added if royalty were not loaded
 
 
