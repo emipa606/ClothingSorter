@@ -140,6 +140,8 @@ internal class ClothingSorterMod : Mod
         {
             listing_Standard.CheckboxLabeled("CS_SettingCombineLayers".Translate(), ref Settings.CombineLayers,
                 "CS_SettingCombineLayersDescription".Translate());
+            listing_Standard.CheckboxLabeled("CS_SettingUniqueLayers".Translate(), ref Settings.UniqueLayers,
+                "CS_SettingUniqueLayersDescription".Translate());
         }
         else
         {

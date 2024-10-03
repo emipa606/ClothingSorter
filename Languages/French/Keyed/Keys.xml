@@ -45,4 +45,7 @@
   <CS_Male>Homme</CS_Male>
   <CS_VerboseLogging>Journalisation verbeuse</CS_VerboseLogging>
   <CS_VerboseLoggingDescription>Affiche des messages supplémentaires pour le débogage</CS_VerboseLoggingDescription>
+  <CS_UniqueLayerOnly>seulement</CS_UniqueLayerOnly>
+  <CS_SettingUniqueLayers>Générer des catégories pour les vêtements à couche unique</CS_SettingUniqueLayers>
+  <CS_SettingUniqueLayersDescription>Les vêtements qui n'appartiennent qu'à une seule couche seront également classés dans une catégorie distincte.</CS_SettingUniqueLayersDescription>
 </LanguageData>

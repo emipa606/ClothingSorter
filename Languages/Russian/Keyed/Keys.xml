@@ -45,4 +45,7 @@
   <CS_Male>Мужчина</CS_Male>
   <CS_VerboseLogging>Ведение подробного журнала</CS_VerboseLogging>
   <CS_VerboseLoggingDescription>Показывает дополнительные сообщения журнала для отладки</CS_VerboseLoggingDescription>
+  <CS_UniqueLayerOnly>только</CS_UniqueLayerOnly>
+  <CS_SettingUniqueLayers>Создание категорий для однослойной одежды</CS_SettingUniqueLayers>
+  <CS_SettingUniqueLayersDescription>Одежда, относящаяся только к одному слою, также будет отсортирована в отдельную категорию</CS_SettingUniqueLayersDescription>
 </LanguageData>

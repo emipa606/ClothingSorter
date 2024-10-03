@@ -45,4 +45,7 @@
   <CS_Male>Männlich</CS_Male>
   <CS_VerboseLogging>Ausführliche Protokollierung</CS_VerboseLogging>
   <CS_VerboseLoggingDescription>Zeigt zusätzliche Log-Meldungen zur Fehlersuche</CS_VerboseLoggingDescription>
+  <CS_UniqueLayerOnly>nur</CS_UniqueLayerOnly>
+  <CS_SettingUniqueLayers>Erzeugen von Kategorien für einlagige Kleidungsstücke</CS_SettingUniqueLayers>
+  <CS_SettingUniqueLayersDescription>Kleidungsstücke, die nur zu einer einzigen Schicht gehören, werden ebenfalls in einer separaten Kategorie sortiert</CS_SettingUniqueLayersDescription>
 </LanguageData>

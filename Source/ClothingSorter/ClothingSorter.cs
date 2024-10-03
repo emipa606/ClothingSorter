@@ -172,6 +172,7 @@ public class ClothingSorter
             select layerDef).ToList();
         layerDefs.Add(new ApparelLayerDef { defName = "Layer_None", label = "CS_NoLayer".Translate() });
         var selectedLayers = new List<ApparelLayerDef>();
+
         for (var layerInt = 0; layerInt < layerDefs.Count; layerInt++)
         {
             if (ClothingSorterMod.instance.Settings.CombineLayers && layerDefs.Count > layerInt + 1 &&
@@ -188,6 +189,11 @@ public class ClothingSorter
                     where apparelDef.apparel?.layers?.Count > 0 &&
                           apparelDef.apparel.layers.SharesElementWith(selectedLayers)
                     select apparelDef).ToHashSet();
+
+            var uniqueApparelToCheck =
+                (from apparelDef in apparelToCheck
+                    where apparelDef.apparel?.layers?.Count == 1
+                    select apparelDef).ToHashSet();
             if (layerDef.defName == "Layer_None")
             {
                 apparelToCheck =
@@ -203,6 +209,8 @@ public class ClothingSorter
                 layerDefName = $"CS_{layerDef}";
             }
 
+            var layerDefNameUnique = $"{layerDefName}_Single";
+
             var layerThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(layerDefName);
             if (layerThingCategory == null)
             {
@@ -214,8 +222,31 @@ public class ClothingSorter
                 DefGenerator.AddImpliedDef(layerThingCategory);
             }
 
+            var layerThingCategoryUnique = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(layerDefNameUnique);
+            if (layerThingCategoryUnique == null)
+            {
+                layerThingCategoryUnique = new ThingCategoryDef
+                {
+                    defName = layerDefNameUnique,
+                    label = $"{layerDef.label} ({"CS_UniqueLayerOnly".Translate()})",
+                    childSpecialFilters = []
+                };
+                DefGenerator.AddImpliedDef(layerThingCategoryUnique);
+            }
+
             if (nextSortOption == NextSortOption.None)
             {
+                if (ClothingSorterMod.instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
+                {
+                    AddApparelToCategory(uniqueApparelToCheck, layerThingCategoryUnique);
+                    if (layerThingCategoryUnique.childThingDefs.Count > 0 ||
+                        layerThingCategoryUnique.childCategories.Count > 0)
+                    {
+                        thingCategoryDef.childCategories.Add(layerThingCategoryUnique);
+                        layerThingCategoryUnique.parent = thingCategoryDef;
+                    }
+                }
+
                 AddApparelToCategory(apparelToCheck, layerThingCategory);
                 if (layerThingCategory.childThingDefs.Count <= 0 && layerThingCategory.childCategories.Count <= 0)
                 {
@@ -227,6 +258,28 @@ public class ClothingSorter
             }
             else
             {
+                if (ClothingSorterMod.instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
+                {
+                    switch (nextSortOption)
+                    {
+                        case NextSortOption.Tech:
+                            SortByTech(uniqueApparelToCheck, layerThingCategoryUnique);
+                            break;
+                        case NextSortOption.Mod:
+                            SortByMod(uniqueApparelToCheck, layerThingCategoryUnique);
+                            break;
+                        case NextSortOption.Tag:
+                            SortByTag(uniqueApparelToCheck, layerThingCategoryUnique);
+                            break;
+                    }
+
+                    if (layerThingCategoryUnique.childCategories.Count > 0)
+                    {
+                        thingCategoryDef.childCategories.Add(layerThingCategoryUnique);
+                        layerThingCategoryUnique.parent = thingCategoryDef;
+                    }
+                }
+
                 switch (nextSortOption)
                 {
                     case NextSortOption.Tech:

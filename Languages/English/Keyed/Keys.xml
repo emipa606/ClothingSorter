@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <CS_SettingLayerCategories>Layer categories</CS_SettingLayerCategories>
   <CS_SettingLayerCategoriesDescription>Should apparel be sorted on what layer they cover?</CS_SettingLayerCategoriesDescription>
@@ -11,6 +11,9 @@
   <CS_SettingDeselectOptions>Max two categories can be selected at the same time</CS_SettingDeselectOptions>
   <CS_SettingCombineLayers>Combine layer-categories with the same name</CS_SettingCombineLayers>
   <CS_SettingCombineLayersDescription>If two or more layers have the same label, should they be combined into one category?</CS_SettingCombineLayersDescription>
+  <CS_UniqueLayerOnly>only</CS_UniqueLayerOnly>
+  <CS_SettingUniqueLayers>Generate categories for single-layer apparel</CS_SettingUniqueLayers>
+  <CS_SettingUniqueLayersDescription>Apparel that only belong to a single layer will also be sorted in a separate category</CS_SettingUniqueLayersDescription>
   <CS_SettingArmoredCategories>Armored sub-categories</CS_SettingArmoredCategories>
   <CS_SettingArmoredCategoriesDescription>Should apparel with armor-values be sorted in a sub-category?</CS_SettingArmoredCategoriesDescription>
   <CS_SettingArmoredLowValue>Low value to count as armored: {0}%</CS_SettingArmoredLowValue>

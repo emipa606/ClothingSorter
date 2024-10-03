@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
   <CS_SettingLayerCategories>按层次分类</CS_SettingLayerCategories>
   <CS_SettingLayerCategoriesDescription>是否按照衣服覆盖部位分类?</CS_SettingLayerCategoriesDescription>
@@ -45,4 +45,7 @@
   <CS_Male>男性</CS_Male>
   <CS_VerboseLogging>冗长日志记录</CS_VerboseLogging>
   <CS_VerboseLoggingDescription>显示用于调试的额外日志信息</CS_VerboseLoggingDescription>
+  <CS_UniqueLayerOnly>只是</CS_UniqueLayerOnly>
+  <CS_SettingUniqueLayers>为单层服装生成类别</CS_SettingUniqueLayers>
+  <CS_SettingUniqueLayersDescription>只属于单层的服装也将被分门别类地排序</CS_SettingUniqueLayersDescription>
 </LanguageData>
