@@ -14,11 +14,11 @@ public class ClothingSorter
 
     static ClothingSorter()
     {
-        UpdateTags();
+        updateTags();
         SortClothing();
     }
 
-    public static void UpdateTags()
+    private static void updateTags()
     {
         ApparelTagDictionary = new Dictionary<string, List<ThingDef>>();
         foreach (var apparel in ThingCategoryDefOf.Apparel.DescendantThingDefs)
@@ -45,11 +45,11 @@ public class ClothingSorter
     {
         var apparelInGame = ThingCategoryDefOf.Apparel.DescendantThingDefs.ToHashSet();
 
-        LogMessage($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
+        logMessage($"Clothing Sorter: Updating {apparelInGame.Count} apparel categories.");
 
-        if (ModLister.GetActiveModWithIdentifier("CETeam.CombatExtended") != null)
+        if (ModLister.GetActiveModWithIdentifier("CETeam.CombatExtended", true) != null)
         {
-            CEArmorModifier = ClothingSorterMod.instance.Settings.CEArmorModifier;
+            CEArmorModifier = ClothingSorterMod.Instance.Settings.CEArmorModifier;
         }
 
         foreach (var category in ThingCategoryDefOf.Apparel.ThisAndChildCategoryDefs)
@@ -86,8 +86,8 @@ public class ClothingSorter
 
         var allSortOptions = new List<bool>
         {
-            ClothingSorterMod.instance.Settings.SortByLayer, ClothingSorterMod.instance.Settings.SortByTech,
-            ClothingSorterMod.instance.Settings.SortByMod, ClothingSorterMod.instance.Settings.SortByTag
+            ClothingSorterMod.Instance.Settings.SortByLayer, ClothingSorterMod.Instance.Settings.SortByTech,
+            ClothingSorterMod.Instance.Settings.SortByMod, ClothingSorterMod.Instance.Settings.SortByTag
         };
         if (allSortOptions.Count(b => b.Equals(true)) == 2)
         {
@@ -115,7 +115,7 @@ public class ClothingSorter
                 break;
             }
 
-            if (ClothingSorterMod.instance.Settings.SortSetting == 1)
+            if (ClothingSorterMod.Instance.Settings.SortSetting == 1)
             {
                 (firstOption, secondOption) = (secondOption, firstOption);
             }
@@ -123,50 +123,50 @@ public class ClothingSorter
             switch (firstOption)
             {
                 case NextSortOption.Layer:
-                    SortByLayer(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
+                    sortByLayer(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
                     break;
                 case NextSortOption.Tech:
-                    SortByTech(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
+                    sortByTech(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
                     break;
                 case NextSortOption.Mod:
-                    SortByMod(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
+                    sortByMod(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
                     break;
                 case NextSortOption.Tag:
-                    SortByTag(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
+                    sortByTag(apparelInGame, ThingCategoryDefOf.Apparel, secondOption);
                     break;
             }
         }
         else
         {
-            if (ClothingSorterMod.instance.Settings.SortByLayer)
+            if (ClothingSorterMod.Instance.Settings.SortByLayer)
             {
-                SortByLayer(apparelInGame, ThingCategoryDefOf.Apparel);
+                sortByLayer(apparelInGame, ThingCategoryDefOf.Apparel);
             }
 
-            if (ClothingSorterMod.instance.Settings.SortByTech)
+            if (ClothingSorterMod.Instance.Settings.SortByTech)
             {
-                SortByTech(apparelInGame, ThingCategoryDefOf.Apparel);
+                sortByTech(apparelInGame, ThingCategoryDefOf.Apparel);
             }
 
-            if (ClothingSorterMod.instance.Settings.SortByMod)
+            if (ClothingSorterMod.Instance.Settings.SortByMod)
             {
-                SortByMod(apparelInGame, ThingCategoryDefOf.Apparel);
+                sortByMod(apparelInGame, ThingCategoryDefOf.Apparel);
             }
 
-            if (ClothingSorterMod.instance.Settings.SortByTag)
+            if (ClothingSorterMod.Instance.Settings.SortByTag)
             {
-                SortByTag(apparelInGame, ThingCategoryDefOf.Apparel);
+                sortByTag(apparelInGame, ThingCategoryDefOf.Apparel);
             }
         }
 
         ThingCategoryDefOf.Apparel.ResolveReferences();
-        LogMessage("Clothing Sorter: Update done.");
+        logMessage("Clothing Sorter: Update done.");
     }
 
-    private static void SortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
+    private static void sortByLayer(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        LogMessage($"Sorting {thingCategoryDef} by layer, then by {nextSortOption}");
+        logMessage($"Sorting {thingCategoryDef} by layer, then by {nextSortOption}");
         var layerDefs = (from layerDef in DefDatabase<ApparelLayerDef>.AllDefsListForReading
             orderby layerDef.label
             select layerDef).ToList();
@@ -175,7 +175,7 @@ public class ClothingSorter
 
         for (var layerInt = 0; layerInt < layerDefs.Count; layerInt++)
         {
-            if (ClothingSorterMod.instance.Settings.CombineLayers && layerDefs.Count > layerInt + 1 &&
+            if (ClothingSorterMod.Instance.Settings.CombineLayers && layerDefs.Count > layerInt + 1 &&
                 layerDefs[layerInt].label.ToLower() == layerDefs[layerInt + 1].label.ToLower())
             {
                 selectedLayers.Add(layerDefs[layerInt]);
@@ -236,9 +236,9 @@ public class ClothingSorter
 
             if (nextSortOption == NextSortOption.None)
             {
-                if (ClothingSorterMod.instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
+                if (ClothingSorterMod.Instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
                 {
-                    AddApparelToCategory(uniqueApparelToCheck, layerThingCategoryUnique);
+                    addApparelToCategory(uniqueApparelToCheck, layerThingCategoryUnique);
                     if (layerThingCategoryUnique.childThingDefs.Count > 0 ||
                         layerThingCategoryUnique.childCategories.Count > 0)
                     {
@@ -247,29 +247,26 @@ public class ClothingSorter
                     }
                 }
 
-                AddApparelToCategory(apparelToCheck, layerThingCategory);
+                addApparelToCategory(apparelToCheck, layerThingCategory);
                 if (layerThingCategory.childThingDefs.Count <= 0 && layerThingCategory.childCategories.Count <= 0)
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(layerThingCategory);
-                layerThingCategory.parent = thingCategoryDef;
             }
             else
             {
-                if (ClothingSorterMod.instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
+                if (ClothingSorterMod.Instance.Settings.UniqueLayers && uniqueApparelToCheck.Any())
                 {
                     switch (nextSortOption)
                     {
                         case NextSortOption.Tech:
-                            SortByTech(uniqueApparelToCheck, layerThingCategoryUnique);
+                            sortByTech(uniqueApparelToCheck, layerThingCategoryUnique);
                             break;
                         case NextSortOption.Mod:
-                            SortByMod(uniqueApparelToCheck, layerThingCategoryUnique);
+                            sortByMod(uniqueApparelToCheck, layerThingCategoryUnique);
                             break;
                         case NextSortOption.Tag:
-                            SortByTag(uniqueApparelToCheck, layerThingCategoryUnique);
+                            sortByTag(uniqueApparelToCheck, layerThingCategoryUnique);
                             break;
                     }
 
@@ -283,13 +280,13 @@ public class ClothingSorter
                 switch (nextSortOption)
                 {
                     case NextSortOption.Tech:
-                        SortByTech(apparelToCheck, layerThingCategory);
+                        sortByTech(apparelToCheck, layerThingCategory);
                         break;
                     case NextSortOption.Mod:
-                        SortByMod(apparelToCheck, layerThingCategory);
+                        sortByMod(apparelToCheck, layerThingCategory);
                         break;
                     case NextSortOption.Tag:
-                        SortByTag(apparelToCheck, layerThingCategory);
+                        sortByTag(apparelToCheck, layerThingCategory);
                         break;
                 }
 
@@ -297,19 +294,19 @@ public class ClothingSorter
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(layerThingCategory);
-                layerThingCategory.parent = thingCategoryDef;
             }
+
+            thingCategoryDef.childCategories.Add(layerThingCategory);
+            layerThingCategory.parent = thingCategoryDef;
 
             thingCategoryDef.ResolveReferences();
         }
     }
 
-    private static void SortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
+    private static void sortByTech(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        LogMessage($"Sorting {thingCategoryDef} by tech, then by {nextSortOption}");
+        logMessage($"Sorting {thingCategoryDef} by tech, then by {nextSortOption}");
         foreach (TechLevel techLevel in Enum.GetValues(typeof(TechLevel)))
         {
             var apparelToCheck =
@@ -334,28 +331,25 @@ public class ClothingSorter
 
             if (nextSortOption == NextSortOption.None)
             {
-                AddApparelToCategory(apparelToCheck, techLevelThingCategory);
+                addApparelToCategory(apparelToCheck, techLevelThingCategory);
                 if (techLevelThingCategory.childThingDefs.Count <= 0 &&
                     techLevelThingCategory.childCategories.Count <= 0)
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(techLevelThingCategory);
-                techLevelThingCategory.parent = thingCategoryDef;
             }
             else
             {
                 switch (nextSortOption)
                 {
                     case NextSortOption.Layer:
-                        SortByLayer(apparelToCheck, techLevelThingCategory);
+                        sortByLayer(apparelToCheck, techLevelThingCategory);
                         break;
                     case NextSortOption.Mod:
-                        SortByMod(apparelToCheck, techLevelThingCategory);
+                        sortByMod(apparelToCheck, techLevelThingCategory);
                         break;
                     case NextSortOption.Tag:
-                        SortByTag(apparelToCheck, techLevelThingCategory);
+                        sortByTag(apparelToCheck, techLevelThingCategory);
                         break;
                 }
 
@@ -363,19 +357,19 @@ public class ClothingSorter
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(techLevelThingCategory);
-                techLevelThingCategory.parent = thingCategoryDef;
             }
+
+            thingCategoryDef.childCategories.Add(techLevelThingCategory);
+            techLevelThingCategory.parent = thingCategoryDef;
 
             thingCategoryDef.ResolveReferences();
         }
     }
 
-    private static void SortByTag(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
+    private static void sortByTag(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        LogMessage($"Sorting by {thingCategoryDef} tag, then by {nextSortOption}");
+        logMessage($"Sorting by {thingCategoryDef} tag, then by {nextSortOption}");
         foreach (var tag in ApparelTagDictionary.Keys.OrderBy(s => s))
         {
             if (!apparelToSort.SharesElementWith(ApparelTagDictionary[tag]))
@@ -401,27 +395,24 @@ public class ClothingSorter
 
             if (nextSortOption == NextSortOption.None)
             {
-                AddApparelToCategory(apparelToCheck, tagThingCategory);
+                addApparelToCategory(apparelToCheck, tagThingCategory);
                 if (tagThingCategory.childThingDefs.Count <= 0 && tagThingCategory.childCategories.Count <= 0)
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(tagThingCategory);
-                tagThingCategory.parent = thingCategoryDef;
             }
             else
             {
                 switch (nextSortOption)
                 {
                     case NextSortOption.Layer:
-                        SortByLayer(apparelToCheck, tagThingCategory);
+                        sortByLayer(apparelToCheck, tagThingCategory);
                         break;
                     case NextSortOption.Tech:
-                        SortByTech(apparelToCheck, tagThingCategory);
+                        sortByTech(apparelToCheck, tagThingCategory);
                         break;
                     case NextSortOption.Mod:
-                        SortByMod(apparelToCheck, tagThingCategory);
+                        sortByMod(apparelToCheck, tagThingCategory);
                         break;
                 }
 
@@ -429,10 +420,10 @@ public class ClothingSorter
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(tagThingCategory);
-                tagThingCategory.parent = thingCategoryDef;
             }
+
+            thingCategoryDef.childCategories.Add(tagThingCategory);
+            tagThingCategory.parent = thingCategoryDef;
 
             thingCategoryDef.ResolveReferences();
         }
@@ -466,28 +457,25 @@ public class ClothingSorter
 
         if (nextSortOption == NextSortOption.None)
         {
-            AddApparelToCategory(missingApparelToCheck, missingTagThingCategory);
+            addApparelToCategory(missingApparelToCheck, missingTagThingCategory);
             if (missingTagThingCategory.childThingDefs.Count <= 0 &&
                 missingTagThingCategory.childCategories.Count <= 0)
             {
                 return;
             }
-
-            thingCategoryDef.childCategories.Add(missingTagThingCategory);
-            missingTagThingCategory.parent = thingCategoryDef;
         }
         else
         {
             switch (nextSortOption)
             {
                 case NextSortOption.Layer:
-                    SortByLayer(missingApparelToCheck, missingTagThingCategory);
+                    sortByLayer(missingApparelToCheck, missingTagThingCategory);
                     break;
                 case NextSortOption.Tech:
-                    SortByTech(missingApparelToCheck, missingTagThingCategory);
+                    sortByTech(missingApparelToCheck, missingTagThingCategory);
                     break;
                 case NextSortOption.Mod:
-                    SortByMod(missingApparelToCheck, missingTagThingCategory);
+                    sortByMod(missingApparelToCheck, missingTagThingCategory);
                     break;
             }
 
@@ -495,18 +483,18 @@ public class ClothingSorter
             {
                 return;
             }
-
-            thingCategoryDef.childCategories.Add(missingTagThingCategory);
-            missingTagThingCategory.parent = thingCategoryDef;
         }
+
+        thingCategoryDef.childCategories.Add(missingTagThingCategory);
+        missingTagThingCategory.parent = thingCategoryDef;
 
         thingCategoryDef.ResolveReferences();
     }
 
-    private static void SortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
+    private static void sortByMod(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef,
         NextSortOption nextSortOption = NextSortOption.None)
     {
-        LogMessage($"Sorting {thingCategoryDef} by mod, then by {nextSortOption}");
+        logMessage($"Sorting {thingCategoryDef} by mod, then by {nextSortOption}");
         foreach (var modData in from modData in ModLister.AllInstalledMods where modData.Active select modData)
         {
             var apparelToCheck = (from apparelDef in apparelToSort
@@ -531,27 +519,24 @@ public class ClothingSorter
 
             if (nextSortOption == NextSortOption.None)
             {
-                AddApparelToCategory(apparelToCheck, modThingCategory);
+                addApparelToCategory(apparelToCheck, modThingCategory);
                 if (modThingCategory.childThingDefs.Count <= 0 && modThingCategory.childCategories.Count <= 0)
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(modThingCategory);
-                modThingCategory.parent = thingCategoryDef;
             }
             else
             {
                 switch (nextSortOption)
                 {
                     case NextSortOption.Layer:
-                        SortByLayer(apparelToCheck, modThingCategory);
+                        sortByLayer(apparelToCheck, modThingCategory);
                         break;
                     case NextSortOption.Tech:
-                        SortByTech(apparelToCheck, modThingCategory);
+                        sortByTech(apparelToCheck, modThingCategory);
                         break;
                     case NextSortOption.Tag:
-                        SortByTag(apparelToCheck, modThingCategory);
+                        sortByTag(apparelToCheck, modThingCategory);
                         break;
                 }
 
@@ -559,10 +544,10 @@ public class ClothingSorter
                 {
                     continue;
                 }
-
-                thingCategoryDef.childCategories.Add(modThingCategory);
-                modThingCategory.parent = thingCategoryDef;
             }
+
+            thingCategoryDef.childCategories.Add(modThingCategory);
+            modThingCategory.parent = thingCategoryDef;
 
             thingCategoryDef.ResolveReferences();
         }
@@ -595,28 +580,25 @@ public class ClothingSorter
 
         if (nextSortOption == NextSortOption.None)
         {
-            AddApparelToCategory(missingApparelToCheck, missingModThingCategory);
+            addApparelToCategory(missingApparelToCheck, missingModThingCategory);
             if (missingModThingCategory.childThingDefs.Count <= 0 &&
                 missingModThingCategory.childCategories.Count <= 0)
             {
                 return;
             }
-
-            thingCategoryDef.childCategories.Add(missingModThingCategory);
-            missingModThingCategory.parent = thingCategoryDef;
         }
         else
         {
             switch (nextSortOption)
             {
                 case NextSortOption.Layer:
-                    SortByLayer(missingApparelToCheck, missingModThingCategory);
+                    sortByLayer(missingApparelToCheck, missingModThingCategory);
                     break;
                 case NextSortOption.Tech:
-                    SortByTech(missingApparelToCheck, missingModThingCategory);
+                    sortByTech(missingApparelToCheck, missingModThingCategory);
                     break;
                 case NextSortOption.Tag:
-                    SortByTag(missingApparelToCheck, missingModThingCategory);
+                    sortByTag(missingApparelToCheck, missingModThingCategory);
                     break;
             }
 
@@ -624,10 +606,10 @@ public class ClothingSorter
             {
                 return;
             }
-
-            thingCategoryDef.childCategories.Add(missingModThingCategory);
-            missingModThingCategory.parent = thingCategoryDef;
         }
+
+        thingCategoryDef.childCategories.Add(missingModThingCategory);
+        missingModThingCategory.parent = thingCategoryDef;
 
         thingCategoryDef.ResolveReferences();
     }
@@ -638,102 +620,80 @@ public class ClothingSorter
     /// </summary>
     /// <param name="apparelToSort"></param>
     /// <param name="thingCategoryDef"></param>
-    private static void AddApparelToCategory(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef)
+    private static void addApparelToCategory(HashSet<ThingDef> apparelToSort, ThingCategoryDef thingCategoryDef)
     {
         var armoredDefName = $"{thingCategoryDef.defName}_Armored";
-        var armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(armoredDefName);
-        if (armoredThingCategory == null)
-        {
-            armoredThingCategory = new ThingCategoryDef
-            {
-                defName = armoredDefName, label = "CS_Armored".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var armoredThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(armoredDefName) ??
+                                   new ThingCategoryDef
+                                   {
+                                       defName = armoredDefName, label = "CS_Armored".Translate(),
+                                       childSpecialFilters = []
+                                   };
 
         armoredThingCategory.childCategories.Clear();
         armoredThingCategory.childThingDefs.Clear();
 
         var psyfocusDefName = $"{thingCategoryDef.defName}_Psyfocus";
-        var psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName);
-        if (psyfocusThingCategory == null)
-        {
-            psyfocusThingCategory = new ThingCategoryDef
-            {
-                defName = psyfocusDefName, label = "CS_Psyfocus".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var psyfocusThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(psyfocusDefName) ??
+                                    new ThingCategoryDef
+                                    {
+                                        defName = psyfocusDefName, label = "CS_Psyfocus".Translate(),
+                                        childSpecialFilters = []
+                                    };
 
         psyfocusThingCategory.childCategories.Clear();
         psyfocusThingCategory.childThingDefs.Clear();
 
         var royaltyDefName = $"{thingCategoryDef.defName}_Royalty";
-        var royaltyThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(royaltyDefName);
-        if (royaltyThingCategory == null)
-        {
-            royaltyThingCategory = new ThingCategoryDef
-            {
-                defName = royaltyDefName, label = "CS_Royalty".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var royaltyThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(royaltyDefName) ??
+                                   new ThingCategoryDef
+                                   {
+                                       defName = royaltyDefName, label = "CS_Royalty".Translate(),
+                                       childSpecialFilters = []
+                                   };
 
         royaltyThingCategory.childCategories.Clear();
         royaltyThingCategory.childThingDefs.Clear();
 
         var specialDefName = $"{thingCategoryDef.defName}_Special";
-        var specialThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(specialDefName);
-        if (specialThingCategory == null)
-        {
-            specialThingCategory = new ThingCategoryDef
-            {
-                defName = specialDefName, label = "CS_Special".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var specialThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(specialDefName) ??
+                                   new ThingCategoryDef
+                                   {
+                                       defName = specialDefName, label = "CS_Special".Translate(),
+                                       childSpecialFilters = []
+                                   };
 
         specialThingCategory.childCategories.Clear();
         specialThingCategory.childThingDefs.Clear();
 
         var femaleDefName = $"{thingCategoryDef.defName}_Female";
-        var femaleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(femaleDefName);
-        if (femaleThingCategory == null)
-        {
-            femaleThingCategory = new ThingCategoryDef
-            {
-                defName = femaleDefName, label = "CS_Female".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var femaleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(femaleDefName) ??
+                                  new ThingCategoryDef
+                                  {
+                                      defName = femaleDefName, label = "CS_Female".Translate(),
+                                      childSpecialFilters = []
+                                  };
 
         femaleThingCategory.childCategories.Clear();
         femaleThingCategory.childThingDefs.Clear();
 
         var maleDefName = $"{thingCategoryDef.defName}_Male";
-        var maleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(maleDefName);
-        if (maleThingCategory == null)
+        var maleThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(maleDefName) ?? new ThingCategoryDef
         {
-            maleThingCategory = new ThingCategoryDef
-            {
-                defName = maleDefName, label = "CS_Male".Translate(),
-                childSpecialFilters = []
-            };
-        }
+            defName = maleDefName, label = "CS_Male".Translate(),
+            childSpecialFilters = []
+        };
 
         maleThingCategory.childCategories.Clear();
         maleThingCategory.childThingDefs.Clear();
 
         var mechanitorDefName = $"{thingCategoryDef.defName}_Mechanitor";
-        var mechanitorThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(mechanitorDefName);
-        if (mechanitorThingCategory == null)
-        {
-            mechanitorThingCategory = new ThingCategoryDef
-            {
-                defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
-                childSpecialFilters = []
-            };
-        }
+        var mechanitorThingCategory = DefDatabase<ThingCategoryDef>.GetNamedSilentFail(mechanitorDefName) ??
+                                      new ThingCategoryDef
+                                      {
+                                          defName = mechanitorDefName, label = "CS_Mechanitor".Translate(),
+                                          childSpecialFilters = []
+                                      };
 
         mechanitorThingCategory.childCategories.Clear();
         mechanitorThingCategory.childThingDefs.Clear();
@@ -741,27 +701,27 @@ public class ClothingSorter
         thingCategoryDef.childCategories.Clear();
         thingCategoryDef.childThingDefs.Clear();
 
-        var doPsychicSeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.PsychicSeparate;
-        var doRoyaltySeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.instance.Settings.RoyaltySeparate;
-        var doSpecialSeparate = ClothingSorterMod.instance.Settings.SpecialSeparate;
-        var doGenderSeparate = ClothingSorterMod.instance.Settings.GenderSeparate;
-        var doMechanitorSeparate = ModLister.BiotechInstalled && ClothingSorterMod.instance.Settings.MechanitorSeparate;
+        var doPsychicSeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.Instance.Settings.PsychicSeparate;
+        var doRoyaltySeparate = ModLister.RoyaltyInstalled && ClothingSorterMod.Instance.Settings.RoyaltySeparate;
+        var doSpecialSeparate = ClothingSorterMod.Instance.Settings.SpecialSeparate;
+        var doGenderSeparate = ClothingSorterMod.Instance.Settings.GenderSeparate;
+        var doMechanitorSeparate = ModLister.BiotechInstalled && ClothingSorterMod.Instance.Settings.MechanitorSeparate;
 
         foreach (var apparel in apparelToSort)
         {
             var alreadyAdded = false;
 
-            if (ClothingSorterMod.instance.Settings.ArmoredSeparate)
+            if (ClothingSorterMod.Instance.Settings.ArmoredSeparate)
             {
                 if (apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) &&
                     apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) >
-                    ClothingSorterMod.instance.Settings.ArmorRating * CEArmorModifier ||
+                    ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
                     apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) &&
                     apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) >
-                    ClothingSorterMod.instance.Settings.ArmorRating * CEArmorModifier ||
+                    ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
                     apparel.StatBaseDefined(StatDefOf.StuffEffectMultiplierArmor) &&
                     apparel.GetStatValueAbstract(StatDefOf.StuffEffectMultiplierArmor) >
-                    ClothingSorterMod.instance.Settings.ArmorRating * 2 * CEArmorModifier)
+                    ClothingSorterMod.Instance.Settings.ArmorRating * 2 * CEArmorModifier)
                 {
                     apparel.thingCategories.Add(armoredThingCategory);
                     armoredThingCategory.childThingDefs.Add(apparel);
@@ -852,9 +812,9 @@ public class ClothingSorter
             thingCategoryDef.childThingDefs.Add(apparel);
         }
 
-        if (ClothingSorterMod.instance.Settings.ArmoredSeparate && armoredThingCategory.childThingDefs.Count > 0)
+        if (ClothingSorterMod.Instance.Settings.ArmoredSeparate && armoredThingCategory.childThingDefs.Count > 0)
         {
-            LateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
+            lateAddCategoryToDefDataBase(armoredDefName, armoredThingCategory);
             armoredThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(armoredThingCategory);
             armoredThingCategory.ResolveReferences();
@@ -862,7 +822,7 @@ public class ClothingSorter
 
         if (doPsychicSeparate && psyfocusThingCategory.childThingDefs.Count > 0)
         {
-            LateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
+            lateAddCategoryToDefDataBase(psyfocusDefName, psyfocusThingCategory);
             psyfocusThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(psyfocusThingCategory);
             psyfocusThingCategory.ResolveReferences();
@@ -870,7 +830,7 @@ public class ClothingSorter
 
         if (doSpecialSeparate && specialThingCategory.childThingDefs.Count > 0)
         {
-            LateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
+            lateAddCategoryToDefDataBase(specialDefName, specialThingCategory);
             specialThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(specialThingCategory);
             specialThingCategory.ResolveReferences();
@@ -880,7 +840,7 @@ public class ClothingSorter
         {
             if (femaleThingCategory.childThingDefs.Count > 0)
             {
-                LateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
+                lateAddCategoryToDefDataBase(femaleDefName, femaleThingCategory);
                 femaleThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(femaleThingCategory);
                 femaleThingCategory.ResolveReferences();
@@ -888,7 +848,7 @@ public class ClothingSorter
 
             if (maleThingCategory.childThingDefs.Count > 0)
             {
-                LateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
+                lateAddCategoryToDefDataBase(maleDefName, maleThingCategory);
                 maleThingCategory.parent = thingCategoryDef;
                 thingCategoryDef.childCategories.Add(maleThingCategory);
                 maleThingCategory.ResolveReferences();
@@ -897,7 +857,7 @@ public class ClothingSorter
 
         if (doMechanitorSeparate && mechanitorThingCategory.childThingDefs.Count > 0)
         {
-            LateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
+            lateAddCategoryToDefDataBase(mechanitorDefName, mechanitorThingCategory);
             mechanitorThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(mechanitorThingCategory);
             mechanitorThingCategory.ResolveReferences();
@@ -905,7 +865,7 @@ public class ClothingSorter
 
         if (doRoyaltySeparate && royaltyThingCategory.childThingDefs.Count > 0)
         {
-            LateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
+            lateAddCategoryToDefDataBase(royaltyDefName, royaltyThingCategory);
             royaltyThingCategory.parent = thingCategoryDef;
             thingCategoryDef.childCategories.Add(royaltyThingCategory);
             royaltyThingCategory.ResolveReferences();
@@ -917,22 +877,22 @@ public class ClothingSorter
     /// <summary>
     ///     Blocks empty category so that ThingCategoryDefs won't exceed short hash limit
     /// </summary>
-    /// <param name="CategoryDefName"></param>
+    /// <param name="categoryDefName"></param>
     /// <param name="thingCategoryDef"></param>
-    private static void LateAddCategoryToDefDataBase(string CategoryDefName, ThingCategoryDef thingCategoryDef)
+    private static void lateAddCategoryToDefDataBase(string categoryDefName, ThingCategoryDef thingCategoryDef)
     {
-        if (DefDatabase<ThingCategoryDef>.GetNamedSilentFail(CategoryDefName) != null)
+        if (DefDatabase<ThingCategoryDef>.GetNamedSilentFail(categoryDefName) != null)
         {
             return;
         }
 
         DefGenerator.AddImpliedDef(thingCategoryDef);
-        LogMessage($"Added {CategoryDefName} to def-database");
+        logMessage($"Added {categoryDefName} to def-database");
     }
 
-    private static void LogMessage(string message)
+    private static void logMessage(string message)
     {
-        if (!ClothingSorterMod.instance.Settings.VerboseLogging)
+        if (!ClothingSorterMod.Instance.Settings.VerboseLogging)
         {
             return;
         }

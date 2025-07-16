@@ -2,7 +2,15 @@
   "Continued": false,
   "CanAdd": "0",
   "CanRemove": "0",
-  "PreviewVersion": "1.5",
+  "PreviewVersion": "1.6",
   "SocialImageSet": true,
-  "FundingSet": true
+  "FundingSet": true,
+  "Patches": false,
+  "Defs": false,
+  "Assemblies": true,
+  "LinesOfCode": 48372,
+  "LinesOfXML": 0,
+  "CodeBaseSize": 74,
+  "LastXmlCleaning": "2025-07-16T17:35:47.9424245+02:00",
+  "SearchTags": " layer categories"
 }
