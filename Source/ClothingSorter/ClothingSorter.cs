@@ -7,7 +7,7 @@ using Verse;
 namespace ClothingSorter;
 
 [StaticConstructorOnStartup]
-public class ClothingSorter
+public static class ClothingSorter
 {
     private static float CEArmorModifier = 1f;
     private static Dictionary<string, List<ThingDef>> ApparelTagDictionary;
@@ -711,42 +711,34 @@ public class ClothingSorter
         {
             var alreadyAdded = false;
 
-            if (ClothingSorterMod.Instance.Settings.ArmoredSeparate)
+            if (ClothingSorterMod.Instance.Settings.ArmoredSeparate &&
+                (apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) &&
+                 apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) >
+                 ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
+                 apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) &&
+                 apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) >
+                 ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
+                 apparel.StatBaseDefined(StatDefOf.StuffEffectMultiplierArmor) &&
+                 apparel.GetStatValueAbstract(StatDefOf.StuffEffectMultiplierArmor) >
+                 ClothingSorterMod.Instance.Settings.ArmorRating * 2 * CEArmorModifier))
             {
-                if (apparel.StatBaseDefined(StatDefOf.ArmorRating_Blunt) &&
-                    apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Blunt) >
-                    ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
-                    apparel.StatBaseDefined(StatDefOf.ArmorRating_Sharp) &&
-                    apparel.GetStatValueAbstract(StatDefOf.ArmorRating_Sharp) >
-                    ClothingSorterMod.Instance.Settings.ArmorRating * CEArmorModifier ||
-                    apparel.StatBaseDefined(StatDefOf.StuffEffectMultiplierArmor) &&
-                    apparel.GetStatValueAbstract(StatDefOf.StuffEffectMultiplierArmor) >
-                    ClothingSorterMod.Instance.Settings.ArmorRating * 2 * CEArmorModifier)
-                {
-                    apparel.thingCategories.Add(armoredThingCategory);
-                    armoredThingCategory.childThingDefs.Add(apparel);
-                    alreadyAdded = true;
-                }
+                apparel.thingCategories.Add(armoredThingCategory);
+                armoredThingCategory.childThingDefs.Add(apparel);
+                alreadyAdded = true;
             }
 
-            if (doPsychicSeparate)
+            if (doPsychicSeparate && apparel.apparel?.tags?.Contains("Psychic") == true)
             {
-                if (apparel.apparel?.tags?.Contains("Psychic") == true)
-                {
-                    apparel.thingCategories.Add(psyfocusThingCategory);
-                    psyfocusThingCategory.childThingDefs.Add(apparel);
-                    alreadyAdded = true;
-                }
+                apparel.thingCategories.Add(psyfocusThingCategory);
+                psyfocusThingCategory.childThingDefs.Add(apparel);
+                alreadyAdded = true;
             }
 
-            if (doRoyaltySeparate)
+            if (doRoyaltySeparate && apparel.apparel?.tags?.Contains("Royal") == true)
             {
-                if (apparel.apparel?.tags?.Contains("Royal") == true)
-                {
-                    apparel.thingCategories.Add(royaltyThingCategory);
-                    royaltyThingCategory.childThingDefs.Add(apparel);
-                    alreadyAdded = true;
-                }
+                apparel.thingCategories.Add(royaltyThingCategory);
+                royaltyThingCategory.childThingDefs.Add(apparel);
+                alreadyAdded = true;
             }
 
             if (doGenderSeparate)
@@ -766,41 +758,33 @@ public class ClothingSorter
                 }
             }
 
-            if (doSpecialSeparate)
+            if (doSpecialSeparate &&
+                (apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PainShockThreshold) != 0
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ShootingAccuracyPawn) != 0
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.RangedCooldownFactor) != 0
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PsychicSensitivity) != 0
+                 || apparel.defName == "Apparel_TortureCrown"
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
+                 || apparel.equippedStatOffsets.GetStatOffsetFromList(
+                     DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) >
+                 0) // It should work now, at least for defs below
+                //|| apparel.defName == "Apparel_Collar"
+                //|| apparel.defName == "Apparel_BodyStrap"
+               )
             {
-                if (
-                    apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PainShockThreshold) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ShootingAccuracyPawn) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.RangedCooldownFactor) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.PsychicSensitivity) != 0
-                    || apparel.defName == "Apparel_TortureCrown"
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.ToxicEnvironmentResistance) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.SuppressionPower) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(
-                        DefDatabase<StatDef>.GetNamedSilentFail("SlaveSuppressionOffset")) > 0
-
-                    // It should work now, at least for defs below
-                    //|| apparel.defName == "Apparel_Collar"
-                    //|| apparel.defName == "Apparel_BodyStrap"
-                )
-                {
-                    apparel.thingCategories.Add(specialThingCategory);
-                    specialThingCategory.childThingDefs.Add(apparel);
-                    alreadyAdded = true;
-                }
+                apparel.thingCategories.Add(specialThingCategory);
+                specialThingCategory.childThingDefs.Add(apparel);
+                alreadyAdded = true;
             }
 
-            if (doMechanitorSeparate)
+            if (doMechanitorSeparate && (apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.MechBandwidth) != 0
+                                         || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf
+                                             .MechControlGroups) != 0))
             {
-                if (
-                    apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.MechBandwidth) != 0
-                    || apparel.equippedStatOffsets.GetStatOffsetFromList(StatDefOf.MechControlGroups) != 0
-                )
-                {
-                    apparel.thingCategories.Add(mechanitorThingCategory);
-                    mechanitorThingCategory.childThingDefs.Add(apparel);
-                    alreadyAdded = true;
-                }
+                apparel.thingCategories.Add(mechanitorThingCategory);
+                mechanitorThingCategory.childThingDefs.Add(apparel);
+                alreadyAdded = true;
             }
 
             if (alreadyAdded)

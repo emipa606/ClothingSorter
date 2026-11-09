@@ -1,40 +1,89 @@
-# Copilot Instructions for RimWorld Mod: ClothingSorter
+# GitHub Copilot Instructions for Clothing Sorter
 
 ## Mod Overview and Purpose
 
-The ClothingSorter mod is designed to enhance the RimWorld experience by providing a more intuitive and efficient clothing management system. The mod aims to streamline the process of organizing, sorting, and selecting clothing for colonists, making it easier for players to manage their colony's apparel resources.
+Clothing Sorter is a RimWorld mod that sorts apparel based on various properties. It allows users to sort apparel by layer, tech-level, mod-name, and apparel tag. Additionally, it provides options to combine layer-categories with the same name, generate layer-categories for apparel that only occupy one layer, and generate subcategories based on armor-value, Psycic/Royalty-tagged apparel, Machanitors and other gear with special effects, gender, and CE-armor calculation. This mod works with all apparel, modded and vanilla, and is safe to add/remove from saves.
 
 ## Key Features and Systems
 
-- **Automated Clothing Sorting**: Provides automatic sorting algorithms to organize clothing items based on various criteria such as quality, condition, and type.
-- **Customizable Sorting Preferences**: Allows players to set their own sorting preferences via an in-game settings menu.
-- **Enhanced User Interface**: Improves the user interface for clothing management, providing clear visual indicators and sorting options.
-- **Efficient Storage Solutions**: Introduces new storage options that integrate with sorted clothing for improved resource management.
+### Apparel Sorting
+Clothing Sorter allows users to sort apparel by various properties, including:
+
+- Layer
+- Tech-level
+- Mod-name
+- Apparel tag
+
+### Layer and Subcategory Management
+Clothing Sorter provides options to:
+
+- Combine layer-categories with the same name
+- Generate layer-categories for apparel that only occupy one layer
+- Generate subcategories based on armor-value, Psycic/Royalty-tagged apparel, Machanitors and other gear with special effects, gender, and CE-armor calculation
+
+### Safe to Add/Remove from Saves
+Clothing Sorter is safe to add/remove from saves, making it easy to manage.
 
 ## Coding Patterns and Conventions
 
-- **Namespace Usage**: Ensure all classes are encapsulated within a relevant namespace, for example, `namespace ClothingSorterMod`.
-- **Class and Method Naming**: Use CamelCase for class names (e.g., `ClothingSorterMod`) and PascalCase for method names. Method names should be descriptive and start with a verb indicating their function (e.g., `InitializeSettings`).
-- **Fields and Properties**: Use underscore-prefixed camelCase for private fields (e.g., `_clothingList`) and PascalCase for public properties.
+Clothing Sorter follows standard C# and XML coding patterns and conventions. The main classes and methods are defined in the following C# files:
+
+- `ClothingSorterMod.cs`
+- `ClothingSorterSettings.cs`
+- `ClothingSorter.cs`
+
+The main XML file is:
+
+- `Test-file.xml`
 
 ## XML Integration
 
-- **DefModExtensions**: Leverage RimWorld's XML capabilities to extend existing def properties with additional fields necessary for sorting algorithms.
-- **Custom XML Tags**: Utilize custom XML definitions to define new sorting categories or preferences that can be recognized by the mod.
-- **Localization Support**: Ensure all user-facing strings are localized using XML to support multiple languages and provide a wider reach.
+Clothing Sorter uses XML to define the apparel layers and subcategories. The XML file contains the following definitions:
+
+- `ApparelLayerDef`
+- `ThingDef`
 
 ## Harmony Patching
 
-- **Target Specific Methods**: Use Harmony to patch only those methods within RimWorld's core that directly affect clothing management. This minimizes conflicts with other mods.
-- **Prefix and Postfix Patches**: Implement both prefix and postfix patches where necessary to modify the logic of existing methods without completely overriding them.
-- **Error Handling**: Incorporate robust error handling around Harmony patches to ensure game stability even if a patch fails.
+Clothing Sorter uses Harmony to patch the game's code and add its functionality. Harmony is a popular modding framework for RimWorld.
 
 ## Suggestions for Copilot
 
-- **Auto-completions for Sorting Algorithms**: Suggest code snippets for common sorting algorithms (e.g., bubble sort, quick sort) that can be adapted to work with RimWorld's clothing items.
-- **UI Enhancements**: Propose UI component designs that align with RimWorld's existing look and feel while providing enhanced functionality.
-- **Custom XML Definitions**: Provide templates for defining new XML tags and their integration with C# logic.
-- **Harmony Patch Examples**: Offer examples of effective Harmony patches, especially how to correctly identify methods to patch within RimWorld's assemblies.
-- **Mod Settings Management**: Assist with the creation of intuitive settings management code to allow players to easily customize their sorting preferences.
+### C# Code
+When using Copilot to generate C# code for Clothing Sorter, keep the following in mind:
 
-By following these instructions, developers can effectively utilize GitHub Copilot to streamline the development of the ClothingSorter mod, enhancing both developer productivity and the end-user experience in RimWorld.
+- The main classes and methods are defined in the `ClothingSorterMod.cs`, `ClothingSorterSettings.cs`, and `ClothingSorter.cs` files.
+- The main XML file is `Test-file.xml`.
+- Follow standard C# and XML coding patterns and conventions.
+
+### XML Integration
+When using Copilot to generate XML code for Clothing Sorter, keep the following in mind:
+
+- The XML file contains `ApparelLayerDef` and `ThingDef` definitions.
+- Use standard XML syntax and conventions.
+
+### Harmony Patching
+When using Copilot to generate Harmony patches for Clothing Sorter, keep the following in mind:
+
+- Harmony is a popular modding framework for RimWorld.
+- Use standard Harmony syntax and conventions.
+
+## Conclusion
+
+Clothing Sorter is a powerful mod that sorts apparel based on various properties. It is safe to add/remove from saves and provides options to manage layer and subcategory categories. When using Copilot to generate code for Clothing Sorter, keep the coding patterns and conventions, XML integration, and Harmony patching in mind.
+
+## Project Solution Guidelines
+- Relevant mod XML files are included as Solution Items under the solution folder named XML, these can be read and modified from within the solution.
+- Use these in-solution XML files as the primary files for reference and modification.
+- The `.github/copilot-instructions.md` file is included in the solution under the `.github` solution folder, so it should be read/modified from within the solution instead of using paths outside the solution. Update this file once only, as it and the parent-path solution reference point to the same file in this workspace.
+- When making functional changes in this mod, ensure the documented features stay in sync with implementation; use the in-solution `.github` copy as the primary file.
+- In the solution is also a project called Assembly-CSharp, containing a read-only version of the decompiled game source, for reference and debugging purposes.
+- For any new documentation, update this copilot-instructions.md file rather than creating separate documentation files.
+
+
+## Hard rules (must follow)
+- Do NOT run commands that modify the repo (no git commit, git apply, dotnet format) unless explicitly asked.
+- Prefer minimal reads: read only the smallest code region needed (around the suspicious lines).
+- When mentioning SonarQube issues, automatically use the SonarQube MCP service to fetch and address issues instead of making inferred fixes without querying SonarQube first.
+- When mentioning the rimworld log, automatically use the Rimworld MCP service to fetch the log.
+

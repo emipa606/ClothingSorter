@@ -7,8 +7,8 @@ namespace ClothingSorter;
 /// </summary>
 internal class ClothingSorterSettings : ModSettings
 {
-    public bool ArmoredSeparate = true;
     public float ArmorRating = 0.2f;
+    public bool ArmoredSeparate = true;
     public float CEArmorModifier = 5f;
     public bool CombineLayers = true;
     public bool GenderSeparate;
